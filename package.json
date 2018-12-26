@@ -4,7 +4,10 @@
   "private": true,
   "dependencies": {
     "react": "^16.6.3",
+    "react-animated-slider": "^1.1.4",
+    "react-burger-menu": "^2.5.4",
     "react-dom": "^16.6.3",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1"
   },
   "scripts": {
