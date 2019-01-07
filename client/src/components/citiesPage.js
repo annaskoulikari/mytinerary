@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CitiesList from "./citiesList";
 
 class CitiesPage extends Component {
   state = {};
@@ -6,6 +7,7 @@ class CitiesPage extends Component {
     return (
       <React.Fragment>
         <p>This is the Cities Page</p>
+        <CitiesList />
       </React.Fragment>
     );
   }
