@@ -1,4 +1,6 @@
 var routerTest = require("./routes/test");
+var routerItinerary = require("./routes/itineraryRoute");
+var routerActivity = require("./routes/activityRoute");
 
 console.log("server is starting");
 
@@ -9,15 +11,19 @@ var bodyParser = require("body-parser");
 
 var app = express();
 
+app.use(express.static("uploads"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(
   "mongodb://user_1:1Greecepuppy@ds013559.mlab.com:13559/mytinerary",
-  { useNewUrlParser: true }
+  { useNewUrlParser: true, useCreateIndex: true }
 );
 
 mongoose.Promise = global.Promise;
+
+app.use("/itinerary/uploads", express.static("uploads"));
+app.use("/activity/uploads", express.static("uploads"));
 
 mongoose.connection
   .once("open", function() {
@@ -38,5 +44,7 @@ app.get("/test", function(req, res) {
 });
 
 app.use("/testRouter", routerTest);
+app.use("/testItinerary", routerItinerary);
+app.use("/testActivity", routerActivity);
 
 app.listen(port, () => console.log(`server running on port ${port}`));

@@ -1,0 +1,90 @@
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { fetchItineraries } from "../actions/itineraryActions";
+import "../App.css";
+// import cityReducer from "../reducers/cityReducer";
+import { NavLink } from "react-router-dom";
+
+class Itinerary extends Component {
+  componentDidMount() {
+    var city = this.props.match.params.city;
+    this.props.fetchItineraries(city);
+    console.log(this.props);
+    console.log(this.props.match.params.city);
+    console.log(this.state);
+  }
+
+  displayActivities = () => {
+    this.setState({
+      displayActivities: !this.state.displayActivities
+    });
+  };
+
+  constructor() {
+    super();
+    this.state = {
+      itineraries: "",
+      displayActivities: false
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>City Name</h1>
+        <h2>Available MYitenaries</h2>
+
+        {this.props.itineraries.map(itinerary => (
+          <div key={itinerary.id} className="itineraryContainer">
+            <div className="itineraryFirstRow">
+              {" "}
+              <div className="profilePhoto">Profilephoto</div>
+              <div className="itineraryInfo">
+                <div className="itineraryTitle">{itinerary.title}</div>
+                <div className="itineraryDetails">
+                  <div className="itineraryLikes">
+                    {"Likes :" + itinerary.likes}
+                  </div>
+                  <div className="itineraryDuration">
+                    {itinerary.hours + " " + "Hours"}
+                  </div>
+                  <div className="itineraryExpense">{itinerary.expense}</div>
+                </div>
+              </div>
+            </div>
+            <div className="itinerarySecondRow">
+              <div className="profileName">{itinerary.profileName}</div>
+              <div className="itineraryHashtags">HASHTAGS</div>
+            </div>
+            <img
+              className="sliderImage"
+              src={itinerary.itineraryImage}
+              alt="stuff"
+            />
+            <NavLink
+              onClick={this.displayActivities}
+              to={"/activity/" + itinerary._id}
+            >
+              <div className="itineraryThirdRow"> v View All v </div>
+            </NavLink>
+          </div>
+        ))}
+      </div>
+    );
+  }
+}
+
+Itinerary.propTypes = {
+  fetchItineraries: PropTypes.func.isRequired,
+  itineraries: PropTypes.array.isRequired
+};
+
+const mapStateToProps = state => ({
+  itineraries: state.itineraries.item
+});
+
+export default connect(
+  mapStateToProps,
+  { fetchItineraries }
+)(Itinerary);

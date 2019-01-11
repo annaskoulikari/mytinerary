@@ -1,19 +1,10 @@
 import { combineReducers } from "redux";
 import cityReducer from "./cityReducer";
+import itineraryReducer from "./itineraryReducer";
+import activityReducer from "./activityReducer";
 
 export default combineReducers({
-  cities: cityReducer
+  cities: cityReducer,
+  itineraries: itineraryReducer,
+  activities: activityReducer
 });
-
-// const initState = {
-//   posts: [
-//     { name: "Barcelona", country: "Spain" },
-//     { name: "Athens", country: "Greece" }
-//   ]
-// };
-
-// const rootReducer = (state = initState, action) => {
-//   return state;
-// };
-
-// export default rootReducer;

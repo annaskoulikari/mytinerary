@@ -2,13 +2,12 @@ var express = require("express");
 var router = express.Router();
 var City = require("../models/city");
 
-var url = "mongodb://localhost:5000/mytinerary";
-
 // get a list of cities rom the db
 
 router.get("/", (req, res) => {
   City.find({}).then(function(cities) {
     res.send(cities);
+    console.log(cities);
   });
 });
 

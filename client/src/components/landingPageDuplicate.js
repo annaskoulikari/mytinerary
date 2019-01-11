@@ -4,8 +4,10 @@ import cities from "../circled-right-2.png";
 import "../App.css";
 import { NavLink } from "react-router-dom";
 import Header from "./header";
+
 import Slider from "react-animated-slider";
 import "react-animated-slider/build/horizontal.css";
+
 import Amsterdam from "../amsterdam.jpg";
 import Athens from "../athens.jpg";
 import Prague from "../prague.jpg";

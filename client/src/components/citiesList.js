@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchCities } from "../actions/citiesActions";
 import { DebounceInput } from "react-debounce-input";
 import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
 
 class CitiesList extends Component {
   componentDidMount() {
@@ -36,7 +37,9 @@ class CitiesList extends Component {
         />
         <ul>
           {filteredCities.map(city => (
-            <li key={city._id}>{city.name}</li>
+            <NavLink to={"/itinerary/" + city.name}>
+              <li key={city._id}>{city.name}</li>
+            </NavLink>
           ))}
         </ul>
       </div>

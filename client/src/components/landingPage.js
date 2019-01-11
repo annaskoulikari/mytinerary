@@ -19,7 +19,7 @@ class LangingPage extends Component {
           </p>
           <div className="startBrowsing">
             <p>Start browsing</p>
-            <NavLink to="/citiesPage">
+            <NavLink to="/citiesList">
               <img
                 className="citiesArrow"
                 src={cities}
