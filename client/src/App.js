@@ -8,7 +8,6 @@ import SignupPage from "./components/signupPage";
 import MenuOpen from "./components/menuOpen";
 import Footer from "./components/footer";
 import Itinerary from "./components/itinerary";
-import Activity from "./components/activity";
 
 class App extends Component {
   render() {
@@ -17,7 +16,7 @@ class App extends Component {
         <div className="App">
           <Switch>
             <Route exact path="/" component={LandingPage} />
-            <Route path="/activity/:id" component={Activity} />
+            {/* <Route path="/activity/:id" component={Activity} /> */}
             <Route path="/itinerary/:city" component={Itinerary} />
             <Route path="/citiesList" component={CitiesList} />
             <Route path="/loginPage" component={LoginPage} />

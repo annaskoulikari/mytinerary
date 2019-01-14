@@ -7,10 +7,14 @@ import "../App.css";
 import Slider from "react-animated-slider";
 import "react-animated-slider/build/horizontal.css";
 
+import Comments from "./comments";
+
 class Activity extends Component {
   componentDidMount() {
     console.log(this.props);
-    var itinerary_id = this.props.match.params.id;
+    // what I need to do is pass itinierary_id in some other way to this component and then redefine the variable
+    var itinerary_id = this.props.property;
+
     this.props.fetchActivities(itinerary_id);
     console.log(itinerary_id);
   }
@@ -30,6 +34,7 @@ class Activity extends Component {
             </div>
           ))}
         </Slider>
+        <Comments property={this.props.property} />
       </div>
     );
   }

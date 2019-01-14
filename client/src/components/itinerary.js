@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 import { fetchItineraries } from "../actions/itineraryActions";
 import "../App.css";
 // import cityReducer from "../reducers/cityReducer";
-import { NavLink } from "react-router-dom";
+
+import Activity from "./activity";
+import Toggle from "./toggle";
 
 class Itinerary extends Component {
   componentDidMount() {
@@ -15,28 +17,21 @@ class Itinerary extends Component {
     console.log(this.state);
   }
 
-  displayActivities = () => {
-    this.setState({
-      displayActivities: !this.state.displayActivities
-    });
-  };
-
-  constructor() {
-    super();
-    this.state = {
-      itineraries: "",
-      displayActivities: false
-    };
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     itineraries: ""
+  //   };
+  // }
 
   render() {
     return (
       <div>
-        <h1>City Name</h1>
+        <h1>City</h1>
         <h2>Available MYitenaries</h2>
 
         {this.props.itineraries.map(itinerary => (
-          <div key={itinerary.id} className="itineraryContainer">
+          <div key={itinerary._id} className="itineraryContainer">
             <div className="itineraryFirstRow">
               {" "}
               <div className="profilePhoto">Profilephoto</div>
@@ -62,12 +57,14 @@ class Itinerary extends Component {
               src={itinerary.itineraryImage}
               alt="stuff"
             />
-            <NavLink
-              onClick={this.displayActivities}
-              to={"/activity/" + itinerary._id}
-            >
-              <div className="itineraryThirdRow"> v View All v </div>
-            </NavLink>
+            <Toggle propertyViewAll={itinerary._id}>
+              {({ on, toggle }) => (
+                <div>
+                  {on && <Activity property={itinerary._id} />}
+                  <button onClick={toggle}>View All</button>
+                </div>
+              )}
+            </Toggle>
           </div>
         ))}
       </div>
