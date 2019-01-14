@@ -20,6 +20,7 @@ class Activity extends Component {
   }
 
   render() {
+    //console.log(this.props.selected);
     return (
       <div>
         <Slider>

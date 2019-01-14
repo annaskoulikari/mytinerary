@@ -8,6 +8,7 @@ import axios from "axios";
 
 export const postComment = itinerary_id => dispatch => {
   console.log("axiosing");
+  console.log(itinerary_id);
   axios.get(`/testComment/comments/${itinerary_id}`).then(res => {
     console.log(res);
     dispatch({

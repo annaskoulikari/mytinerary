@@ -9,7 +9,7 @@ class Comments extends Component {
   componentDidMount() {
     // what I need to do is pass itinierary_id in some other way to this component and then redefine the variable
     var itinerary_id = this.props.property;
-
+    console.log(itinerary_id);
     this.props.postComment(itinerary_id);
     console.log(itinerary_id);
     console.log(this.props);

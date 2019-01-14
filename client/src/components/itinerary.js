@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { fetchItineraries } from "../actions/itineraryActions";
 import "../App.css";
+import ToggleDisplay from "react-toggle-display";
 // import cityReducer from "../reducers/cityReducer";
 
 import Activity from "./activity";
@@ -17,12 +18,24 @@ class Itinerary extends Component {
     console.log(this.state);
   }
 
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     itineraries: ""
-  //   };
-  // }
+  constructor() {
+    super();
+    this.state = {
+      //on: false,
+      selectedItinerary: ""
+    };
+  }
+
+  handleToggle(e) {
+    e.preventDefault();
+    e.persist();
+    console.log(e);
+    console.log(e.target.id);
+    this.setState({
+      //on: !this.state.on
+      selectedItinerary: e.target.id
+    });
+  }
 
   render() {
     return (
@@ -57,14 +70,28 @@ class Itinerary extends Component {
               src={itinerary.itineraryImage}
               alt="stuff"
             />
-            <Toggle propertyViewAll={itinerary._id}>
-              {({ on, toggle }) => (
-                <div>
-                  {on && <Activity property={itinerary._id} />}
-                  <button onClick={toggle}>View All</button>
-                </div>
-              )}
-            </Toggle>
+            {/* <div className="App">
+              <p>
+                <button
+                  itinerary_id={itinerary.itinerary_id}
+                  onClick={e => this.handleClick(e)}
+                >
+                  View All
+                </button>
+              </p>
+
+              <ToggleDisplay show={this.state.show}>
+                <Activity property={itinerary._id} />
+              </ToggleDisplay>
+            </div> */}
+            <div>
+              {this.state.selectedItinerary === itinerary._id ? (
+                <Activity property={itinerary._id} />
+              ) : null}
+              <button id={itinerary._id} onClick={e => this.handleToggle(e)}>
+                {itinerary._id}
+              </button>
+            </div>
           </div>
         ))}
       </div>
