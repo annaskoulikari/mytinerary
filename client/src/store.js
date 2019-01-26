@@ -2,20 +2,36 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
+import logger from "redux-logger";
 
-//import {syncHistoryWithStore} from 'react-router-redux';
-//import {browserHistory} from "react-router";
+// OLD WAY OF DOING THINGS
+
+// const initialState = {};
+
+// const middleware = [thunk];
+
+// console.log("this is the store");
+
+// const store = createStore(
+//   rootReducer,
+//   initialState,
+//   composeWithDevTools(applyMiddleware(...middleware))
+// );
+
+// export default store;
+
+// NEW WAY OF DOING THINGS
 
 const initialState = {};
 
-const middleware = [thunk];
+//const middleware = [thunk];
+
+console.log("this is the store");
 
 const store = createStore(
   rootReducer,
   initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
+  composeWithDevTools(applyMiddleware(thunk, logger))
 );
-
-//export const history = syncHistoryWithStore(browserHistory, store);
 
 export default store;

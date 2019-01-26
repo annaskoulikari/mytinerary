@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { fetchItineraries } from "../actions/itineraryActions";
 import "../App.css";
-import ToggleDisplay from "react-toggle-display";
+//import ToggleDisplay from "react-toggle-display";
 // import cityReducer from "../reducers/cityReducer";
 
 import Activity from "./activity";
-import Toggle from "./toggle";
 
 class Itinerary extends Component {
   componentDidMount() {
@@ -89,7 +88,7 @@ class Itinerary extends Component {
                 <Activity property={itinerary._id} />
               ) : null}
               <button id={itinerary._id} onClick={e => this.handleToggle(e)}>
-                {itinerary._id}
+                View All
               </button>
             </div>
           </div>

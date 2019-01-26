@@ -15,6 +15,7 @@
     "react-slick": "^0.23.2",
     "react-toggle-display": "^2.2.0",
     "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1"
   },

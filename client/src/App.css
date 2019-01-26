@@ -411,3 +411,7 @@ h3 {
   max-height: 200px;
   overflow: scroll;
 }
+
+.error {
+  background: pink;
+}
