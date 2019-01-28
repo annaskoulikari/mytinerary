@@ -13,14 +13,3 @@ export const fetchItineraries = city => dispatch => {
     });
   });
 };
-
-// export const fetchItineraries = () => dispatch => {
-//   console.log("axiosing ITINEARRIES THOUGH");
-//   axios.get("testItinerary/itineraries/barcelona").then(res => {
-//     console.log(res);
-//     dispatch({
-//       type: FETCH_ITINERARIES,
-//       payload: res.data
-//     });
-//   });
-// };

@@ -3,9 +3,6 @@
 import { POST_COMMENT, ADD_COMMENT } from "./types";
 import axios from "axios";
 
-//var express = require("express");
-//var router = express.Router();
-
 export const postComment = itinerary_id => dispatch => {
   console.log("axiosing");
   console.log(itinerary_id);
@@ -17,10 +14,6 @@ export const postComment = itinerary_id => dispatch => {
     });
   });
 };
-
-// export const addComment = {itinerary_id, user, comment} => {
-
-//   console.log("adding comment to db and on website");
 
 export const addComment = (itinerary_id, user, comment) => {
   console.log("adding comment");
@@ -41,14 +34,3 @@ export const addComment = (itinerary_id, user, comment) => {
     comment
   };
 };
-
-// export const addComment = (itinerary_id, user, comment) => {
-//   console.log("adding comment");
-//   //console.log(itinerary_id, user, comment);
-//   return {
-//     type: ADD_COMMENT,
-//     itinerary_id,
-//     user,
-//     comment
-//   };
-// };
