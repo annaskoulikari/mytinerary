@@ -44,9 +44,17 @@ router.post("/accounts", (req, res) => {
               res.send(account);
             });
 
-            var token = jwt.sign({ id: account._id }, process.env.JWT_KEY, {
-              expiresIn: 86400
-            });
+            var token = jwt.sign(
+              {
+                email: account[0].email,
+                accountId: account[0]._id,
+                name: account[0].firstName + " " + account[0].lastName
+              },
+              process.env.JWT_KEY,
+              {
+                expiresIn: 86400
+              }
+            );
 
             res.status(200).send({ auth: true, token: token });
           }

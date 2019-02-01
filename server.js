@@ -5,6 +5,8 @@ var routerComment = require("./routes/commentRoute");
 var routerCountry = require("./routes/countryRoute");
 var routerAccount = require("./routes/accountRoute");
 var routerLogin = require("./routes/loginRoute");
+var routerAuth = require("./routes/authRoute");
+var passportSetup = require("./config/passport-setup");
 require("dotenv").config();
 
 console.log("server is starting");
@@ -104,6 +106,8 @@ app.get("/test", function(req, res) {
   res.send("Hello World");
 });
 
+//app.use(passport.initialize());
+
 app.use("/testRouter", routerTest);
 app.use("/testItinerary", routerItinerary);
 app.use("/testActivity", routerActivity);
@@ -111,5 +115,6 @@ app.use("/testComment", routerComment);
 app.use("/testCountry", routerCountry);
 app.use("/testAccount", routerAccount);
 app.use("/testLogin", routerLogin);
+app.use("/auth", routerAuth);
 
 app.listen(port, () => console.log(`server running on port ${port}`));

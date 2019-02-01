@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { checkAccount } from "../actions/loginActions";
+import { checkAccount, googleLogin } from "../actions/loginActions";
 import PropTypes from "prop-types";
 
 class LoginPage extends Component {
@@ -14,6 +14,7 @@ class LoginPage extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
   }
 
   handleChange(e) {
@@ -27,6 +28,12 @@ class LoginPage extends Component {
     const password = this.state.password;
     this.props.checkAccount(email, password);
   }
+
+  // handleGoogleLogin(e) {
+  //   e.preventDefault();
+  //   console.log("google login event is a happening");
+  //   this.props.googleLogin();
+  // }
 
   render() {
     //console.log(this.props);
@@ -71,7 +78,8 @@ class LoginPage extends Component {
             </button>
           </div>
         </form>
-        <button>Log in with Google</button>
+        {/* <button onClick={this.handleGoogleLogin}>Log in with Google</button> */}
+        <a href="http://localhost:5000/auth/google">Log in with Google</a>
         <button>Log in with Facebook</button>
         <h4>
           Don't have a MYtinerary account yet? You should create one! It's
@@ -99,5 +107,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { checkAccount }
+  { checkAccount, googleLogin }
 )(LoginPage);

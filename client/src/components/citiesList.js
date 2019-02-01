@@ -22,7 +22,7 @@ class CitiesList extends Component {
   }
 
   render() {
-    let filteredCities = this.props.cities.filter(city => {
+    const filteredCities = this.props.cities.filter(city => {
       return (
         city.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
       );
@@ -30,6 +30,7 @@ class CitiesList extends Component {
     return (
       <div>
         <DebounceInput
+          placeholder="search city..."
           debounceTimeout={1000}
           type="text"
           value={this.state.search}

@@ -15,14 +15,24 @@ export const postComment = itinerary_id => dispatch => {
   });
 };
 
+let config = {
+  withCredentials: true,
+  headers: { Authorization: "Bearer " + localStorage.getItem("user") }
+};
+
 export const addComment = (itinerary_id, user, comment) => {
-  console.log("adding comment");
+  console.log("adding comment" + user + comment);
+  console.log(localStorage.getItem("user"));
   axios
-    .post(`/testComment/comments`, {
-      itinerary_id,
-      user,
-      comment
-    })
+    .post(
+      `/testComment/comments`,
+      {
+        itinerary_id,
+        user,
+        comment
+      },
+      config
+    )
     .then(res => {
       console.log(res);
       console.log(res.data);

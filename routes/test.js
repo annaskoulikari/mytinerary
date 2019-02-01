@@ -6,6 +6,7 @@ var City = require("../models/city");
 
 router.get("/", (req, res) => {
   City.find({}).then(function(cities) {
+    console.log(req);
     res.send(cities);
     console.log(cities);
   });

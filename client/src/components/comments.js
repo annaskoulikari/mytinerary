@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { postComment, addComment } from "../actions/commentActions";
+import { checkAccount } from "../actions/loginActions";
 import PropTypes from "prop-types";
 import "../App.css";
 
@@ -68,10 +69,11 @@ Comments.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  comment: state.comments.comment
+  comment: state.comments.comment,
+  loggedInUser: state.loggedInUser.loggedInUser
 });
 
 export default connect(
   mapStateToProps,
-  { postComment, addComment }
+  { postComment, addComment, checkAccount }
 )(Comments);
