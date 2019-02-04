@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { checkAccount, googleLogin } from "../actions/loginActions";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 class LoginPage extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class LoginPage extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
+    this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
   }
 
   handleChange(e) {
@@ -29,11 +30,20 @@ class LoginPage extends Component {
     this.props.checkAccount(email, password);
   }
 
-  // handleGoogleLogin(e) {
-  //   e.preventDefault();
-  //   console.log("google login event is a happening");
-  //   this.props.googleLogin();
-  // }
+  handleGoogleLogin(e) {
+    e.preventDefault();
+    console.log("google login event is a happening");
+    // this.props.googleLogin();
+    axios
+      .get(`http://localhost:5000/testRouter`)
+      .then(res => {
+        // localStorage.setItem("user", res.data.token);
+        console.log(res);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
 
   render() {
     //console.log(this.props);

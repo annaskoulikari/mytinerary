@@ -21,8 +21,9 @@ export const checkAccount = (email, password) => dispatch => {
 export const googleLogin = () => dispatch => {
   console.log("I am in the google Login function in logiActions");
   axios
-    .get("/auth/google")
+    .get(`/auth/google`)
     .then(res => {
+      localStorage.setItem("user", res.data.token);
       console.log(res);
       dispatch({
         type: GOOGLE_LOGIN,

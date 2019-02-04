@@ -18,5 +18,6 @@ export default combineReducers({
   countries: countryReducer,
   accounts: accountReducer,
   message: accountReducer,
-  loggedInUser: loginReducer
+  loggedInUser: loginReducer,
+  loggedInUserGoogle: loginReducer
 });

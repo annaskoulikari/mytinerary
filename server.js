@@ -8,6 +8,8 @@ var routerLogin = require("./routes/loginRoute");
 var routerAuth = require("./routes/authRoute");
 var passportSetup = require("./config/passport-setup");
 require("dotenv").config();
+// var cors = require("cors");
+var passport = require("passport");
 
 console.log("server is starting");
 
@@ -23,18 +25,23 @@ var bodyParser = require("body-parser");
 // const Grid = require("gridfs-stream");
 // const multer = require("multer");
 
-// END OF STUFF I DID TO UPLOAD IMAGE
+// END OF STUFF I DID TO UPLOAD IMAGE\
 
 var app = express();
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// app.use(cors());
 
 app.use(express.static("uploads"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect(
-  process.env.db_url,
-  { useNewUrlParser: true, useCreateIndex: true }
-);
+mongoose.connect(process.env.db_url, {
+  useNewUrlParser: true,
+  useCreateIndex: true
+});
 
 mongoose.Promise = global.Promise;
 
@@ -105,6 +112,44 @@ let gfs;
 app.get("/test", function(req, res) {
   res.send("Hello World");
 });
+
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+//   res.header("Access-Control-Allow-Headers", "Content-Type");
+//   next();
+// });
+
+// app.use((req, res, next) => {
+//   const origin = req.get("origin");
+
+//   // TODO Add origin validation
+//   res.header("Access-Control-Allow-Origin", origin);
+//   res.header("Access-Control-Allow-Credentials", true);
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma"
+//   );
+
+//   // intercept OPTIONS method
+//   if (req.method === "OPTIONS") {
+//     res.sendStatus(204);
+//   } else {
+//     next();
+//   }
+// });
+
+//ADDED THIS
+
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
 
 //app.use(passport.initialize());
 

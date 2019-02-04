@@ -1,7 +1,8 @@
-import { CHECK_ACCOUNT } from "../actions/types";
+import { CHECK_ACCOUNT, GOOGLE_LOGIN } from "../actions/types";
 
 const initialState = {
-  loggedInUser: []
+  loggedInUser: [],
+  loggedInUserGoogle: []
 };
 
 export default function(state = initialState, action) {
@@ -11,6 +12,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loggedInUser: action.payload
+      };
+    case GOOGLE_LOGIN:
+      console.log("reducer");
+      return {
+        ...state,
+        loggedInUserGoogle: action.payload
       };
     default:
       return state;
