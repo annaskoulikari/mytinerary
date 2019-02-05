@@ -109,7 +109,7 @@ class LoginPage extends Component {
         </form>
         <button onClick={this.handleGoogleLogin}>Log in with Google</button>
         {/* <a href="http://localhost:5000/auth/google">Log in with Google</a> */}
-        <button>Log in with Facebook</button>
+        <button>Log in with Facebook (version2)</button>
         {/* {providers.map(provider => (
           <OAuth provider={provider} key={provider} socket={socket} />
         ))} */}
