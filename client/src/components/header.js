@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MenuOpen from "./menuOpen";
 import Login from "./login";
 import "../App.css";
+import { NavLink } from "react-router-dom";
 
 class Header extends Component {
   state = {};
@@ -10,7 +11,9 @@ class Header extends Component {
       <React.Fragment>
         <div className="header">
           <div className="loginComponent">
-            <Login />
+            <NavLink to="/profilePage">
+              <Login />
+            </NavLink>
           </div>
 
           <MenuOpen />

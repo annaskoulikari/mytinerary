@@ -8,3 +8,4 @@ export const CREATE_ACCOUNT = "CREATE_ACCOUNT";
 export const ACCOUNT_EXISTS = "ACCOUNT_EXISTS";
 export const CHECK_ACCOUNT = "CHECK_ACCOUNT";
 export const GOOGLE_LOGIN = "GOOGLE_LOGIN";
+export const GET_PROFILE = "GOOGLE_LOGIN";

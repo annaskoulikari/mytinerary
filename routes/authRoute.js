@@ -26,8 +26,8 @@ router.get("/logout", (req, res) => {
 //   }
 // );
 
-router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-  console.log(req);
+router.get("/google/callback", passport.authenticate("google"), (req, res) => {
+  //console.log(req);
   const user = req.user;
   const token = jwt.sign(
     {
@@ -39,16 +39,20 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
       expiresIn: "24h"
     }
   );
-  res.status(200).json({
-    message: "Auth successful",
-    token: token,
-    userName: user.userName,
-    email: user.email,
-    firstName: user.firstName,
-    lastName: user.lastName
-  });
-  res.redirect("http://localhost:3000/loginPage");
-  console.log("I redirected you");
+  console.log(token);
+
+  res.redirect("http://localhost:3000/loginPage?token=" + token);
+
+  // res.status(200).json({
+  //   message: "Auth successful",
+  //   token: token,
+  //   userName: user.userName,
+  //   email: user.email,
+  //   firstName: user.firstName,
+  //   lastName: user.lastName
+  // });
+  //res.redirect("http://localhost:3000/loginPage");
+  // console.log("I redirected you");
 });
 
 module.exports = router;

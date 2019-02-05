@@ -6,6 +6,7 @@ import commentReducer from "./commentReducer";
 import countryReducer from "./countryReducer";
 import accountReducer from "./accountReducer";
 import loginReducer from "./loginReducer";
+import profileReducer from "./profileReducer";
 
 console.log("this is the combined reducer");
 
@@ -19,5 +20,6 @@ export default combineReducers({
   accounts: accountReducer,
   message: accountReducer,
   loggedInUser: loginReducer,
-  loggedInUserGoogle: loginReducer
+  loggedInUserGoogle: loginReducer,
+  profile: profileReducer
 });

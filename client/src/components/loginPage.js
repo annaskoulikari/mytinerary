@@ -4,6 +4,13 @@ import { connect } from "react-redux";
 import { checkAccount, googleLogin } from "../actions/loginActions";
 import PropTypes from "prop-types";
 import axios from "axios";
+// import OAuth from "./oauth";
+// import io from "socket.io-client";
+import queryString from "query-string";
+
+// const socket = io("http://localhost:5000");
+
+// const providers = ["google"];
 
 class LoginPage extends Component {
   constructor(props) {
@@ -34,15 +41,27 @@ class LoginPage extends Component {
     e.preventDefault();
     console.log("google login event is a happening");
     // this.props.googleLogin();
-    axios
-      .get(`http://localhost:5000/testRouter`)
-      .then(res => {
-        // localStorage.setItem("user", res.data.token);
-        console.log(res);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    // axios
+    //   .get(`http://localhost:5000/auth/google`)
+    //   .then(res => {
+    //     console.log("done!");
+    //     // localStorage.setItem("user", res.data.token);
+    //     //console.log(res);
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
+
+    window.open("http://localhost:5000/auth/google");
+  }
+
+  componentWillMount() {
+    var query = queryString.parse(this.props.location.search);
+    if (query.token) {
+      window.localStorage.setItem("user", query.token);
+      console.log("you stored the correct token in local storage");
+      //this.props.history.push("/");
+    }
   }
 
   render() {
@@ -88,9 +107,12 @@ class LoginPage extends Component {
             </button>
           </div>
         </form>
-        {/* <button onClick={this.handleGoogleLogin}>Log in with Google</button> */}
-        <a href="http://localhost:5000/auth/google">Log in with Google</a>
+        <button onClick={this.handleGoogleLogin}>Log in with Google</button>
+        {/* <a href="http://localhost:5000/auth/google">Log in with Google</a> */}
         <button>Log in with Facebook</button>
+        {/* {providers.map(provider => (
+          <OAuth provider={provider} key={provider} socket={socket} />
+        ))} */}
         <h4>
           Don't have a MYtinerary account yet? You should create one! It's
           totally free and only takes a minute.

@@ -6,33 +6,67 @@ var routerCountry = require("./routes/countryRoute");
 var routerAccount = require("./routes/accountRoute");
 var routerLogin = require("./routes/loginRoute");
 var routerAuth = require("./routes/authRoute");
+var routerAuth2 = require("./routes/authRoute2");
+var routerProfile = require("./routes/profileRoute");
 var passportSetup = require("./config/passport-setup");
 require("dotenv").config();
-// var cors = require("cors");
+var cors = require("cors");
 var passport = require("passport");
+
+var express = require("express");
+var app = express();
+
+var port = process.env.PORT || 5000;
+app.listen(port, () => console.log(`server running on port ${port}`));
+
+const session = require("express-session");
 
 console.log("server is starting");
 
-var express = require("express");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 
-// START OF STUFF I DID TO UPLOAD IMAGE
+require("dotenv").config();
 
-// const path = require("path");
-// const crypto = require("crypto");
-// const GridFsStorage = require("multer-gridfs-storage");
-// const Grid = require("gridfs-stream");
-// const multer = require("multer");
+const socketio = require("socket.io");
 
-// END OF STUFF I DID TO UPLOAD IMAGE\
+const http = require("http");
 
-var app = express();
+const server = http.createServer(app);
+//const server = http.Server(app);
+
+const io = socketio.listen(server);
+
+io.sockets.on("connection", function(socket) {
+  console.log("A client is connected!");
+});
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true
+  })
+);
+
+app.use(
+  session({
+    secret: "process.env.secret",
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+// var io = require("socket.io").listen(server);
+
+// console.log("this is io", io);
+// console.log("this is io id", io.id);
+// const io = socketio.listen(server);
+app.set("io", io);
+
+console.log("this is app", app.io);
 
 app.use(express.static("uploads"));
 app.use(bodyParser.json());
@@ -50,108 +84,15 @@ app.use("/activity/uploads", express.static("uploads"));
 
 mongoose.connection
   .once("open", () => {
-    //init stream
     console.log("Connection has been made, now make fireworks...");
-    // gfs = Grid(
-    //   "mongodb://user_1:1Greecepuppy@ds013559.mlab.com:13559/mytinerary",
-    //   mongoose.mongo
-    // );
-    // gfs.collection("uploads");
   })
   .on("error", function(error) {
     console.log("Connection error:", error);
   });
 
-// START OF STUFF I DID TO UPLOAD IMAGE
-
-// Create our storage engine (aka storage object)
-
-// const storage = new GridFsStorage({
-//   url: "mongodb://user_1:1Greecepuppy@ds013559.mlab.com:13559/mytinerary",
-//   file: (req, file) => {
-//     return new Promise((resolve, reject) => {
-//       crypto.randomBytes(16, (err, buf) => {
-//         if (err) {
-//           return reject(err);
-//         }
-//         const filename = buf.toString("hex") + path.extname(file.originalname);
-//         const fileInfo = {
-//           filename: filename,
-//           bucketName: "uploads"
-//         };
-//         resolve(fileInfo);
-//       });
-//     });
-//   }
-// });
-
-// const upload = multer({ storage });
-
-// END OF STUFF I DID TO UPLOAD IMAGE
-
-// route
-
-// get
-
-//post
-
-// app.post("/upload", upload.single("file"), (req, res) => {
-//   res.json({ file: req.file });
-// });
-
-var port = process.env.PORT || 5000;
-
-//Init gfs
-
-let gfs;
-
-// app.get("/", (req, res) => res.send("HELLO WORLD"));
-
-// var router = express.Router();
-
 app.get("/test", function(req, res) {
   res.send("Hello World");
 });
-
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
-//   res.header("Access-Control-Allow-Headers", "Content-Type");
-//   next();
-// });
-
-// app.use((req, res, next) => {
-//   const origin = req.get("origin");
-
-//   // TODO Add origin validation
-//   res.header("Access-Control-Allow-Origin", origin);
-//   res.header("Access-Control-Allow-Credentials", true);
-//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma"
-//   );
-
-//   // intercept OPTIONS method
-//   if (req.method === "OPTIONS") {
-//     res.sendStatus(204);
-//   } else {
-//     next();
-//   }
-// });
-
-//ADDED THIS
-
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
-
-//app.use(passport.initialize());
 
 app.use("/testRouter", routerTest);
 app.use("/testItinerary", routerItinerary);
@@ -160,6 +101,6 @@ app.use("/testComment", routerComment);
 app.use("/testCountry", routerCountry);
 app.use("/testAccount", routerAccount);
 app.use("/testLogin", routerLogin);
+app.use("/testProfile", routerProfile);
 app.use("/auth", routerAuth);
-
-app.listen(port, () => console.log(`server running on port ${port}`));
+// app.use("/auth", routerAuth2);
