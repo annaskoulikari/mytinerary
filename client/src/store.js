@@ -22,7 +22,11 @@ import logger from "redux-logger";
 
 // NEW WAY OF DOING THINGS
 
-const initialState = {};
+const jwtToken = localStorage.getItem("user");
+
+const initialState = {
+  auth: { token: jwtToken, isAuthenticated: jwtToken ? true : false }
+};
 
 //const middleware = [thunk];
 

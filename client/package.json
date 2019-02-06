@@ -10,6 +10,7 @@
     "react-burger-menu": "^2.5.4",
     "react-debounce-input": "^3.2.0",
     "react-dom": "^16.6.3",
+    "react-google-login": "^5.0.0",
     "react-redux": "^6.0.0",
     "react-responsive-carousel": "^3.1.45",
     "react-router-dom": "^4.3.1",

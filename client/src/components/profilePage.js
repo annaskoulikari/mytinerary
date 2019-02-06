@@ -23,8 +23,7 @@ class ProfilePage extends Component {
 }
 
 ProfilePage.propTypes = {
-  getProfile: PropTypes.func.isRequired,
-  profile: PropTypes.array.isRequired
+  getProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

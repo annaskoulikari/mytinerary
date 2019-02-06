@@ -1,28 +1,31 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { checkAccount, googleLogin } from "../actions/loginActions";
+import {
+  checkAccount,
+  googleLogin,
+  oauthGoogle
+} from "../actions/loginActions";
 import PropTypes from "prop-types";
 import axios from "axios";
-// import OAuth from "./oauth";
-// import io from "socket.io-client";
-import queryString from "query-string";
+import GoogleLogin from "react-google-login";
+require("dotenv").config();
 
-// const socket = io("http://localhost:5000");
-
-// const providers = ["google"];
+//import queryString from "query-string";
 
 class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      accessToken: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
+    this.responseGoogle = this.responseGoogle.bind(this);
   }
 
   handleChange(e) {
@@ -39,7 +42,14 @@ class LoginPage extends Component {
 
   handleGoogleLogin(e) {
     e.preventDefault();
+
     console.log("google login event is a happening");
+
+    window.authenticateCallback = function(token) {
+      this.setState.accessToken = token;
+    };
+
+    window.open("http://localhost:5000/auth/googleLogin");
     // this.props.googleLogin();
     // axios
     //   .get(`http://localhost:5000/auth/google`)
@@ -52,15 +62,24 @@ class LoginPage extends Component {
     //     console.log(error);
     //   });
 
-    window.open("http://localhost:5000/auth/google");
+    //window.open("http://localhost:5000/auth/google");
   }
 
   componentWillMount() {
-    var query = queryString.parse(this.props.location.search);
-    if (query.token) {
-      window.localStorage.setItem("user", query.token);
-      console.log("you stored the correct token in local storage");
-      //this.props.history.push("/");
+    // var query = queryString.parse(this.props.location.search);
+    //window.localStorage.setItem("user", req.user.token);
+    // if (query.token) {
+    //   window.localStorage.setItem("user", query.token);
+    //   console.log("you stored the correct token in local storage");
+    //   //this.props.history.push("/");
+    // }
+  }
+
+  async responseGoogle(res) {
+    console.log("response google", res);
+    await this.props.oauthGoogle(res.accessToken);
+    if (!this.props.errorMessage) {
+      this.props.history.push("/profilePage");
     }
   }
 
@@ -107,8 +126,14 @@ class LoginPage extends Component {
             </button>
           </div>
         </form>
-        <button onClick={this.handleGoogleLogin}>Log in with Google</button>
+        {/* <button onClick={this.handleGoogleLogin}>Log in with Google</button> */}
         {/* <a href="http://localhost:5000/auth/google">Log in with Google</a> */}
+        <GoogleLogin
+          clientId="71133190926-d8mjt4mslu36qa3md2efuql8md35sjg9.apps.googleusercontent.com"
+          buttonText="Google"
+          onSuccess={this.responseGoogle}
+          onFailure={this.responseGoogle}
+        />
         <button>Log in with Facebook (version2)</button>
         {/* {providers.map(provider => (
           <OAuth provider={provider} key={provider} socket={socket} />
@@ -139,5 +164,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { checkAccount, googleLogin }
+  { checkAccount, googleLogin, oauthGoogle }
 )(LoginPage);

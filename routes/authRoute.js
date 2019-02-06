@@ -7,10 +7,7 @@ router.get(
   "/google",
   passport.authenticate("google", {
     scope: ["profile", "email"]
-  }),
-  (req, res) => {
-    console.log("you reached me!");
-  }
+  })
 );
 
 router.get("/logout", (req, res) => {
@@ -39,9 +36,13 @@ router.get("/google/callback", passport.authenticate("google"), (req, res) => {
       expiresIn: "24h"
     }
   );
-  console.log(token);
-
-  res.redirect("http://localhost:3000/loginPage?token=" + token);
+  const accessToken = token;
+  //req.user.token = token;
+  console.log("this is req.user", req.user);
+  console.log("this is the token", token);
+  //res.send(req.user);
+  res.render("http://localhost:3000/loginPage", { token: accessToken });
+  //res.redirect("/profilePage");
 
   // res.status(200).json({
   //   message: "Auth successful",
@@ -54,6 +55,26 @@ router.get("/google/callback", passport.authenticate("google"), (req, res) => {
   //res.redirect("http://localhost:3000/loginPage");
   // console.log("I redirected you");
 });
+
+router
+  .route("/googlelogin")
+  .post(
+    passport.authenticate("googleToken", { session: false }),
+    (req, res) => {
+      const user = req.user;
+      const token = jwt.sign(
+        {
+          email: user.email,
+          name: user.firstName + " " + user.lastName
+        },
+        process.env.JWT_KEY,
+        {
+          expiresIn: "24h"
+        }
+      );
+      res.status(200).json({ token });
+    }
+  );
 
 module.exports = router;
 

@@ -1,4 +1,4 @@
-import { CHECK_ACCOUNT, GOOGLE_LOGIN } from "./types";
+import { CHECK_ACCOUNT, GOOGLE_LOGIN, AUTH_SIGN_UP } from "./types";
 import axios from "axios";
 
 export const checkAccount = (email, password) => dispatch => {
@@ -33,4 +33,19 @@ export const googleLogin = () => dispatch => {
     .catch(function(error) {
       console.log(error);
     });
+};
+
+export const oauthGoogle = data => {
+  return async dispatch => {
+    console.log("we received", data);
+    const res = await axios.post("http://localhost:5000/auth/googlelogin", {
+      access_token: data
+    });
+    dispatch({
+      type: AUTH_SIGN_UP,
+      payload: res.data.token
+    });
+    console.log("res", res);
+    localStorage.setItem("user", res.data.token);
+  };
 };
