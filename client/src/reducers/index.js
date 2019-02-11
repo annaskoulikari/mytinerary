@@ -7,6 +7,7 @@ import countryReducer from "./countryReducer";
 import accountReducer from "./accountReducer";
 import loginReducer from "./loginReducer";
 import profileReducer from "./profileReducer";
+import favouritesReducer from "./favouritesReducer";
 
 console.log("this is the combined reducer");
 
@@ -21,5 +22,7 @@ export default combineReducers({
   message: accountReducer,
   loggedInUser: loginReducer,
   loggedInUserGoogle: loginReducer,
-  profile: profileReducer
+  profile: profileReducer,
+  favourites: favouritesReducer,
+  favouriteItinerary: favouritesReducer
 });

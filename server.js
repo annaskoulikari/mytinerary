@@ -10,6 +10,7 @@ var routerAuth2 = require("./routes/authRoute2");
 var routerProfile = require("./routes/profileRoute");
 var passportSetup = require("./config/passport-setup");
 var profilePageRoute = require("./routes/profileBackendRoute");
+var favouriteRoute = require("./routes/favouriteRoute2");
 require("dotenv").config();
 var cors = require("cors");
 var passport = require("passport");
@@ -25,6 +26,7 @@ const session = require("express-session");
 console.log("server is starting");
 
 var mongoose = require("mongoose");
+mongoose.set("useFindAndModify", false);
 var bodyParser = require("body-parser");
 
 require("dotenv").config();
@@ -105,4 +107,7 @@ app.use("/testLogin", routerLogin);
 app.use("/testProfile", routerProfile);
 app.use("/auth", routerAuth);
 app.use("/profileBackendRoute", profilePageRoute);
+app.use("/favourite", favouriteRoute);
+
+// app.use
 // app.use("/auth", routerAuth2);

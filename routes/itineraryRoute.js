@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Itinerary = require("../models/itinerary");
 const multer = require("multer");
+var Account = require("../models/account");
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -55,6 +56,36 @@ router.put("/itineraries:id", (req, res) => {
 
 router.delete("/itineraries:id", (req, res) => {
   res.send({ type: "DELETE" });
+});
+
+router.post("/itineraries/favourite", (req, res) => {
+  // console.log(req);
+  console.log("this is user from favourite", req.body.user);
+  console.log("this is id from favourite", req.body.itineraryFavourite);
+  res.send("you reached the favourite backend route!");
+
+  Account.findOne({ email: req.body.user.email }).then(user => {
+    console.log("favourites before adding", user.favourite);
+
+    if (user.favourite.indexOf(req.body.itineraryFavourite) != -1) {
+      console.log("this itinerary has already been liked");
+    } else {
+      Account.findOneAndUpdate(
+        { email: req.body.user.email },
+        { $push: { favourite: req.body.itineraryFavourite } },
+        { upsert: true },
+        function(err, updatedFavourites) {
+          if (err) {
+            console.log("error occured");
+          } else {
+            console.log(updatedFavourites);
+          }
+        }
+      );
+    }
+
+    console.log("favourites after adding", user.favourite);
+  });
 });
 
 module.exports = router;

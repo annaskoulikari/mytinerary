@@ -415,3 +415,7 @@ h3 {
 .error {
   background: pink;
 }
+
+.itineraryHeart {
+  max-height: 50px;
+}

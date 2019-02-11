@@ -35,15 +35,15 @@ export const googleLogin = () => dispatch => {
     });
 };
 
-export const oauthGoogle = data => {
+export const oauthGoogle = accessToken => {
   return async dispatch => {
-    console.log("we received", data);
+    console.log("we received", accessToken);
     const res = await axios.post("http://localhost:5000/auth/googlelogin", {
-      access_token: data
+      access_token: accessToken
     });
     dispatch({
       type: AUTH_SIGN_UP,
-      payload: res.data.token
+      payload: res.data
     });
     console.log("res", res);
     localStorage.setItem("user", res.data.token);

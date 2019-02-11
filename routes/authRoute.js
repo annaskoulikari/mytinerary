@@ -72,9 +72,31 @@ router
           expiresIn: "24h"
         }
       );
-      res.status(200).json({ token });
+      //user.token = token;
+      console.log("this is user", user);
+      res.status(200).json({ user: user, token: token });
     }
   );
+
+// router
+// .route("/googlelogin")
+// .post(
+//   passport.authenticate("googleToken", { session: false }),
+//   (req, res) => {
+//     const user = req.user;
+//     const token = jwt.sign(
+//       {
+//         email: user.email,
+//         name: user.firstName + " " + user.lastName
+//       },
+//       process.env.JWT_KEY,
+//       {
+//         expiresIn: "24h"
+//       }
+//     );
+//     res.status(200).json({ token });
+//   }
+// );
 
 module.exports = router;
 

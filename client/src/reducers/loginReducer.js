@@ -5,6 +5,7 @@ const initialState = {
   loggedInUserGoogle: [],
   isAuthenticated: false,
   token: "",
+  user: "",
   errorMessage: ""
 };
 
@@ -26,7 +27,8 @@ export default function(state = initialState, action) {
       console.log("reducer");
       return {
         ...state,
-        token: action.payload,
+        token: action.payload.token,
+        user: action.payload.user,
         isAuthenticated: true,
         errorMessage: ""
       };

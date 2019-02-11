@@ -22,6 +22,9 @@ var schemaAccount = new Schema({
   },
   country: {
     type: String
+  },
+  favourite: {
+    type: Array
   }
 });
 

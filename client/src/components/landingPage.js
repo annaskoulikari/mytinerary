@@ -4,8 +4,15 @@ import cities from "../circled-right-2.png";
 import "../App.css";
 import { NavLink } from "react-router-dom";
 import Header from "./header";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-class LangingPage extends Component {
+import { getProfile } from "../actions/profileActions";
+
+class LandingPage extends Component {
+  componentDidMount() {
+    this.props.getProfile();
+  }
   state = {};
   render() {
     return (
@@ -36,6 +43,7 @@ class LangingPage extends Component {
               <NavLink to="/signupPage" className="createAccountOption">
                 Create Account
               </NavLink>
+              <NavLink to="/favouritePage"> Favourite </NavLink>;
             </div>
           </div>
         </div>
@@ -44,4 +52,15 @@ class LangingPage extends Component {
   }
 }
 
-export default LangingPage;
+LandingPage.propTypes = {
+  getProfile: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  profile: state.profile.profile
+});
+
+export default connect(
+  mapStateToProps,
+  { getProfile }
+)(LandingPage);

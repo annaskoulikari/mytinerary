@@ -9,7 +9,6 @@ import {
 import PropTypes from "prop-types";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
-require("dotenv").config();
 
 //import queryString from "query-string";
 
