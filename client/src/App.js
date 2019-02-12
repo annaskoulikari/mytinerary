@@ -10,6 +10,7 @@ import Footer from "./components/footer";
 import Itinerary from "./components/itinerary";
 import ProfilePage from "./components/profilePage";
 import Favourite from "./components/favourite";
+import ItineraryList from "./components/itineraryList";
 
 class App extends Component {
   render() {
@@ -20,8 +21,10 @@ class App extends Component {
             <Route exact path="/" component={LandingPage} />
             <Route path="/favouritePage" component={Favourite} />
             <Route exact path="/profilePage" component={ProfilePage} />
+
             {/* <Route path="/activity/:id" component={Activity} /> */}
-            <Route path="/itinerary/:city" component={Itinerary} />
+            {/* <Route path="/itinerary/:city" component={Itinerary} /> */}
+            <Route path="/itinerary/:city" component={ItineraryList} />
             <Route path="/citiesList" component={CitiesList} />
             <Route path="/loginPage" component={LoginPage} />
             <Route path="/signupPage" component={SignupPage} />

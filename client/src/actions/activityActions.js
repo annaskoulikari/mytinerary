@@ -1,9 +1,9 @@
 import { FETCH_ACTIVITIES } from "./types";
 import axios from "axios";
 
-export const fetchActivities = itinerary_id => dispatch => {
+export const fetchActivities = itinerariesArray => dispatch => {
   console.log("axiosing");
-  axios.get(`/testActivity/activities/${itinerary_id}`).then(res => {
+  axios.post("/testActivity/activitiesAll", { itinerariesArray }).then(res => {
     console.log(res);
     dispatch({
       type: FETCH_ACTIVITIES,

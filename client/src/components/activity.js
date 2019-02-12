@@ -10,21 +10,26 @@ import "react-animated-slider/build/horizontal.css";
 import Comments from "./comments";
 
 class Activity extends Component {
-  componentDidMount() {
-    console.log(this.props);
-    // what I need to do is pass itinierary_id in some other way to this component and then redefine the variable
-    var itinerary_id = this.props.property;
-
-    this.props.fetchActivities(itinerary_id);
-    console.log(itinerary_id);
-  }
+  componentDidMount() {}
 
   render() {
     //console.log(this.props.selected);
+    var itinerary_id = this.props.property;
+    let activitiesArray = [];
+    this.props.activities.activities.forEach(activity => {
+      if (activity.itinerary_id === itinerary_id) {
+        activitiesArray.push(activity);
+      }
+    });
+    console.log(
+      "this should be just activities for this itinerary",
+      activitiesArray
+    );
+
     return (
       <div>
         <Slider>
-          {this.props.activities.map(activity => (
+          {activitiesArray.map(activity => (
             <div key={activity._id}>
               <img
                 className="sliderImage"
@@ -42,8 +47,8 @@ class Activity extends Component {
 }
 
 Activity.propTypes = {
-  fetchActivities: PropTypes.func.isRequired,
-  activities: PropTypes.array.isRequired
+  fetchActivities: PropTypes.func.isRequired
+  // activities: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({

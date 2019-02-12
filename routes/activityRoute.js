@@ -17,15 +17,30 @@ const upload = multer({ storage: storage });
 
 // get a list of itineraries from the db
 
-router.get("/activities/:_id", (req, res) => {
-  console.log(req.params);
-  var itineraryIdentified = req.params._id;
-  console.log(itineraryIdentified);
-  Activity.find({ itinerary_id: itineraryIdentified }).then(function(
-    activities
-  ) {
-    res.send(activities);
-  });
+// router.get("/activities/:_id", (req, res) => {
+//   console.log(req.params);
+//   var itineraryIdentified = req.params._id;
+//   console.log(itineraryIdentified);
+//   Activity.find({ itinerary_id: itineraryIdentified }).then(function(
+//     activities
+//   ) {
+//     res.send(activities);
+//   });
+// });
+
+router.post("/activitiesAll", (req, res) => {
+  console.log(req.body);
+  let itinerariesArray = req.body.itinerariesArray;
+  Activity.find({ itinerary_id: { $in: itinerariesArray } })
+    .then(activities => {
+      res.send({ activities });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
 });
 
 // add a new itinerary to the db
