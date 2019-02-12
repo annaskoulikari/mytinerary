@@ -6,6 +6,9 @@ import { getProfile } from "../actions/profileActions";
 import "../App.css";
 import favourite from "../images/favourite.png";
 import favourited from "../images/favourited.png";
+import close from "../images/close.png";
+import Popup from "reactjs-popup";
+import { NavLink } from "react-router-dom";
 
 import Activity from "./activity";
 import axios from "axios";
@@ -24,8 +27,13 @@ class Itinerary extends Component {
     super();
     this.state = {
       selectedItinerary: "",
-      image: favourite
+      image: favourite,
+      open: false,
+      imageClose: close
     };
+
+    //this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   handleToggle(e) {
@@ -39,6 +47,7 @@ class Itinerary extends Component {
   }
 
   addToFavourite(itineraryId, e) {
+    this.setState({ open: true });
     console.log("yeah we are gonna add to favourite");
     console.log(itineraryId);
     console.log(this.props.user);
@@ -52,6 +61,10 @@ class Itinerary extends Component {
       .then(res => {
         console.log(res);
       });
+  }
+
+  closeModal() {
+    this.setState({ open: false });
   }
 
   render() {
@@ -68,12 +81,46 @@ class Itinerary extends Component {
               <div className="itineraryInfo">
                 <div className="itineraryTitle">{itinerary.title}</div>
                 <div>
-                  <img
+                  {/* <img
                     onClick={e => this.addToFavourite(itinerary._id, e)}
                     className="itineraryHeart"
                     src={this.state.image}
                     alt="like"
+                  /> */}
+
+                  <img
+                    src={this.state.image}
+                    alt="like"
+                    className="itineraryHeart"
+                    onClick={e => this.addToFavourite(itinerary._id, e)}
+                    href="#"
                   />
+                  <Popup
+                    open={this.state.open}
+                    closeOnDocumentClick
+                    onClose={this.closeModal}
+                  >
+                    <div className="modal">
+                      {/* <a className="close" onClick={this.closeModal}>
+                        &times;
+                      </a> */}
+                      <img
+                        src={this.state.close}
+                        alt="close"
+                        onClick={this.closeModal}
+                      />
+                      <div>MYtinerary added to your Favorites</div>
+                      <NavLink to="/favouritePage">
+                        Go to Favourites Page
+                      </NavLink>
+                    </div>
+                  </Popup>
+                  {/* <img
+                    onClick={e => this.addToFavourite(itinerary._id, e)}
+                    className="itineraryHeart"
+                    src={this.state.image}
+                    alt="like"
+                  /> */}
                 </div>
                 <div className="itineraryDetails">
                   <div className="itineraryLikes">

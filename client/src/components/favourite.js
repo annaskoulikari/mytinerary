@@ -17,34 +17,41 @@ class Favourite extends Component {
     this.props.getFavourites(user);
   }
 
-  handleItineraries = (favouritesArray, e) => {
-    favouritesArray = this.props.favourites;
-    console.log("this should be this.props.favourites", this.props.favourites);
-    console.log("this should be the favourites array", favouritesArray);
-    this.props.getFavouriteItinerary(favouritesArray);
-    console.log("this should be this.props", this.props);
-  };
+  // handleItineraries = (favouritesArray, e) => {
+  //   favouritesArray = this.props.favourites;
+  //   console.log("this should be this.props.favourites", this.props.favourites);
+  //   console.log("this should be the favourites array", favouritesArray);
+  //   this.props.getFavouriteItinerary(favouritesArray);
+  //   console.log("this should be this.props", this.props);
+  // };
 
   state = {};
   render() {
     return (
       <div>
         <h1>Favourites</h1>
-        <button onClick={e => this.handleItineraries(this.props.favourites, e)}>
+        {/* <button onClick={e => this.handleItineraries(this.props.favourites, e)}>
           clickme
-        </button>
+        </button> */}
 
-        {this.props.favouriteItinerary.map(favourite => (
+        {/* {this.props.favourites.map(favourite => (
           <FavouriteMytinerary itinerary={favourite} />
-        ))}
+        ))} */}
+
+        {this.props.favourites.length !== 0 ? (
+          this.props.favourites.map(favourite => (
+            <FavouriteMytinerary itinerary={favourite} />
+          ))
+        ) : (
+          <div>You have no favourites</div>
+        )}
       </div>
     );
   }
 }
 
 Favourite.propTypes = {
-  getFavourites: PropTypes.func.isRequired,
-  favourites: PropTypes.array.isRequired
+  getFavourites: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

@@ -1,4 +1,8 @@
-import { GET_FAVOURITES, GET_FAVOURITE_ITINERARY } from "./types";
+import {
+  GET_FAVOURITES,
+  GET_FAVOURITE_ITINERARY,
+  REMOVE_FAVOURITE
+} from "./types";
 import axios from "axios";
 
 export const getFavourites = user => dispatch => {
@@ -8,6 +12,10 @@ export const getFavourites = user => dispatch => {
       user: user
     })
     .then(res => {
+      console.log(
+        "I pwetty pwetty pwease want this to be the array with the itinerarieis objects",
+        res.data
+      );
       dispatch({
         type: GET_FAVOURITES,
         payload: res.data
@@ -28,6 +36,21 @@ export const getFavouriteItinerary = itineraryID => dispatch => {
       console.log(res);
       dispatch({
         type: GET_FAVOURITE_ITINERARY,
+        payload: res.data
+      });
+    })
+    .catch(error => {
+      console.log(error.response);
+    });
+};
+
+export const removeFavourite = (id, user) => dispatch => {
+  axios
+    .post("/favourite/deleteFavourite", { id: id, user: user })
+    .then(res => {
+      console.log("this should be the itineraries after deleting", res.data);
+      dispatch({
+        type: GET_FAVOURITES,
         payload: res.data
       });
     })
