@@ -6,14 +6,25 @@ const jwt = require("jsonwebtoken");
 
 // get a list of cities rom the db
 
-router.get("/comments/:itinerary_id", (req, res) => {
-  console.log(req.params);
-  var itineraryIdentified = req.params.itinerary_id;
-  Comment.find({ itinerary_id: itineraryIdentified }).then(function(comments) {
+router.post("/commentsAll", (req, res) => {
+  var itinerariesArray = req.body.itinerariesArray;
+  console.log("this should be array of itineraries", itinerariesArray);
+  Comment.find({ itinerary_id: { $in: itinerariesArray } }).then(function(
+    comments
+  ) {
     res.send(comments);
     //console.log(comments);
   });
 });
+
+// router.get("/comments/:itinerary_id", (req, res) => {
+//   console.log(req.params);
+//   var itineraryIdentified = req.params.itinerary_id;
+//   Comment.find({ itinerary_id: itineraryIdentified }).then(function(comments) {
+//     res.send(comments);
+//     //console.log(comments);
+//   });
+// });
 
 // the checkAuth way
 
@@ -21,16 +32,35 @@ router.post("/comments", checkAuth, (req, res) => {
   console.log("this is req.body", req.body);
   console.log("this is again decoded", req.decoded);
   let userInfo = req.decoded;
-  //res.json({ userInfo });
+  let itinerariesArray = req.body.itinerariesArray;
   const comment = new Comment({
     comment: req.body.comment,
     user: userInfo.name,
     itinerary_id: req.body.itinerary_id
   });
-  Comment.create(comment).then(function(comment) {
-    res.send(comment);
-  });
+  Comment.create(comment).then(
+    Comment.find({ itinerary_id: { $in: itinerariesArray } }).then(function(
+      comments
+    ) {
+      res.send(comments);
+    })
+  );
 });
+
+// router.post("/comments", checkAuth, (req, res) => {
+//   console.log("this is req.body", req.body);
+//   console.log("this is again decoded", req.decoded);
+//   let userInfo = req.decoded;
+//   //res.json({ userInfo });
+//   const comment = new Comment({
+//     comment: req.body.comment,
+//     user: userInfo.name,
+//     itinerary_id: req.body.itinerary_id
+//   });
+//   Comment.create(comment).then(function(comment) {
+//     res.send(comment);
+//   });
+// });
 
 module.exports = router;
 

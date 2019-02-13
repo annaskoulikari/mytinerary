@@ -203,7 +203,7 @@
   flex: 1;
 }
 
-.itineraryContainer {
+/* .itineraryContainer {
   border: solid;
   display: flex;
   flex-direction: column;
@@ -262,7 +262,7 @@
 
 .itineraryExpense {
   flex: 1;
-}
+} */
 
 h3 {
   background: blue;
@@ -416,6 +416,36 @@ h3 {
   background: pink;
 }
 
-.itineraryHeart {
+/* .itineraryHeart {
   max-height: 50px;
+} */
+
+.cardContainer {
+  display: flex;
+}
+
+.cardImage {
+  flex: 1;
+}
+
+.cardInfo {
+  flex: 4;
+}
+
+.itineraryInfo {
+  display: flex;
+}
+
+.itineraryLikes,
+.itineraryHours,
+.itineraryExpense {
+  flex: 1;
+}
+
+.itineraryHashtags {
+  display: flex;
+}
+
+.itineraryHashtag {
+  flex: 1;
 }

@@ -8,7 +8,7 @@
     "client": "cd client && npm start",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "dev": "concurrently --kill-others-on-fail \"HTTPS=true npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,9 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "file-system": "^2.2.2",
+    "fs": "0.0.1-security",
     "gridfs-stream": "^1.1.1",
+    "https": "^1.0.0",
     "jsonwebtoken": "^8.4.0",
     "mongodb": "^3.1.10",
     "mongoose": "^5.4.1",
@@ -40,6 +42,7 @@
     "passport-google-oauth2": "^0.1.6",
     "passport-google-oauth20": "^1.0.0",
     "passport-google-plus-token": "^2.1.0",
+    "path": "^0.12.7",
     "react": "^16.7.0",
     "react-redux": "^6.0.0",
     "react-toggle-display": "^2.2.0",

@@ -6,8 +6,10 @@ class CitiesPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <p>This is the Cities Page</p>
-        <CitiesList />
+        <div className="container">
+          <p>This is the Cities Page</p>
+          <CitiesList />
+        </div>
       </React.Fragment>
     );
   }

@@ -7,7 +7,7 @@ import {
   oauthGoogle
 } from "../actions/loginActions";
 import PropTypes from "prop-types";
-import axios from "axios";
+
 import GoogleLogin from "react-google-login";
 
 //import queryString from "query-string";

@@ -9,7 +9,7 @@ import {
 import PropTypes from "prop-types";
 import favourited from "../images/favourited.png";
 import favourite from "../images/favourite.png";
-import axios from "axios";
+
 import { getProfile } from "../actions/profileActions";
 import Popup from "reactjs-popup";
 import close from "../images/close.png";

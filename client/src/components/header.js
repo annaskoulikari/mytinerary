@@ -16,7 +16,7 @@ class Header extends Component {
             </NavLink>
           </div>
 
-          <MenuOpen />
+          {/* <MenuOpen /> */}
         </div>
       </React.Fragment>
     );

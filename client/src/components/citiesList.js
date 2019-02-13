@@ -4,6 +4,7 @@ import { fetchCities } from "../actions/citiesActions";
 import { DebounceInput } from "react-debounce-input";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import "materialize-css/dist/css/materialize.min.css";
 
 class CitiesList extends Component {
   componentDidMount() {

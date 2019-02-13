@@ -10,16 +10,27 @@ var routerAuth2 = require("./routes/authRoute2");
 var routerProfile = require("./routes/profileRoute");
 var passportSetup = require("./config/passport-setup");
 var profilePageRoute = require("./routes/profileBackendRoute");
-var favouriteRoute = require("./routes/favouriteRoute2");
+var favouriteRoute = require("./routes/favouriteRoute");
 require("dotenv").config();
 var cors = require("cors");
 var passport = require("passport");
 
+const path = require("path");
+const fs = require("fs");
+var https = require("https");
+
 var express = require("express");
+
+const certOptions = {
+  key: fs.readFileSync(path.resolve("./ssl/server.key")),
+  cert: fs.readFileSync(path.resolve("./ssl/server.crt"))
+};
 var app = express();
 
+const server = https.createServer(certOptions, app);
+
 var port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`server running on port ${port}`));
+server.listen(port, () => console.log(`server running on port ${port}`));
 
 const session = require("express-session");
 
@@ -35,7 +46,7 @@ const socketio = require("socket.io");
 
 const http = require("http");
 
-const server = http.createServer(app);
+// const server = http.createServer(app);
 //const server = http.Server(app);
 
 const io = socketio.listen(server);

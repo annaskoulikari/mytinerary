@@ -1,18 +1,22 @@
 // add comment
 
-import { POST_COMMENT, ADD_COMMENT } from "./types";
+import { POST_COMMENT } from "./types";
 import axios from "axios";
 
-export const postComment = itinerary_id => dispatch => {
+export const postComment = itinerariesArray => dispatch => {
   console.log("axiosing");
-  console.log(itinerary_id);
-  axios.get(`/testComment/comments/${itinerary_id}`).then(res => {
-    console.log(res);
-    dispatch({
-      type: POST_COMMENT,
-      payload: res.data
+
+  axios
+    .post("http://localhost:5000/testComment/commentsAll", {
+      itinerariesArray: itinerariesArray
+    })
+    .then(res => {
+      console.log(res);
+      dispatch({
+        type: POST_COMMENT,
+        payload: res.data
+      });
     });
-  });
 };
 
 let config = {
@@ -20,7 +24,12 @@ let config = {
   headers: { Authorization: "Bearer " + localStorage.getItem("user") }
 };
 
-export const addComment = (itinerary_id, user, comment) => {
+export const addComment = (
+  itinerary_id,
+  user,
+  comment,
+  itinerariesArray
+) => dispatch => {
   console.log("adding comment" + user + comment);
   console.log(localStorage.getItem("user"));
   axios
@@ -29,18 +38,17 @@ export const addComment = (itinerary_id, user, comment) => {
       {
         itinerary_id,
         user,
-        comment
+        comment,
+        itinerariesArray
       },
       config
     )
     .then(res => {
       console.log(res);
       console.log(res.data);
+      dispatch({
+        type: POST_COMMENT,
+        payload: res.data
+      });
     });
-  return {
-    type: ADD_COMMENT,
-    itinerary_id,
-    user,
-    comment
-  };
 };

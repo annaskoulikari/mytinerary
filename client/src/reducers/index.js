@@ -16,7 +16,6 @@ export default combineReducers({
   itineraries: itineraryReducer,
   activities: activityReducer,
   comments: commentReducer,
-  newComment: commentReducer,
   countries: countryReducer,
   accounts: accountReducer,
   message: accountReducer,

@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { getProfile } from "../actions/profileActions";
+import "materialize-css/dist/css/materialize.min.css";
 
 class LandingPage extends Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ class LandingPage extends Component {
   state = {};
   render() {
     return (
-      <React.Fragment>
+      <div>
         <Header />
         <div className="row landingPageContents">
           <img className="logo" src={logotest} alt="logo" />
@@ -47,7 +48,7 @@ class LandingPage extends Component {
             </div>
           </div>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
