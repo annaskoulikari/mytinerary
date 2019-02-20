@@ -527,3 +527,23 @@
 .infoFavourite {
   flex: 2;
 }
+
+.email {
+  display: flex;
+  margin: 10px;
+}
+
+.password {
+  display: flex;
+  margin: 10px;
+}
+
+.googleButton {
+  margin: 20px;
+  width: 80%;
+}
+
+.facebookButton {
+  margin: 20px;
+  width: 80%;
+}

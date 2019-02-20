@@ -61,6 +61,6 @@ export const oauthFacebook = data => {
       payload: res.data
     });
     console.log("res", res);
-    localStorage.setItem("user, res.data.token");
+    localStorage.setItem("user", res.data.token);
   };
 };

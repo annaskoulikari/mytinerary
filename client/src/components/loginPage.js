@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import {
   checkAccount,
   googleLogin,
-  oauthGoogle
+  oauthGoogle,
+  oauthFacebook
 } from "../actions/loginActions";
 import PropTypes from "prop-types";
 
@@ -54,6 +55,7 @@ class LoginPage extends Component {
 
   async responseFacebook(res) {
     console.log("responseFacebook", res);
+    await this.props.oauthFacebook(res.accessToken);
     if (!this.props.errorMessage) {
       this.props.history.push("/profilePage");
     }
@@ -65,58 +67,87 @@ class LoginPage extends Component {
         <Header />
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className="email">
-            <label htmlFor="email">Email: </label>
+          <div className="email formGroup ">
+            <label className="form-label" htmlFor="email" style={{ flex: 1 }}>
+              Email:
+            </label>
             <input
               type="email"
-              placeholder="Email"
               name="email"
               onChange={this.handleChange}
               value={this.state.value}
+              className="form-control"
+              style={{ flex: 2 }}
             />
           </div>
 
-          <div className="password">
-            <label htmlFor="password">Password: </label>
+          <div className="password formGroup">
+            <label
+              className="form-label"
+              htmlFor="password"
+              style={{ flex: 1 }}
+            >
+              Password:
+            </label>
             <input
               type="password"
-              placeholder="Password"
               name="password"
               value={this.state.value}
               onChange={this.handleChange}
+              className="form-control"
+              style={{ flex: 2 }}
             />
           </div>
-          <div>
-            <input required type="checkbox" />
-            <label>Remember Me</label>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-start",
+              margin: "10px",
+              alignItems: "center"
+            }}
+          >
+            <div className="form-check">
+              <input type="checkbox" className="form-check-input" />
+              <label className="form-check-label">Remember Me</label>
+            </div>
           </div>
           <div>
-            <button style={{ background: this.state.color }} type="submit">
+            <button class="btn btn-outline-primary" type="submit ">
               OK
             </button>
           </div>
         </form>
-        <FacebookLogin
-          appId="783669185332730"
-          // autoLoad={true}
-          textButton="Facebook"
-          field="name, email, picture"
-          callback={this.responseFacebook}
-          cssClass=""
-        />
-
-        <GoogleLogin
-          clientId="71133190926-d8mjt4mslu36qa3md2efuql8md35sjg9.apps.googleusercontent.com"
-          buttonText="Google"
-          onSuccess={this.responseGoogle}
-          onFailure={this.responseGoogle}
-        />
-        <button>Log in with Facebook (version2)</button>
-
-        <h4>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}
+        >
+          <div className="facebookButton">
+            <FacebookLogin
+              appId="783669185332730"
+              // autoLoad={true}
+              textButton="Log in with Facebook"
+              // field="name, email, picture"
+              callback={this.responseFacebook}
+              // cssClass="btn btn-primary "
+            />
+          </div>
+          <div className="googleButton">
+            <GoogleLogin
+              clientId="71133190926-d8mjt4mslu36qa3md2efuql8md35sjg9.apps.googleusercontent.com"
+              buttonText="Log in with Google"
+              onSuccess={this.responseGoogle}
+              onFailure={this.responseGoogle}
+              className="btn "
+            />
+          </div>
+        </div>
+        <p className="text-left" style={{ margin: "20px" }}>
           Don't have a MYtinerary account yet? You should create one! It's
           totally free and only takes a minute.
-        </h4>
+        </p>
         <NavLink to="/signupPage">Create Account</NavLink>
       </React.Fragment>
     );
@@ -134,5 +165,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { checkAccount, googleLogin, oauthGoogle }
+  { checkAccount, googleLogin, oauthGoogle, oauthFacebook }
 )(LoginPage);
