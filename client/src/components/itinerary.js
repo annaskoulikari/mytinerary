@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 import { fetchItineraries } from "../actions/itineraryActions";
 import { getProfile } from "../actions/profileActions";
 
-import close from "../images/close.png";
-
 import { NavLink } from "react-router-dom";
 
 import ActivityTrial from "./activityTrial";
@@ -14,18 +12,19 @@ import axios from "axios";
 import "../App.css";
 import {
   getFavourites,
-  getFavouriteItinerary
+  getFavouriteItinerary,
+  removeFavourite
 } from "../actions/favouriteActions";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import CardHeader from "@material-ui/core/CardHeader";
+
 import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import Close from "@material-ui/icons/Close";
@@ -39,48 +38,40 @@ class Itinerary extends Component {
     this.props.favourites.forEach(favourite =>
       favouritesArray.push(favourite._id)
     );
-    console.log("this should be array of favourites id", favouritesArray);
+
     if (favouritesArray.includes(this.props.itinerary._id)) {
       this.setState({ liked: true });
     }
-  }
-  componentDidMount() {
-    this.props.getProfile();
-
-    console.log(this.props);
-
-    // var user = this.props.user.email;
-
-    this.isLiked();
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      selectedItinerary: "",
       showActivity: false,
-
       open: false,
-      imageClose: close,
-      liked: false
+      liked: false,
+      itineraryAsFavourite: false
     };
-
+    this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
-  handleToggle(e) {
-    e.preventDefault();
+  componentDidMount() {
+    this.props.getProfile();
 
-    this.setState({
-      showActivity: !this.state.showActivity
-    });
+    this.isLiked();
+
+    console.log(this.props.useCase);
+
+    if (this.props.useCase === "favourite") {
+      this.setState({ itineraryAsFavourite: true });
+    } else {
+      this.setState({ itineraryAsFavourite: false });
+    }
   }
-
+  //use case for itinerarylist
   addToFavourite(itineraryId, e) {
     this.setState({ open: true });
-    console.log("yeah we are gonna add to favourite");
-    console.log(itineraryId);
-    console.log(this.props.user);
     var itineraryFavourite = itineraryId;
     var user = this.props.user;
     axios
@@ -93,17 +84,30 @@ class Itinerary extends Component {
       });
   }
 
-  closeModal() {
-    this.setState({ open: false, liked: false });
-  }
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
   handleClose = () => {
     this.setState({ open: false, liked: true });
   };
+
+  //use case for favourite
+  openModal() {
+    this.setState({ open: true, liked: false });
+  }
+  closeModal() {
+    this.setState({ open: false, liked: true });
+  }
+
+  removeFromFavourite(id, e) {
+    var user = this.props.user;
+    this.props.removeFavourite(id, user);
+    this.setState({ open: false });
+  }
+
+  handleToggle(e) {
+    e.preventDefault();
+    this.setState({
+      showActivity: !this.state.showActivity
+    });
+  }
 
   render() {
     const style = {
@@ -116,42 +120,83 @@ class Itinerary extends Component {
 
     return (
       <div>
-        <div>
-          <Dialog
-            open={this.state.open}
-            onClose={this.handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogActions>
-              <Close onClick={this.handleClose} />
-            </DialogActions>
-            <DialogContent>
-              {/* <DialogContentText style={dialog} id="alert-dialog-description">
-                MYtinerary added to your Favourite
-              </DialogContentText> */}
-              {this.state.liked ? (
+        {this.state.itineraryAsFavourite ? (
+          <div>
+            <Dialog
+              open={this.state.open}
+              onClose={this.closeModal}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogContent>
                 <DialogContentText style={dialog} id="alert-dialog-description">
-                  This MYtinerary is already in your favourites! (-:)
+                  Are you sure you want to delete this MYtinerary from your
+                  Favourite?
                 </DialogContentText>
-              ) : (
-                <DialogContentText style={dialog} id="alert-dialog-description">
-                  MYtinerary added to your Favourite
-                </DialogContentText>
-              )}
-            </DialogContent>
-            <DialogActions>
-              <Button
-                style={{ width: "100%" }}
-                onClick={this.handleClose}
-                color="primary"
-                autoFocus
-              >
-                <NavLink to="/favouritePage">Go to Favourites Page</NavLink>
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </div>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  style={{ width: "100%" }}
+                  onClick={this.closeModal}
+                  color="primary"
+                  autoFocus
+                >
+                  Cancel
+                </Button>
+                <Button
+                  style={{ width: "100%" }}
+                  onClick={e =>
+                    this.removeFromFavourite(this.props.itinerary._id, e)
+                  }
+                  color="primary"
+                  autoFocus
+                >
+                  Confirm
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </div>
+        ) : (
+          <div>
+            <Dialog
+              open={this.state.open}
+              onClose={this.handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogActions>
+                <Close onClick={this.handleClose} />
+              </DialogActions>
+              <DialogContent>
+                {this.state.liked ? (
+                  <DialogContentText
+                    style={dialog}
+                    id="alert-dialog-description"
+                  >
+                    This MYtinerary is already in your favourites! (-:)
+                  </DialogContentText>
+                ) : (
+                  <DialogContentText
+                    style={dialog}
+                    id="alert-dialog-description"
+                  >
+                    MYtinerary added to your Favourite
+                  </DialogContentText>
+                )}
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  style={{ width: "100%" }}
+                  onClick={this.handleClose}
+                  color="primary"
+                  autoFocus
+                >
+                  <NavLink to="/favouritePage">Go to Favourites Page</NavLink>
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </div>
+        )}
         <Card>
           <CardContent>
             <div className="card">
@@ -172,14 +217,35 @@ class Itinerary extends Component {
                     <span className="card-title itineraryTitle">
                       {this.props.itinerary.title}
                     </span>
-                    <div
+                    <div>
+                      {this.state.itineraryAsFavourite ? (
+                        <div className="likeFavourite">
+                          {this.state.liked ? (
+                            <FavoriteBorder onClick={this.openModal} />
+                          ) : (
+                            <Favorite onClick={this.openModal} />
+                          )}
+                        </div>
+                      ) : (
+                        <div
+                          onClick={e =>
+                            this.addToFavourite(this.props.itinerary._id, e)
+                          }
+                          className="btn-floating pink itineraryLike"
+                        >
+                          {this.state.liked ? <Favorite /> : <FavoriteBorder />}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* <div
                       onClick={e =>
                         this.addToFavourite(this.props.itinerary._id, e)
                       }
                       className="btn-floating pink itineraryLike"
                     >
                       {this.state.liked ? <Favorite /> : <FavoriteBorder />}
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="itineraryInfo">
@@ -234,5 +300,11 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchItineraries, getProfile, getFavourites, getFavouriteItinerary }
+  {
+    fetchItineraries,
+    getProfile,
+    getFavourites,
+    getFavouriteItinerary,
+    removeFavourite
+  }
 )(Itinerary);

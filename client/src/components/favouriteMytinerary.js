@@ -8,65 +8,45 @@ import {
 } from "../actions/favouriteActions";
 
 import PropTypes from "prop-types";
-import favourited from "../images/favourited.png";
-import favourite from "../images/favourite.png";
 
 import { getProfile } from "../actions/profileActions";
 import Popup from "reactjs-popup";
-import close from "../images/close.png";
+
 import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 class FavouriteMytinerary extends Component {
+  componentDidMount() {
+    this.props.getProfile();
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      image: favourited,
-      liked: false,
-      imageClose: close
+      liked: false
     };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
   openModal() {
-    this.setState({ open: true });
-    this.setState({ image: favourite, liked: false });
+    this.setState({ open: true, liked: false });
   }
   closeModal() {
-    this.setState({ open: false, image: favourited, liked: true });
-  }
-
-  componentDidMount() {
-    console.log(this.props);
-    console.log(this.props.itinerary);
-    this.props.getProfile();
+    this.setState({ open: false, liked: true });
   }
 
   removeFromFavourite(id, e) {
-    console.log("yup let's remove");
-    console.log(id);
-    this.setState({ image: favourite, liked: false });
     var user = this.props.user;
-    console.log("this should be the user accessing from front end", user);
     this.props.removeFavourite(id, user);
     this.setState({ open: false });
   }
 
   render() {
-    const cover = {
-      width: 151
-    };
     return (
       <div>
-        {/* {this.props.itineraries.map(itinerary => (
-          <div>
-            <img src={itinerary.itineraryImage} alt="itinerary" />
-          </div>
-        ))} */}
         <Card>
           <CardContent>
             <div className="favouriteCard">
@@ -122,38 +102,6 @@ class FavouriteMytinerary extends Component {
             </button>
           </div>
         </Popup>
-        {/* <h2>here I should put mytinerary</h2>
-        {this.props.itinerary.profileName}
-        <div> */}
-        {/* <div>
-            <img
-              onClick={this.openModal}
-              className="itineraryHeart"
-              src={this.state.image}
-              alt="like"
-            /> */}
-        {/* <Popup
-              open={this.state.open}
-              closeOnDocumentClick
-              onClose={this.closeModal}
-            >
-              <div className="modal">
-                <div>
-                  Are you sure you want to delete this MYtinerary from your
-                  Favourites?
-                </div>
-                <button onClick={this.closeModal}>Cancel</button>
-                <button
-                  onClick={e =>
-                    this.removeFromFavourite(this.props.itinerary._id, e)
-                  }
-                >
-                  Confirm
-                </button>
-              </div>
-            </Popup> */}
-        {/* </div> */}
-        {/* </div> */}
       </div>
     );
   }

@@ -9,22 +9,40 @@ import {
 import { getProfile } from "../actions/profileActions";
 import PropTypes from "prop-types";
 import Header from "./header";
+import Itinerary from "./itinerary";
+import { fetchActivities } from "../actions/activityActions";
+import { postComment } from "../actions/commentActions";
 
 class Favourite extends Component {
-  componentDidMount() {
+  // componentDidMount() {
+  //   this.props.getProfile();
+  //   var user = this.props.profile.email;
+  //   console.log(user);
+  //   this.props.getFavourites(user);
+  // }
+
+  async fetchEverything() {
+    let itinerariesArray = [];
     this.props.getProfile();
     var user = this.props.profile.email;
     console.log(user);
-    this.props.getFavourites(user);
+    await this.props.getFavourites(user);
+
+    this.props.favourites.map(itinerary =>
+      itinerariesArray.push(itinerary._id)
+    );
+    console.log(
+      "this should be array of itineraries is ItineraryList",
+      itinerariesArray
+    );
+
+    this.props.fetchActivities(itinerariesArray);
+    this.props.postComment(itinerariesArray);
   }
 
-  // handleItineraries = (favouritesArray, e) => {
-  //   favouritesArray = this.props.favourites;
-  //   console.log("this should be this.props.favourites", this.props.favourites);
-  //   console.log("this should be the favourites array", favouritesArray);
-  //   this.props.getFavouriteItinerary(favouritesArray);
-  //   console.log("this should be this.props", this.props);
-  // };
+  componentDidMount() {
+    this.fetchEverything();
+  }
 
   state = {};
   render() {
@@ -32,17 +50,10 @@ class Favourite extends Component {
       <div>
         <Header />
         <h1>Favourites</h1>
-        {/* <button onClick={e => this.handleItineraries(this.props.favourites, e)}>
-          clickme
-        </button> */}
-
-        {/* {this.props.favourites.map(favourite => (
-          <FavouriteMytinerary itinerary={favourite} />
-        ))} */}
 
         {this.props.favourites.length !== 0 ? (
           this.props.favourites.map(favourite => (
-            <FavouriteMytinerary itinerary={favourite} />
+            <Itinerary useCase="favourite" itinerary={favourite} />
           ))
         ) : (
           <div>You have no favourites</div>
@@ -64,5 +75,11 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getProfile, getFavourites, getFavouriteItinerary }
+  {
+    getProfile,
+    getFavourites,
+    getFavouriteItinerary,
+    fetchActivities,
+    postComment
+  }
 )(Favourite);

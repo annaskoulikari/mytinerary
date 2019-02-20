@@ -57,7 +57,7 @@ class CitiesList extends Component {
           </Paper>
         </div>
         <div className="cityList">
-          <div clasNames="list-group ">
+          <div className="list-group ">
             {filteredCities.map(city => (
               <div
                 className="list-group-item list-group-item-action"
