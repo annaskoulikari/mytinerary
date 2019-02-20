@@ -5,6 +5,7 @@ import { createAccount } from "../actions/accountActions";
 import { fetchCountries } from "../actions/countryActions";
 import PropTypes from "prop-types";
 import Header from "./header";
+import axios from "axios";
 
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -26,6 +27,7 @@ class SignupPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedFile: null,
       submitReady: false,
       userName: null,
       password: null,
@@ -43,6 +45,8 @@ class SignupPage extends Component {
         formError: ""
       }
     };
+    // this.handleSubmitFile = this.handleSubmitFile.bind(this);
+    // this.fileInput = React.createRef();
   }
 
   componentDidMount() {
@@ -135,15 +139,38 @@ class SignupPage extends Component {
     //   : this.setState({ color: "grey" });
   };
 
-  fileSelectedHandler = event => {
-    console.log(event.target.files[0]);
-  };
+  // fileSelectedHandler = event => {
+  //   console.log(event.target.files[0]);
+  // };
 
   // profileSubmit = e => {
   //   axios.post("/upload", upload.single("file"), (req, res) => {
   //     res.json({ file: req.file });
   //   });
   // }
+
+  // handleSubmitFile = event => {
+  //   event.preventDefault();
+  //   var file = event.target.files[0];
+  //   console.log("this is file", file);
+
+  //   // axios
+  //   //   .post("/uploads", { file: file })
+  //   //   .then(res => console.log("this should be file res", res));
+  // };
+
+  handleSelectedFile = event => {
+    console.log("selectedfile", event.target.files[0]);
+    this.setState({ selectedFile: event.target.files[0] });
+  };
+
+  handleUpload = () => {
+    const data = new FormData();
+    data.append("file", this.state.selectedFile, this.state.selectedFile.name);
+    axios
+      .post("https://localhost:5000/uploads", data)
+      .then(res => console.log("this is after uploading file res", res));
+  };
 
   render() {
     const { formErrors } = this.state;
@@ -153,14 +180,33 @@ class SignupPage extends Component {
         <Header />
         <h1> Create Account</h1>
 
+        <form>
+          <label>
+            Upload file:
+            <input
+              type="file"
+              ref={this.fileInput}
+              onChange={this.handleSelectedFile}
+            />
+          </label>
+          <br />
+          <button onClick={this.handleUpload}>Submit</button>
+        </form>
+
         <form
           onChange={this.handleSubmitButtonChange}
           onSubmit={this.handleSubmit}
         >
-          <div>
+          {/* <div>
             <label>Profile Photo:</label>
-            <input type="file" onChange={this.fileSelectedHandler} />
-          </div>
+            <input
+              type="file"
+              name="file"
+              id="file"
+              class="custom-file-input"
+              onChange={this.fileSelectedHandler}
+            />
+          </div> */}
 
           <div className="userName form-Group input">
             <label

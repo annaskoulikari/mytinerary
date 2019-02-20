@@ -221,9 +221,9 @@ class Itinerary extends Component {
                       {this.state.itineraryAsFavourite ? (
                         <div className="likeFavourite">
                           {this.state.liked ? (
-                            <FavoriteBorder onClick={this.openModal} />
-                          ) : (
                             <Favorite onClick={this.openModal} />
+                          ) : (
+                            <FavoriteBorder onClick={this.openModal} />
                           )}
                         </div>
                       ) : (
