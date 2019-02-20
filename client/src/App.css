@@ -528,7 +528,7 @@
   flex: 2;
 }
 
-.email {
+.input {
   display: flex;
   margin: 10px;
 }
@@ -546,4 +546,9 @@
 .facebookButton {
   margin: 20px;
   width: 80%;
+}
+
+.cityList {
+  height: 500px;
+  overflow: scroll;
 }

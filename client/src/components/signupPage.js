@@ -26,7 +26,7 @@ class SignupPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      color: "grey",
+      submitReady: false,
       userName: null,
       password: null,
       email: null,
@@ -88,7 +88,7 @@ class SignupPage extends Component {
     console.log("we are here");
     e.preventDefault();
     if (formValid(this.state)) {
-      this.setState({ color: "green" });
+      this.setState({ submitReady: true });
     } else {
       console.log("form not valid yet to submit");
     }
@@ -153,19 +153,6 @@ class SignupPage extends Component {
         <Header />
         <h1> Create Account</h1>
 
-        {/* <form
-          onSubmit={this.profileSubmit}
-          action="/upload"
-          method="POST"
-          encType="multipart/form-data"
-        >
-          <div>
-            <input type="file" name="file" id="file" />
-          </div>
-          <label htmlFor="file">Choose File</label>
-          <input type="submit" value="submit" />
-        </form> */}
-
         <form
           onChange={this.handleSubmitButtonChange}
           onSubmit={this.handleSubmit}
@@ -175,76 +162,123 @@ class SignupPage extends Component {
             <input type="file" onChange={this.fileSelectedHandler} />
           </div>
 
-          <div className="userName">
-            <label htmlFor="userName">Username: </label>
+          <div className="userName form-Group input">
+            <label
+              className="form-label"
+              style={{ flex: 1 }}
+              htmlFor="userName"
+            >
+              Username:{" "}
+            </label>
             <input
               type="text"
-              placeholder="Username"
               name="userName"
               onChange={this.handleChange}
-              className={formErrors.userName.length > 0 ? "error" : null}
+              className={
+                formErrors.userName.length > 0
+                  ? "error form-control"
+                  : "form-control"
+              }
+              style={{ flex: 2 }}
             />
             {formErrors.userName.length > 0 && (
               <span>{formErrors.userName}</span>
             )}
           </div>
-          <div className="password">
-            <label htmlFor="password">Password: </label>
+          <div className="password input form-Group">
+            <label
+              className="form-label"
+              style={{ flex: 1 }}
+              htmlFor="password"
+            >
+              Password:{" "}
+            </label>
             <input
               type="password"
-              placeholder="Password"
               name="password"
               onChange={this.handleChange}
-              className={formErrors.password.length > 0 ? "error" : null}
+              className={
+                formErrors.password.length > 0
+                  ? "error form-control"
+                  : "form-control"
+              }
+              style={{ flex: 2 }}
             />
             {formErrors.password.length > 0 && (
               <span>{formErrors.password}</span>
             )}
           </div>
-          <div className="email">
-            <label htmlFor="email">Email: </label>
+          <div className="email input form-Group">
+            <label className="form-label" style={{ flex: 1 }} htmlFor="email">
+              Email:{" "}
+            </label>
             <input
               type="email"
-              placeholder="Email"
               name="email"
               onChange={this.handleChange}
-              className={formErrors.email.length > 0 ? "error" : null}
+              className={
+                formErrors.email.length > 0
+                  ? "error form-control"
+                  : "form-control"
+              }
+              style={{ flex: 2 }}
             />
             {formErrors.email.length > 0 && <span>{formErrors.email}</span>}
           </div>
-          <div className="firstName">
-            <label htmlFor="firstName">First Name: </label>
+          <div className="firstName input form-Group">
+            <label
+              className="form-label"
+              style={{ flex: 1 }}
+              htmlFor="firstName"
+            >
+              First Name:{" "}
+            </label>
             <input
               type="text"
-              placeholder="First Name"
               name="firstName"
               onChange={this.handleChange}
-              className={formErrors.firstName.length > 0 ? "error" : null}
+              className={
+                formErrors.firstName.length > 0
+                  ? "error form-control"
+                  : "form-control"
+              }
+              style={{ flex: 2 }}
             />
             {formErrors.firstName.length > 0 && (
               <span>{formErrors.firstName}</span>
             )}
           </div>
-          <div className="lastName">
-            <label htmlFor="lastName">Last Name: </label>
+          <div className="lastName input form-Group">
+            <label
+              className="form-label"
+              style={{ flex: 1 }}
+              htmlFor="lastName"
+            >
+              Last Name:{" "}
+            </label>
             <input
               type="text"
-              placeholder="Last Name"
               name="lastName"
               onChange={this.handleChange}
-              className={formErrors.lastName.length > 0 ? "error" : null}
+              className={
+                formErrors.lastName.length > 0 ? "form-control" : "form-control"
+              }
+              style={{ flex: 2 }}
             />
             {formErrors.lastName.length > 0 && (
               <span>{formErrors.lastName}</span>
             )}
           </div>
-          <div className="country">
-            <label htmlFor="country">Country: </label>
+          <div className="country form-Group input">
+            <label className="form-label" style={{ flex: 1 }} htmlFor="country">
+              Country:{" "}
+            </label>
             <select
-              className=""
+              className="custom-select"
               name="country"
               onChange={this.handleChange}
               required
+              style={{ flex: 2 }}
             >
               <option value="" disabled selected>
                 Choose your Country{" "}
@@ -258,11 +292,21 @@ class SignupPage extends Component {
             {formErrors.country.length > 0 && <span>{formErrors.country}</span>}
           </div>
           <div>
-            <input required type="checkbox" />
-            <label>I agree to MYtinerary's Terms &amp; Conditions</label>
+            <input className="form-check-input" required type="checkbox" />
+            <label className="form-check-label">
+              I agree to MYtinerary's Terms &amp; Conditions
+            </label>
           </div>
-          <div>
-            <button style={{ background: this.state.color }} type="submit">
+          <div style={{ margin: "30px" }}>
+            <button
+              className={
+                this.state.submitReady
+                  ? "btn btn-primary"
+                  : "btn btn-outline-primary"
+              }
+              style={{ background: this.state.color }}
+              type="submit"
+            >
               OK
             </button>
           </div>

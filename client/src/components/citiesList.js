@@ -9,12 +9,6 @@ import Header from "./header";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/Inbox";
-import List from "@material-ui/core/List";
-
 class CitiesList extends Component {
   componentDidMount() {
     this.props.fetchCities();
@@ -54,7 +48,7 @@ class CitiesList extends Component {
     return (
       <div>
         <Header />
-        <div style={{ marginLeft: 40 }}>
+        <div style={{ marginLeft: 40, marginBottom: 30 }}>
           <div style={{ textAlign: "left", marginBottom: 5 }}>
             Filter our current cities
           </div>
@@ -62,24 +56,32 @@ class CitiesList extends Component {
             <InputBase style={input} onChange={this.updateSearch.bind(this)} />
           </Paper>
         </div>
-
-        <ul>
-          {filteredCities.map(city => (
-            <div key={city._id}>
-              <NavLink to={"/itinerary/" + city.name}>
-                <div>
-                  {city.flag} {city.name}
-                </div>
-              </NavLink>
-              <List component="nav">
-                <ListItem button>
-                  <ListItemIcon>{city.flag}</ListItemIcon>
-                  <ListItemText primary={city.name} />
-                </ListItem>
-              </List>
-            </div>
-          ))}
-        </ul>
+        <div className="cityList">
+          <div clasNames="list-group ">
+            {filteredCities.map(city => (
+              <div
+                className="list-group-item list-group-item-action"
+                key={city._id}
+              >
+                <NavLink to={"/itinerary/" + city.name}>
+                  <div style={{ display: "flex", paddingLeft: "30px" }}>
+                    <div style={{ fontSize: "30px" }}>{city.flag}</div>
+                    <div
+                      style={{
+                        fontSize: "30px",
+                        paddingLeft: "30px",
+                        color: "black"
+                      }}
+                    >
+                      {" "}
+                      {city.name}
+                    </div>
+                  </div>
+                </NavLink>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }

@@ -67,7 +67,7 @@ class LoginPage extends Component {
         <Header />
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className="email formGroup ">
+          <div className="input formGroup ">
             <label className="form-label" htmlFor="email" style={{ flex: 1 }}>
               Email:
             </label>
