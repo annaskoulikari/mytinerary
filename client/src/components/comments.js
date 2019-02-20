@@ -5,40 +5,45 @@ import { postComment, addComment } from "../actions/commentActions";
 import { checkAccount } from "../actions/loginActions";
 import PropTypes from "prop-types";
 import "../App.css";
+import TextField from "@material-ui/core/TextField";
+import Send from "@material-ui/icons/Send";
 
 class Comments extends Component {
-  componentDidMount() {
-    // what I need to do is pass itinierary_id in some other way to this component and then redefine the variable
-    var itinerary_id = this.props.property;
-
-    console.log(itinerary_id);
-    this.props.postComment(itinerary_id);
-    console.log(itinerary_id);
-    console.log(this.props);
+  constructor(props) {
+    super(props);
+    this.state = {
+      multiline: ""
+    };
   }
 
-  user = React.createRef();
-  comment = React.createRef();
-  commentForm = React.createRef();
+  componentDidMount() {
+    var itinerary_id = this.props.property;
+
+    this.props.postComment(itinerary_id);
+  }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(e);
-    console.log(this.user.current.value);
-    console.log(this.comment.current.value);
-    var user = this.user.current.value;
-    var comment = this.comment.current.value;
+
+    var comment = this.state.multiline;
+
+    // var comment = this.comment.current.value;
     var itinerary_id = this.props.property;
     var itinerariesArray = [];
     this.props.itineraries.forEach(itinerary => {
       itinerariesArray.push(itinerary._id);
     });
-    console.log("this is in comments itinerariesarray", itinerariesArray);
-    console.log(itinerary_id, user, comment);
-    this.props.addComment(itinerary_id, user, comment, itinerariesArray);
+
+    this.props.addComment(itinerary_id, comment, itinerariesArray);
     this.props.postComment(itinerary_id);
-    console.log(this.props.comment);
+    this.setState({ multiline: "" });
   }
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
 
   render() {
     let arrayOfComments = [];
@@ -47,17 +52,34 @@ class Comments extends Component {
         arrayOfComments.push(comment);
       }
     });
+
+    const style = {
+      width: "250px"
+    };
+
     return (
       <div>
         <div className="commentArea">
           <div className="commentForm">
-            <form ref={this.commentForm} onSubmit={e => this.handleSubmit(e)}>
-              <input
-                type="text"
-                ref={this.comment}
-                placeholder="Your comment..."
-              />
-              <input type="submit" hidden />
+            <form autoComplete="off" onSubmit={e => this.handleSubmit(e)}>
+              <div className="commentMaterial">
+                <TextField
+                  id="outlined-multiline-flexible"
+                  label="Comment"
+                  // multiline
+                  rowsMax="4"
+                  style={style}
+                  value={this.state.multiline}
+                  onChange={this.handleChange("multiline")}
+                  margin="normal"
+                  placeholder="Your comment..."
+                  variant="outlined"
+                />
+                <Send
+                  className="sendButton"
+                  onClick={e => this.handleSubmit(e)}
+                />
+              </div>
             </form>
           </div>
           <div className="commentAll">

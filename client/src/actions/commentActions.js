@@ -7,7 +7,7 @@ export const postComment = itinerariesArray => dispatch => {
   console.log("axiosing");
 
   axios
-    .post("http://localhost:5000/testComment/commentsAll", {
+    .post("https://localhost:5000/testComment/commentsAll", {
       itinerariesArray: itinerariesArray
     })
     .then(res => {
@@ -26,18 +26,17 @@ let config = {
 
 export const addComment = (
   itinerary_id,
-  user,
   comment,
   itinerariesArray
 ) => dispatch => {
-  console.log("adding comment" + user + comment);
   console.log(localStorage.getItem("user"));
+  console.log("you reached the addComment actioncreator");
   axios
     .post(
       `/testComment/comments`,
       {
         itinerary_id,
-        user,
+
         comment,
         itinerariesArray
       },

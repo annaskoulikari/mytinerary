@@ -44,19 +44,19 @@ router.post("/accounts", (req, res) => {
               res.send(account);
             });
 
-            var token = jwt.sign(
-              {
-                email: account[0].email,
-                accountId: account[0]._id,
-                name: account[0].firstName + " " + account[0].lastName
-              },
-              process.env.JWT_KEY,
-              {
-                expiresIn: 86400
-              }
-            );
+            // var token = jwt.sign(
+            //   {
+            //     email: account[0].email,
+            //     accountId: account[0]._id,
+            //     name: account[0].firstName + " " + account[0].lastName
+            //   },
+            //   process.env.JWT_KEY,
+            //   {
+            //     expiresIn: 86400
+            //   }
+            // );
 
-            res.status(200).send({ auth: true, token: token });
+            // res.status(200).send({ auth: true, token: token });
           }
         });
       } else {
@@ -67,39 +67,5 @@ router.post("/accounts", (req, res) => {
     }
   );
 });
-
-// router.post("/accounts", (req, res) => {
-//   console.log(req.body);
-
-//   Account.findOne(
-//     {
-//       email: req.body.email
-//     },
-//     function(err, existingAccount) {
-//       console.log(existingAccount);
-//       if (err) throw err;
-//       if (existingAccount == null) {
-//         console.log("this is a new account, I will add it");
-
-//         const account = new Account({
-//           userName: req.body.userName,
-//           password: req.body.password,
-//           email: req.body.email,
-//           firstName: req.body.firstName,
-//           lastName: req.body.lastName,
-//           country: req.body.country
-//         });
-//         Account.create(account).then(function(account) {
-//           res.send(account);
-//         });
-
-//       } else {
-//         console.log("account exists");
-//         res.json(null);
-//         //res.send({ message: "Account already exists" });
-//       }
-//     }
-//   );
-// });
 
 module.exports = router;

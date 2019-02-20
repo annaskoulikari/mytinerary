@@ -78,4 +78,33 @@ router
     }
   );
 
+router
+  .route("/facebooklogin")
+  .post(
+    passport.authenticate("facebookToken", { session: false }),
+    (req, res) => {
+      const user = req.user;
+      const token = jwt.sign(
+        {
+          email: user.email,
+          name: user.firstName + " " + user.lastName
+        },
+        process.env.JWT_KEY,
+        {
+          expiresIn: "24h"
+        }
+      );
+      //user.token = token;
+      console.log("this is user", user);
+      res.status(200).json({ user: user, token: token });
+    }
+  );
+
+// router.route('/oauth/facebook')
+// .post(passport.authenticate('facebookToken', { session: false }), async (req, res, next) => {
+//   // Generate token
+//   const token = signToken(req.user);
+//   res.status(200).json({ token });
+// },);
+
 module.exports = router;

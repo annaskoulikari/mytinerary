@@ -4,7 +4,6 @@ import "../App.css";
 import { NavLink } from "react-router-dom";
 
 class Footer extends Component {
-  state = {};
   render() {
     return (
       <div className="bottomBar">

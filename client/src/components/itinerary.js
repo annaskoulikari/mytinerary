@@ -4,63 +4,87 @@ import PropTypes from "prop-types";
 import { fetchItineraries } from "../actions/itineraryActions";
 import { getProfile } from "../actions/profileActions";
 
-import favourite from "../images/favourite.png";
-import favourited from "../images/favourited.png";
 import close from "../images/close.png";
-import Popup from "reactjs-popup";
+
 import { NavLink } from "react-router-dom";
 
-import Activity from "./activity";
+import ActivityTrial from "./activityTrial";
 import axios from "axios";
 
 import "../App.css";
+import {
+  getFavourites,
+  getFavouriteItinerary
+} from "../actions/favouriteActions";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import CardHeader from "@material-ui/core/CardHeader";
+import Favorite from "@material-ui/icons/Favorite";
+import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
+import Close from "@material-ui/icons/Close";
 
 class Itinerary extends Component {
+  async isLiked() {
+    var user = this.props.user.email;
+    await this.props.getFavourites(user);
+
+    var favouritesArray = [];
+    this.props.favourites.forEach(favourite =>
+      favouritesArray.push(favourite._id)
+    );
+    console.log("this should be array of favourites id", favouritesArray);
+    if (favouritesArray.includes(this.props.itinerary._id)) {
+      this.setState({ liked: true });
+    }
+  }
   componentDidMount() {
     this.props.getProfile();
-    // var city = this.props.match.params.city;
-    // this.props.fetchItineraries(city);
+
     console.log(this.props);
-    // console.log(this.props.match.params.city);
-    // console.log(this.state);
+
+    // var user = this.props.user.email;
+
+    this.isLiked();
   }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       selectedItinerary: "",
       showActivity: false,
-      image: favourite,
+
       open: false,
-      imageClose: close
+      imageClose: close,
+      liked: false
     };
 
-    //this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
   handleToggle(e) {
     e.preventDefault();
-    e.persist();
 
-    console.log(e.target.id);
-    // this.setState({
-    //   selectedItinerary: e.target.id
-    // });
     this.setState({
       showActivity: !this.state.showActivity
     });
   }
 
   addToFavourite(itineraryId, e) {
-    this.setState({ open: true, image: favourited });
+    this.setState({ open: true });
     console.log("yeah we are gonna add to favourite");
     console.log(itineraryId);
     console.log(this.props.user);
     var itineraryFavourite = itineraryId;
     var user = this.props.user;
     axios
-      .post("http://localhost:5000/testItinerary/itineraries/favourite", {
+      .post("https://localhost:5000/testItinerary/itineraries/favourite", {
         itineraryFavourite: itineraryFavourite,
         user: user
       })
@@ -70,125 +94,128 @@ class Itinerary extends Component {
   }
 
   closeModal() {
-    this.setState({ open: false, image: favourite });
+    this.setState({ open: false, liked: false });
   }
 
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false, liked: true });
+  };
+
   render() {
-    // let { itinerary } = this.props.itinerary;
+    const style = {
+      justifyContent: "center"
+    };
+
+    const dialog = {
+      textAlign: "center"
+    };
+
     return (
       <div>
-        <div className="card horizontal cardContainer">
-          <div className="card-content cardImage">
-            <div className="card-image">
-              <img
-                className="responsive-img circle"
-                src={this.props.itinerary.itineraryImage}
-                alt="profile"
-              />
-            </div>
-            <p>{this.props.itinerary.profileName}</p>
-          </div>
-          <div className="card-content cardInfo">
-            <span className="card-title">{this.props.itinerary.title}</span>
-            <div className="itineraryInfo">
-              <div className="itineraryLikes">
-                Likes: {this.props.itinerary.likes}
-              </div>
-              <div className="itineraryHours">
-                {this.props.itinerary.hours} Hours
-              </div>
-              <div className="itineraryExpense">
-                {this.props.itinerary.expense}
-              </div>
-            </div>
-            <div className="itineraryHashtags">
-              {this.props.itinerary.hashtags.map(hashtag => (
-                <div className="itineraryHashtag">{hashtag}</div>
-              ))}
-            </div>
-          </div>
-          <div class="card-action">
-            <a href="#">This is a link</a>
-          </div>
+        <div>
+          <Dialog
+            open={this.state.open}
+            onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogActions>
+              <Close onClick={this.handleClose} />
+            </DialogActions>
+            <DialogContent>
+              {/* <DialogContentText style={dialog} id="alert-dialog-description">
+                MYtinerary added to your Favourite
+              </DialogContentText> */}
+              {this.state.liked ? (
+                <DialogContentText style={dialog} id="alert-dialog-description">
+                  This MYtinerary is already in your favourites! (-:)
+                </DialogContentText>
+              ) : (
+                <DialogContentText style={dialog} id="alert-dialog-description">
+                  MYtinerary added to your Favourite
+                </DialogContentText>
+              )}
+            </DialogContent>
+            <DialogActions>
+              <Button
+                style={{ width: "100%" }}
+                onClick={this.handleClose}
+                color="primary"
+                autoFocus
+              >
+                <NavLink to="/favouritePage">Go to Favourites Page</NavLink>
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
-        <div className="card">
-          <div className="card-content">
-            <div className="itineraryContainer">
-              <div className="itineraryFirstRow"> </div>
-              <img
-                className="profilePhoto sliderImage"
-                src={this.props.itinerary.itineraryImage}
-                alt="stuff"
-              />
-              <div>
-                <div className="itineraryInfo">
-                  <div className="itineraryTitle">
-                    {this.props.itinerary.title}
-                  </div>
-                  <div>
+        <Card>
+          <CardContent>
+            <div className="card">
+              <div className="horizontal cardContainer">
+                <div className="card-content cardImage">
+                  <div className="card-image">
                     <img
-                      src={this.state.image}
-                      alt="like"
-                      className="itineraryHeart"
+                      className="responsive-img circle itineraryImage"
+                      src={this.props.itinerary.itineraryImage}
+                      alt="profile"
+                    />
+                  </div>
+                  <p>{this.props.itinerary.profileName}</p>
+                </div>
+
+                <div className="card-content cardInfo">
+                  <div className="itineraryHeader">
+                    <span className="card-title itineraryTitle">
+                      {this.props.itinerary.title}
+                    </span>
+                    <div
                       onClick={e =>
                         this.addToFavourite(this.props.itinerary._id, e)
                       }
-                      href="#"
-                    />
-                    <Popup
-                      open={this.state.open}
-                      closeOnDocumentClick
-                      onClose={this.closeModal}
+                      className="btn-floating pink itineraryLike"
                     >
-                      <div className="modal">
-                        <img
-                          src={this.state.close}
-                          alt="close"
-                          onClick={this.closeModal}
-                        />
-                        <div>MYtinerary added to your Favorites</div>
-                        <NavLink to="/favouritePage">
-                          Go to Favourites Page
-                        </NavLink>
-                      </div>
-                    </Popup>
-                  </div>
-                  <div className="itineraryDetails">
-                    <div className="itineraryLikes">
-                      {"Likes :" + this.props.itinerary.likes}
+                      {this.state.liked ? <Favorite /> : <FavoriteBorder />}
                     </div>
-                    <div className="itineraryDuration">
-                      {this.props.itinerary.hours + " Hours"}
+                  </div>
+
+                  <div className="itineraryInfo">
+                    <div className="itineraryLikes">
+                      Likes: {this.props.itinerary.likes}
+                    </div>
+                    <div className="itineraryHours">
+                      {this.props.itinerary.hours} Hours
                     </div>
                     <div className="itineraryExpense">
                       {this.props.itinerary.expense}
                     </div>
                   </div>
+                  <div className="itineraryHashtags">
+                    {this.props.itinerary.hashtags.map(hashtag => (
+                      <div className="itineraryHashtag">{hashtag}</div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="itinerarySecondRow">
-                <div className="profileName">
-                  {this.props.itinerary.profileName}
-                </div>
-                <div className="itineraryHashtags">HASHTAGS</div>
-
-                {/* {this.state.selectedItinerary === this.props.itinerary._id ? (
-              <Activity property={this.props.itinerary._id} />
-            ) : null} */}
-                {this.state.showActivity ? (
-                  <Activity property={this.props.itinerary._id} />
-                ) : null}
-
-                <button
-                  id={this.props.itinerary._id}
-                  onClick={e => this.handleToggle(e)}
-                >
-                  View All
-                </button>
               </div>
             </div>
-          </div>
-        </div>
+            {this.state.showActivity ? (
+              <ActivityTrial property={this.props.itinerary._id} />
+            ) : null}
+          </CardContent>
+          <CardActions style={style}>
+            <div class="cardAction">
+              <button
+                id={this.props.itinerary._id}
+                onClick={e => this.handleToggle(e)}
+              >
+                {this.state.showActivity ? "Close" : "View All"}
+              </button>
+            </div>
+          </CardActions>
+        </Card>
       </div>
     );
   }
@@ -201,10 +228,11 @@ Itinerary.propTypes = {
 
 const mapStateToProps = state => ({
   itineraries: state.itineraries.item,
-  user: state.loggedInUserGoogle.loggedInUserGoogle
+  user: state.loggedInUserGoogle.loggedInUserGoogle,
+  favourites: state.favourites.favourites
 });
 
 export default connect(
   mapStateToProps,
-  { fetchItineraries, getProfile }
+  { fetchItineraries, getProfile, getFavourites, getFavouriteItinerary }
 )(Itinerary);

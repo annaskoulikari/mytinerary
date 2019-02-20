@@ -264,7 +264,7 @@
   flex: 1;
 } */
 
-h3 {
+/* h3 {
   background: blue;
   color: #fff;
   font-size: 36px;
@@ -273,7 +273,7 @@ h3 {
   padding: 2%;
   position: relative;
   text-align: center;
-}
+} */
 .variable-width .slick-slide p {
   background: blue;
   height: 100px;
@@ -430,10 +430,13 @@ h3 {
 
 .cardInfo {
   flex: 4;
+  display: flex;
+  flex-direction: column;
 }
 
 .itineraryInfo {
   display: flex;
+  flex: 1;
 }
 
 .itineraryLikes,
@@ -444,8 +447,83 @@ h3 {
 
 .itineraryHashtags {
   display: flex;
+  flex: 1;
 }
 
 .itineraryHashtag {
   flex: 1;
+}
+.itineraryHeader {
+  display: flex;
+  flex: 1;
+}
+
+.itineraryTitle {
+  flex: 4;
+}
+
+.itineraryLike {
+  flex: 1;
+}
+
+.image {
+  height: 50px;
+}
+
+.menu-item {
+  color: pink;
+}
+
+.itineraryImage {
+  border-radius: 50%;
+  max-height: 75px;
+}
+
+.cardAction {
+  justify-content: center;
+}
+
+.commentMaterial {
+  display: flex;
+  align-items: center;
+}
+
+.sendButton {
+  margin: 20px;
+}
+
+.firstRowFavourite {
+  display: flex;
+}
+
+.titleFavourite {
+  flex: 4;
+}
+
+.likeFavourite {
+  flex: 1;
+}
+
+.secondRowFavourite {
+  display: flex;
+}
+
+.timeFavourite {
+  flex: 1;
+}
+
+.expenseFavourite {
+  flex: 1;
+}
+
+.favouriteCard {
+  display: flex;
+}
+
+.imageFavourite {
+  flex: 1;
+}
+
+.infoFavourite {
+  flex: 2;
 }

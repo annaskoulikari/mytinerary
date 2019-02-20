@@ -9,7 +9,7 @@ let config = {
 export const getProfile = () => dispatch => {
   console.log(localStorage.getItem("user"));
   axios
-    .post(`http://localhost:5000/testProfile/profiles`, {}, config)
+    .post(`https://localhost:5000/testProfile/profiles`, {}, config)
     .then(res => {
       console.log(res);
       console.log("this is res.data", res.data);

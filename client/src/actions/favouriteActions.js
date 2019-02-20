@@ -4,7 +4,7 @@ import axios from "axios";
 export const getFavourites = user => dispatch => {
   console.log("you have reached getFavourite action creator");
   axios
-    .post("http://localhost:5000/favourite/getfavourites", {
+    .post("/favourite/getfavourites", {
       user: user
     })
     .then(res => {

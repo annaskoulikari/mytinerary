@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { createAccount } from "../actions/accountActions";
 import { fetchCountries } from "../actions/countryActions";
 import PropTypes from "prop-types";
+import Header from "./header";
 
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -149,6 +150,7 @@ class SignupPage extends Component {
 
     return (
       <div>
+        <Header />
         <h1> Create Account</h1>
 
         {/* <form

@@ -8,6 +8,7 @@ import {
 } from "../actions/favouriteActions";
 import { getProfile } from "../actions/profileActions";
 import PropTypes from "prop-types";
+import Header from "./header";
 
 class Favourite extends Component {
   componentDidMount() {
@@ -29,6 +30,7 @@ class Favourite extends Component {
   render() {
     return (
       <div>
+        <Header />
         <h1>Favourites</h1>
         {/* <button onClick={e => this.handleItineraries(this.props.favourites, e)}>
           clickme

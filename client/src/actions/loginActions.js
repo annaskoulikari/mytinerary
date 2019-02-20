@@ -2,7 +2,7 @@ import { CHECK_ACCOUNT, GOOGLE_LOGIN, AUTH_SIGN_UP } from "./types";
 import axios from "axios";
 
 export const checkAccount = (email, password) => dispatch => {
-  console.log("adding account", email, password);
+  console.log("checking account", email, password);
   axios
     .post("/testLogin/login", { email, password })
     .then(res => {
@@ -38,7 +38,7 @@ export const googleLogin = () => dispatch => {
 export const oauthGoogle = accessToken => {
   return async dispatch => {
     console.log("we received", accessToken);
-    const res = await axios.post("http://localhost:5000/auth/googlelogin", {
+    const res = await axios.post("https://localhost:5000/auth/googlelogin", {
       access_token: accessToken
     });
     dispatch({
@@ -47,5 +47,20 @@ export const oauthGoogle = accessToken => {
     });
     console.log("res", res);
     localStorage.setItem("user", res.data.token);
+  };
+};
+
+export const oauthFacebook = data => {
+  return async dispatch => {
+    console.log("we received", data);
+    const res = await axios.post("https://localhost:5000/auth/facebooklogin", {
+      access_token: data
+    });
+    dispatch({
+      type: AUTH_SIGN_UP,
+      payload: res.data
+    });
+    console.log("res", res);
+    localStorage.setItem("user, res.data.token");
   };
 };

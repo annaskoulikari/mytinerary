@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { getProfile } from "../actions/profileActions";
-import "materialize-css/dist/css/materialize.min.css";
+// import "materialize-css/dist/css/materialize.min.css";
 
 class LandingPage extends Component {
   componentDidMount() {
@@ -44,7 +44,6 @@ class LandingPage extends Component {
               <NavLink to="/signupPage" className="createAccountOption">
                 Create Account
               </NavLink>
-              <NavLink to="/favouritePage"> Favourite </NavLink>;
             </div>
           </div>
         </div>

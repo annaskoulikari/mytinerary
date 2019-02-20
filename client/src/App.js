@@ -10,6 +10,11 @@ import Footer from "./components/footer";
 import ProfilePage from "./components/profilePage";
 import Favourite from "./components/favourite";
 import ItineraryList from "./components/itineraryList";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faIgloo } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faIgloo);
 
 class App extends Component {
   render() {

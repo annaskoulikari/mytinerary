@@ -45,9 +45,38 @@ router.post("/deleteFavourite", (req, res) => {
     { $pull: { favourite: req.body.id } },
     { upsert: true }
   )
+
     .then(account => {
-      var newFavourites = account.favourite;
-      res.status(200).send(newFavourites);
+      let favouriteArray = [];
+      let oldArray = account.favourite;
+      oldArray.forEach(item => {
+        if (item != req.body.id) {
+          favouriteArray.push(item);
+        }
+      });
+      console.log("this should be new array of favourites", favouriteArray);
+      return favouriteArray;
+      // res.status(200).send(favouriteArray);
+    })
+    .then(favouriteArray => {
+      Itinerary.find({ _id: { $in: favouriteArray } }).then(itinerariesFull => {
+        console.log("these are the itinerariesFull", itinerariesFull);
+        res.status(200).send(itinerariesFull);
+        return itinerariesFull;
+      });
+      // console.log("is this still the favourites array", favouriteArray);
+      // let favouriteItineraryArray = [];
+
+      // favouriteArray.forEach(item => {
+      //   Itinerary.find({ _id: item }).then(itinerary => {
+      //     console.log("is this the found itinerary", itinerary);
+      //     favouriteItineraryArray.push(itinerary);
+      //   });
+      // });
+      // console.log(
+      //   "this should be the array with the new favourites",
+      //   favouriteItineraryArray
+      // );
     })
     .catch(err => {
       console.log(err);

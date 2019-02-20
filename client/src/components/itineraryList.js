@@ -6,11 +6,16 @@ import { fetchItineraries } from "../actions/itineraryActions";
 import { fetchActivities } from "../actions/activityActions";
 import { postComment } from "../actions/commentActions";
 import { NavLink } from "react-router-dom";
+import {
+  getFavourites,
+  getFavouriteItinerary
+} from "../actions/favouriteActions";
 
 class ItineraryList extends Component {
   async fetchEverything() {
     let itinerariesArray = [];
     var city = this.props.match.params.city;
+    this.setState({ city: city });
     this.props.itineraries.map(itinerary =>
       itinerariesArray.push(itinerary._id)
     );
@@ -27,12 +32,18 @@ class ItineraryList extends Component {
     this.fetchEverything();
   }
 
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      city: ""
+    };
+  }
+
   render() {
     return (
       <div>
-        <h1>City</h1>
-        <h2>Available MYitenaries</h2>
+        <h3>{this.state.city}</h3>
+        <h3>Available MYitenaries</h3>
         {this.props.itineraries.map(itinerary => (
           <Itinerary itinerary={itinerary} />
         ))}
@@ -55,5 +66,11 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchItineraries, fetchActivities, postComment }
+  {
+    fetchItineraries,
+    fetchActivities,
+    postComment,
+    getFavourites,
+    getFavouriteItinerary
+  }
 )(ItineraryList);
