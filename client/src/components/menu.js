@@ -27,10 +27,19 @@ const styles = {
 };
 
 class MenuShow extends React.Component {
+  componentDidMount(props) {
+    let user = localStorage.getItem("user");
+    if (user) {
+      this.setState({
+        isLoggedIn: true
+      });
+    }
+  }
   constructor(props) {
     super(props);
     this.state = {
-      selected: ""
+      selected: "",
+      isLoggedIn: false
     };
   }
 
@@ -72,43 +81,69 @@ class MenuShow extends React.Component {
         <div>
           <div style={menuStyle}>
             <DialogTitle id="simple-dialog-title">Menu</DialogTitle>
-            <List>
-              <NavLink to="/">
-                <MenuItem
-                  value="Home"
-                  name="Home"
-                  style={style}
-                  onClick={() => this.handleListItemClick()}
-                >
-                  Home
-                </MenuItem>
-              </NavLink>
-              <NavLink to="/citiesList">
-                <MenuItem style={style} onClick={this.handleClose}>
-                  Cities
-                </MenuItem>
-              </NavLink>
-              <NavLink to="/favouritePage">
-                <MenuItem style={style} onClick={this.handleClose}>
-                  Favourites
-                </MenuItem>
-              </NavLink>
-              <NavLink to="/loginPage">
-                <MenuItem style={style} onClick={this.handleClose}>
-                  Login
-                </MenuItem>
-              </NavLink>
-              <NavLink to="/signupPage">
-                <MenuItem style={style} onClick={this.handleClose}>
-                  Create Account
-                </MenuItem>
-              </NavLink>
-              <NavLink to="/profilePage">
-                <MenuItem style={style} onClick={this.handleClose}>
-                  Profile
-                </MenuItem>
-              </NavLink>
-            </List>
+            {this.state.isLoggedIn ? (
+              <List>
+                <NavLink to="/">
+                  <MenuItem
+                    value="Home"
+                    name="Home"
+                    style={style}
+                    onClick={() => this.handleListItemClick()}
+                  >
+                    Home
+                  </MenuItem>
+                </NavLink>
+                <NavLink to="/citiesList">
+                  <MenuItem style={style} onClick={this.handleClose}>
+                    Cities
+                  </MenuItem>
+                </NavLink>
+                <NavLink to="/favouritePage">
+                  <MenuItem style={style} onClick={this.handleClose}>
+                    Favourites
+                  </MenuItem>
+                </NavLink>
+
+                <NavLink to="/profilePage">
+                  <MenuItem style={style} onClick={this.handleClose}>
+                    Profile
+                  </MenuItem>
+                </NavLink>
+              </List>
+            ) : (
+              <List>
+                <NavLink to="/">
+                  <MenuItem
+                    value="Home"
+                    name="Home"
+                    style={style}
+                    onClick={() => this.handleListItemClick()}
+                  >
+                    Home
+                  </MenuItem>
+                </NavLink>
+                <NavLink to="/citiesList">
+                  <MenuItem style={style} onClick={this.handleClose}>
+                    Cities
+                  </MenuItem>
+                </NavLink>
+                <NavLink to="/favouritePage">
+                  <MenuItem style={style} onClick={this.handleClose}>
+                    Favourites
+                  </MenuItem>
+                </NavLink>
+                <NavLink to="/loginPage">
+                  <MenuItem style={style} onClick={this.handleClose}>
+                    Login
+                  </MenuItem>
+                </NavLink>
+                <NavLink to="/signupPage">
+                  <MenuItem style={style} onClick={this.handleClose}>
+                    Create Account
+                  </MenuItem>
+                </NavLink>
+              </List>
+            )}
           </div>
         </div>
       </Dialog>

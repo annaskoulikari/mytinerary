@@ -76,6 +76,7 @@ class SignupPage extends Component {
       const firstName = this.state.firstName;
       const lastName = this.state.lastName;
       const country = this.state.country;
+
       this.props.createAccount(
         userName,
         password,
@@ -133,31 +134,7 @@ class SignupPage extends Component {
     }
 
     this.setState({ formErrors, [name]: value }, () => console.log(this.state));
-
-    // formValid(this.state)
-    //   ? this.setState({ color: "green" })
-    //   : this.setState({ color: "grey" });
   };
-
-  // fileSelectedHandler = event => {
-  //   console.log(event.target.files[0]);
-  // };
-
-  // profileSubmit = e => {
-  //   axios.post("/upload", upload.single("file"), (req, res) => {
-  //     res.json({ file: req.file });
-  //   });
-  // }
-
-  // handleSubmitFile = event => {
-  //   event.preventDefault();
-  //   var file = event.target.files[0];
-  //   console.log("this is file", file);
-
-  //   // axios
-  //   //   .post("/uploads", { file: file })
-  //   //   .then(res => console.log("this should be file res", res));
-  // };
 
   handleSelectedFile = event => {
     console.log("selectedfile", event.target.files[0]);

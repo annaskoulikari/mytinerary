@@ -28,6 +28,7 @@ import CardActions from "@material-ui/core/CardActions";
 import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import Close from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
 
 class Itinerary extends Component {
   async isLiked() {
@@ -50,13 +51,22 @@ class Itinerary extends Component {
       showActivity: false,
       open: false,
       liked: false,
-      itineraryAsFavourite: false
+      itineraryAsFavourite: false,
+      isLoggedIn: false
     };
     this.openModal = this.openModal.bind(this);
+
     this.closeModal = this.closeModal.bind(this);
   }
 
   componentDidMount() {
+    let user = localStorage.getItem("user");
+    if (user) {
+      this.setState({ isLoggedIn: true });
+    } else {
+      this.setState({ isLoggedIn: false });
+    }
+
     this.props.getProfile();
 
     this.isLiked();
@@ -156,7 +166,7 @@ class Itinerary extends Component {
               </DialogActions>
             </Dialog>
           </div>
-        ) : (
+        ) : this.state.isLoggedIn ? (
           <div>
             <Dialog
               open={this.state.open}
@@ -196,7 +206,37 @@ class Itinerary extends Component {
               </DialogActions>
             </Dialog>
           </div>
+        ) : (
+          <div>
+            <Dialog
+              open={this.state.open}
+              onClose={this.handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogActions>
+                <Close onClick={this.handleClose} />
+              </DialogActions>
+              <DialogContent>
+                <DialogContentText>
+                  If you want to unlock the favouriting functionality, please
+                  log in!
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  style={{ width: "100%" }}
+                  onClick={this.handleClose}
+                  color="primary"
+                  autoFocus
+                >
+                  <NavLink to="/">Go to Login</NavLink>
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </div>
         )}
+
         <Card>
           <CardContent>
             <div className="card">
@@ -218,6 +258,24 @@ class Itinerary extends Component {
                       {this.props.itinerary.title}
                     </span>
                     <div>
+                      {/* {this.state.itineraryAsFavourite ? (
+                        <div className="likeFavourite">
+                          {this.state.liked ? (
+                            <Favorite onClick={this.openModal} />
+                          ) : (
+                            <FavoriteBorder onClick={this.openModal} />
+                          )}
+                        </div>
+                      ) : (
+                        <div
+                          onClick={e =>
+                            this.addToFavourite(this.props.itinerary._id, e)
+                          }
+                          className="btn-floating pink itineraryLike"
+                        >
+                          {this.state.liked ? <Favorite /> : <FavoriteBorder />}
+                        </div>
+                      )} */}
                       {this.state.itineraryAsFavourite ? (
                         <div className="likeFavourite">
                           {this.state.liked ? (
@@ -226,6 +284,10 @@ class Itinerary extends Component {
                             <FavoriteBorder onClick={this.openModal} />
                           )}
                         </div>
+                      ) : !this.state.isLoggedIn ? (
+                        <IconButton color="disabled" onClick={this.openModal}>
+                          <Favorite />
+                        </IconButton>
                       ) : (
                         <div
                           onClick={e =>
@@ -272,7 +334,7 @@ class Itinerary extends Component {
             ) : null}
           </CardContent>
           <CardActions style={style}>
-            <div class="cardAction">
+            <div className="cardAction">
               <button
                 id={this.props.itinerary._id}
                 onClick={e => this.handleToggle(e)}

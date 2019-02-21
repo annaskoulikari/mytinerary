@@ -13,17 +13,29 @@ import { getProfile } from "../actions/profileActions";
 class LandingPage extends Component {
   componentDidMount() {
     this.props.getProfile();
+
+    let user = localStorage.getItem("user");
+    if (user) {
+      this.setState({ isLoggedIn: true });
+    }
   }
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false
+    };
+  }
   render() {
     return (
-      <div>
+      <div className="container">
         <Header />
         <div className="row landingPageContents">
-          <img className="logo" src={logotest} alt="logo" />
-          <p className="landingPageText">
-            Find your perfect trip, designed by insiders who know and love thier
-            cities
+          <div className="logoImage">
+            <img className="logo" src={logotest} alt="logo" />
+          </div>
+          <p className="landingPageText text-center">
+            Find your perfect trip, designed by insiders who know and love their
+            cities 🌏
           </p>
           <div className="startBrowsing">
             <p>Start browsing</p>
@@ -35,17 +47,26 @@ class LandingPage extends Component {
               />
             </NavLink>
           </div>
-          <div>
-            <p className="signUpText">Want to build your own MYtinerary?</p>
-            <div className="signUpOptions">
-              <NavLink to="/loginPage" className="loginOption">
-                Log in
-              </NavLink>
-              <NavLink to="/signupPage" className="createAccountOption">
-                Create Account
-              </NavLink>
+
+          {this.state.isLoggedIn ? null : (
+            <div>
+              <p className="signUpText">Want to build your own MYtinerary?</p>
+              <div className="signUpOptions">
+                <NavLink
+                  to="/loginPage"
+                  className="loginOption btn btn-outline-info"
+                >
+                  Log in
+                </NavLink>
+                <NavLink
+                  to="/signupPage"
+                  className="createAccountOption btn btn-outline-info"
+                >
+                  Create Account
+                </NavLink>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     );

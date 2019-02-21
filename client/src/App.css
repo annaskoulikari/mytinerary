@@ -44,12 +44,20 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  margin: 10px;
+
+  padding: 20px;
+  font-size: 25px;
 }
 
 .landingPageContents {
   display: flex;
   flex-direction: column;
+}
+
+.logoImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .startBrowsing {
@@ -77,12 +85,14 @@
   display: flex;
   justify-content: center;
   flex: 1;
+  margin: 10px;
 }
 
 .createAccountOption {
   display: flex;
   justify-content: center;
   flex: 1;
+  margin: 10px;
 }
 
 .footerBarHome {
@@ -111,12 +121,20 @@
 
 .header {
   display: flex;
+  align-items: center;
 }
 
-.loginComponent {
+.profile {
   flex: 1;
   display: flex;
   justify-content: flex-start;
+  margin: 10px;
+}
+
+.menu {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
   margin: 10px;
 }
 
@@ -551,4 +569,36 @@
 .cityList {
   height: 500px;
   overflow: scroll;
+}
+
+.noLoginFavourites {
+  font-size: 20px;
+  margin: 20px;
+}
+
+.favouriteContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileContents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileCard {
+  display: flex;
+}
+
+.cardText {
+  padding-left: 10px;
+  font-size: 18px;
+}
+
+.cardItem {
+  flex: 1;
+  width: 90%;
+  margin: 10px;
 }

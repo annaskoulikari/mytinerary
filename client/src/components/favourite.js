@@ -14,13 +14,6 @@ import { fetchActivities } from "../actions/activityActions";
 import { postComment } from "../actions/commentActions";
 
 class Favourite extends Component {
-  // componentDidMount() {
-  //   this.props.getProfile();
-  //   var user = this.props.profile.email;
-  //   console.log(user);
-  //   this.props.getFavourites(user);
-  // }
-
   async fetchEverything() {
     let itinerariesArray = [];
     this.props.getProfile();
@@ -42,22 +35,63 @@ class Favourite extends Component {
 
   componentDidMount() {
     this.fetchEverything();
+    let user = localStorage.getItem("user");
+    if (user) {
+      this.setState({ isLoggedIn: true });
+    } else {
+      this.setState({ isLoggedIn: false });
+    }
   }
 
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false
+    };
+  }
   render() {
     return (
-      <div>
+      <div className="container">
         <Header />
         <h1>Favourites</h1>
-
-        {this.props.favourites.length !== 0 ? (
-          this.props.favourites.map(favourite => (
-            <Itinerary useCase="favourite" itinerary={favourite} />
-          ))
-        ) : (
-          <div>You have no favourites</div>
-        )}
+        <div className="favouriteContent">
+          {!this.state.isLoggedIn ? (
+            <div className="noLoginFavourites">
+              {" "}
+              Oops you haven't logged in!
+              <span
+                role="img"
+                aria-label="smiling face with open mouth and cold sweat"
+              >
+                😅{" "}
+              </span>
+              Please log in order to see your{" "}
+              <span role="img" aria-label="red heart">
+                ❤️'s
+              </span>
+            </div>
+          ) : this.props.favourites.length !== 0 ? (
+            this.props.favourites.map(favourite => (
+              <Itinerary useCase="favourite" itinerary={favourite} />
+            ))
+          ) : (
+            <div className="noLoginFavourites">
+              {" "}
+              Oops it seems you don't have any favourites!
+              <span
+                role="img"
+                aria-label="smiling face with open mouth and cold sweat"
+              >
+                😅{" "}
+              </span>
+              Go check out all the fun itineraries and find the ones that speak
+              to you!{" "}
+              <span role="img" aria-label="left pointing magnifying glass">
+                🔍
+              </span>
+            </div>
+          )}
+        </div>
       </div>
     );
   }

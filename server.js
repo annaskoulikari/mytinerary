@@ -134,7 +134,8 @@ const upload = multer({ storage });
 
 app.post("/uploads", upload.single("file"), (req, res) => {
   console.log("we reached upload backend route");
-  res.json({ file: req.file });
+  res.send("yup we got your image upload");
+  // res.json({ file: req.file });
 });
 
 // app.post("/uploads", (req, res) => {

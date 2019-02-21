@@ -5,6 +5,8 @@ import logout from "../images/logout.png";
 
 import { getProfile } from "../actions/profileActions";
 
+import Header from "./header";
+
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
@@ -29,18 +31,50 @@ class ProfilePage extends Component {
   }
   render() {
     return (
-      <div>
-        <h1> This is the profile page</h1>
-        <div>{"email:" + this.props.profile.email}</div>
-        <div>{"name:" + this.props.profile.name}</div>
+      <div className="container">
+        <Header />
+        <h1>Profile</h1>
+
         {this.state.isLoggedIn ? (
-          <img
-            className="image"
-            src={this.state.logoutImage}
-            alt="logout"
-            onClick={e => this.handleClick(e)}
-          />
-        ) : null}
+          <div className="profileContents">
+            <div class=" cardItem card border-info ">
+              <div class="card-body text-info profileCard">
+                <h5 class="card-title ">Name: </h5>
+                <p class="card-text cardText">{this.props.profile.name}</p>
+              </div>
+            </div>
+            <div />
+            <div class=" cardItem card border-info ">
+              <div class="card-body text-info profileCard">
+                <h5 class="card-title ">Email: </h5>
+                <p class="card-text cardText">{this.props.profile.email}</p>
+              </div>
+            </div>
+            <div />
+
+            <div
+              className=" cardItem btn btn-primary"
+              onClick={e => this.handleClick(e)}
+            >
+              Log Out
+            </div>
+          </div>
+        ) : (
+          <div className="noLoginFavourites">
+            {" "}
+            Oops you haven't logged in!
+            <span
+              role="img"
+              aria-label="smiling face with open mouth and cold sweat"
+            >
+              😅{" "}
+            </span>
+            Please log in order to see your account
+            <span role="img" aria-label="thumbs up sign">
+              👍🏻
+            </span>
+          </div>
+        )}
       </div>
     );
   }

@@ -112,7 +112,7 @@ class LoginPage extends Component {
             </div>
           </div>
           <div>
-            <button class="btn btn-outline-primary" type="submit ">
+            <button className="btn btn-outline-primary" type="submit ">
               OK
             </button>
           </div>
