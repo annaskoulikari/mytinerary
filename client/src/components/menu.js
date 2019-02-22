@@ -4,20 +4,16 @@ import { withStyles } from "@material-ui/core/styles";
 
 import List from "@material-ui/core/List";
 
-import ListItemText from "@material-ui/core/ListItemText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 
-import blue from "@material-ui/core/colors/blue";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import { NavLink } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
-import "../App.css";
 
-import Login from "./login";
+import "../App.css";
 
 const styles = {
   menuItem: {

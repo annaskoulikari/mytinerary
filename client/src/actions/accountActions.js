@@ -1,5 +1,5 @@
 import { CREATE_ACCOUNT } from "./types";
-//import { ACCOUNT_EXISTS } from "./types";
+
 import axios from "axios";
 
 export const createAccount = (

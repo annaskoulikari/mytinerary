@@ -1,8 +1,7 @@
-import { CHECK_ACCOUNT, GOOGLE_LOGIN, AUTH_SIGN_UP } from "../actions/types";
+import { CHECK_ACCOUNT, AUTH_SIGN_UP } from "../actions/types";
 
 const initialState = {
   loggedInUser: [],
-  loggedInUserGoogle: [],
   isAuthenticated: false,
   token: "",
   user: "",
@@ -17,12 +16,7 @@ export default function(state = initialState, action) {
         ...state,
         loggedInUser: action.payload
       };
-    case GOOGLE_LOGIN:
-      console.log("reducer");
-      return {
-        ...state,
-        loggedInUserGoogle: action.payload
-      };
+
     case AUTH_SIGN_UP:
       console.log("reducer");
       return {

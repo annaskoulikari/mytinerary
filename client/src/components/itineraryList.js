@@ -19,10 +19,7 @@ class ItineraryList extends Component {
     this.props.itineraries.map(itinerary =>
       itinerariesArray.push(itinerary._id)
     );
-    console.log(
-      "this should be array of itineraries is ItineraryList",
-      itinerariesArray
-    );
+
     await this.props.fetchItineraries(city);
     this.props.fetchActivities(itinerariesArray);
     this.props.postComment(itinerariesArray);
@@ -60,8 +57,8 @@ ItineraryList.propTypes = {
 
 const mapStateToProps = state => ({
   itineraries: state.itineraries.item,
-  user: state.loggedInUserGoogle.loggedInUserGoogle,
-  comment: state.comments.comment
+  comment: state.comments.comment,
+  user: state.profile.profile
 });
 
 export default connect(

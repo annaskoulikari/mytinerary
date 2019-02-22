@@ -15,19 +15,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// get a list of itineraries from the db
-
-// router.get("/activities/:_id", (req, res) => {
-//   console.log(req.params);
-//   var itineraryIdentified = req.params._id;
-//   console.log(itineraryIdentified);
-//   Activity.find({ itinerary_id: itineraryIdentified }).then(function(
-//     activities
-//   ) {
-//     res.send(activities);
-//   });
-// });
-
 router.post("/activitiesAll", (req, res) => {
   console.log(req.body);
   let itinerariesArray = req.body.itinerariesArray;

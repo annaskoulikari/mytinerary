@@ -20,7 +20,6 @@ export default combineReducers({
   accounts: accountReducer,
   message: accountReducer,
   loggedInUser: loginReducer,
-  loggedInUserGoogle: loginReducer,
   profile: profileReducer,
   favourites: favouritesReducer,
   favouriteItinerary: favouritesReducer

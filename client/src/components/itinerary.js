@@ -6,7 +6,7 @@ import { getProfile } from "../actions/profileActions";
 
 import { NavLink } from "react-router-dom";
 
-import ActivityTrial from "./activityTrial";
+import ActivityTrial from "./activity";
 import axios from "axios";
 
 import "../App.css";
@@ -70,8 +70,6 @@ class Itinerary extends Component {
     this.props.getProfile();
 
     this.isLiked();
-
-    console.log(this.props.useCase);
 
     if (this.props.useCase === "favourite") {
       this.setState({ itineraryAsFavourite: true });
@@ -258,24 +256,6 @@ class Itinerary extends Component {
                       {this.props.itinerary.title}
                     </span>
                     <div>
-                      {/* {this.state.itineraryAsFavourite ? (
-                        <div className="likeFavourite">
-                          {this.state.liked ? (
-                            <Favorite onClick={this.openModal} />
-                          ) : (
-                            <FavoriteBorder onClick={this.openModal} />
-                          )}
-                        </div>
-                      ) : (
-                        <div
-                          onClick={e =>
-                            this.addToFavourite(this.props.itinerary._id, e)
-                          }
-                          className="btn-floating pink itineraryLike"
-                        >
-                          {this.state.liked ? <Favorite /> : <FavoriteBorder />}
-                        </div>
-                      )} */}
                       {this.state.itineraryAsFavourite ? (
                         <div className="likeFavourite">
                           {this.state.liked ? (
@@ -299,15 +279,6 @@ class Itinerary extends Component {
                         </div>
                       )}
                     </div>
-
-                    {/* <div
-                      onClick={e =>
-                        this.addToFavourite(this.props.itinerary._id, e)
-                      }
-                      className="btn-floating pink itineraryLike"
-                    >
-                      {this.state.liked ? <Favorite /> : <FavoriteBorder />}
-                    </div> */}
                   </div>
 
                   <div className="itineraryInfo">
@@ -356,7 +327,7 @@ Itinerary.propTypes = {
 
 const mapStateToProps = state => ({
   itineraries: state.itineraries.item,
-  user: state.loggedInUserGoogle.loggedInUserGoogle,
+  user: state.profile.profile,
   favourites: state.favourites.favourites
 });
 

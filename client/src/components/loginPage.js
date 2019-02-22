@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   checkAccount,
-  googleLogin,
   oauthGoogle,
   oauthFacebook
 } from "../actions/loginActions";
@@ -165,5 +164,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { checkAccount, googleLogin, oauthGoogle, oauthFacebook }
+  { checkAccount, oauthGoogle, oauthFacebook }
 )(LoginPage);

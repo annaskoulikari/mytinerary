@@ -43,26 +43,11 @@ router.post("/accounts", (req, res) => {
             Account.create(account).then(function(account) {
               res.send(account);
             });
-
-            // var token = jwt.sign(
-            //   {
-            //     email: account[0].email,
-            //     accountId: account[0]._id,
-            //     name: account[0].firstName + " " + account[0].lastName
-            //   },
-            //   process.env.JWT_KEY,
-            //   {
-            //     expiresIn: 86400
-            //   }
-            // );
-
-            // res.status(200).send({ auth: true, token: token });
           }
         });
       } else {
         console.log("account exists");
         res.json(null);
-        //res.send({ message: "Account already exists" });
       }
     }
   );

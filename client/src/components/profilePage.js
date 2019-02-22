@@ -37,17 +37,21 @@ class ProfilePage extends Component {
 
         {this.state.isLoggedIn ? (
           <div className="profileContents">
-            <div class=" cardItem card border-info ">
-              <div class="card-body text-info profileCard">
-                <h5 class="card-title ">Name: </h5>
-                <p class="card-text cardText">{this.props.profile.name}</p>
+            {/* <img
+              alt="profile"
+              src={this.props.loggedInUser.user.profilePhoto}
+            /> */}
+            <div className=" cardItem card border-info ">
+              <div className="card-body text-info profileCard">
+                <h5 className="card-title ">Name: </h5>
+                <p className="card-text cardText">{this.props.profile.name}</p>
               </div>
             </div>
             <div />
-            <div class=" cardItem card border-info ">
-              <div class="card-body text-info profileCard">
-                <h5 class="card-title ">Email: </h5>
-                <p class="card-text cardText">{this.props.profile.email}</p>
+            <div className=" cardItem card border-info ">
+              <div className="card-body text-info profileCard">
+                <h5 className="card-title ">Email: </h5>
+                <p className="card-text cardText">{this.props.profile.email}</p>
               </div>
             </div>
             <div />

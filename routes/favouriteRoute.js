@@ -10,20 +10,16 @@ router.post("/getfavourites", (req, res) => {
   Account.findOne({ email: user })
     .then(account => {
       let itineraries = account.favourite;
-      console.log(account.favourite);
-      // res.status(200).send(itineraries);
-      console.log("these ar the itineraries", itineraries);
+
       return itineraries;
     })
     .then(itineraries => {
       Itinerary.find({ _id: { $in: itineraries } }).then(itinerariesFull => {
-        console.log("these are the itinerariesFull", itinerariesFull);
         res.status(200).send(itinerariesFull);
         return itinerariesFull;
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -31,15 +27,12 @@ router.post("/getfavourites", (req, res) => {
 });
 
 router.post("/getFavouriteItinerary", (req, res) => {
-  console.log("this should be the id", req.body.id);
   Itinerary.find({ _id: { $in: req.body.id } }).then(itineraries => {
     res.send(itineraries);
   });
 });
 
 router.post("/deleteFavourite", (req, res) => {
-  console.log("this is req.body of delete route", req.body);
-  console.log("this should be the id to delete", req.body.id);
   Account.findOneAndUpdate(
     { email: req.body.user.email },
     { $pull: { favourite: req.body.id } },
@@ -54,29 +47,14 @@ router.post("/deleteFavourite", (req, res) => {
           favouriteArray.push(item);
         }
       });
-      console.log("this should be new array of favourites", favouriteArray);
+
       return favouriteArray;
-      // res.status(200).send(favouriteArray);
     })
     .then(favouriteArray => {
       Itinerary.find({ _id: { $in: favouriteArray } }).then(itinerariesFull => {
-        console.log("these are the itinerariesFull", itinerariesFull);
         res.status(200).send(itinerariesFull);
         return itinerariesFull;
       });
-      // console.log("is this still the favourites array", favouriteArray);
-      // let favouriteItineraryArray = [];
-
-      // favouriteArray.forEach(item => {
-      //   Itinerary.find({ _id: item }).then(itinerary => {
-      //     console.log("is this the found itinerary", itinerary);
-      //     favouriteItineraryArray.push(itinerary);
-      //   });
-      // });
-      // console.log(
-      //   "this should be the array with the new favourites",
-      //   favouriteItineraryArray
-      // );
     })
     .catch(err => {
       console.log(err);

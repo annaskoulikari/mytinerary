@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import MenuOpen from "./menuOpen";
-import Login from "./login";
+
 import "../App.css";
 import { NavLink } from "react-router-dom";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import IconButton from "@material-ui/core/IconButton";
-// import AccountCircle from "material-ui/svg-icons/action/AccountCircle";
 
 import Menu from "./menu.js";
 
@@ -25,11 +23,6 @@ class Header extends Component {
   }
 
   render() {
-    const iconStyle = {
-      width: 48,
-      height: 48
-    };
-
     const style = {
       width: 96,
       height: 96
@@ -41,11 +34,11 @@ class Header extends Component {
           <div className="profile">
             <NavLink to="/profilePage">
               {this.state.isLoggedIn ? (
-                <IconButton style={style} iconStyle={iconStyle}>
+                <IconButton style={style}>
                   <AccountCircle />
                 </IconButton>
               ) : (
-                <IconButton style={style} iconStyle={iconStyle} disabled={true}>
+                <IconButton style={style} disabled={true}>
                   <AccountCircle />
                 </IconButton>
               )}

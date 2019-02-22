@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import FavouriteMytinerary from "./favouriteMytinerary";
 
 import { connect } from "react-redux";
 import {
@@ -18,15 +17,11 @@ class Favourite extends Component {
     let itinerariesArray = [];
     this.props.getProfile();
     var user = this.props.profile.email;
-    console.log(user);
+
     await this.props.getFavourites(user);
 
     this.props.favourites.map(itinerary =>
       itinerariesArray.push(itinerary._id)
-    );
-    console.log(
-      "this should be array of itineraries is ItineraryList",
-      itinerariesArray
     );
 
     this.props.fetchActivities(itinerariesArray);

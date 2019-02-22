@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { getProfile } from "../actions/profileActions";
-// import "materialize-css/dist/css/materialize.min.css";
 
 class LandingPage extends Component {
   componentDidMount() {
@@ -35,7 +34,10 @@ class LandingPage extends Component {
           </div>
           <p className="landingPageText text-center">
             Find your perfect trip, designed by insiders who know and love their
-            cities 🌏
+            cities{" "}
+            <span role="img" aria-label="earth globa asia-australia">
+              🌏
+            </span>
           </p>
           <div className="startBrowsing">
             <p>Start browsing</p>
