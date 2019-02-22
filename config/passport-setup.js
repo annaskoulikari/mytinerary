@@ -10,7 +10,8 @@ passport.use(
   "googleToken",
   new GooglePlusTokenStrategy(
     {
-      clientID: process.env.clientID,
+      clientID:
+        "71133190926-d8mjt4mslu36qa3md2efuql8md35sjg9.apps.googleusercontent.com",
       clientSecret: process.env.clientSecret
     },
     async (accessToken, refreshToken, profile, done) => {
