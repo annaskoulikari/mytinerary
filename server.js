@@ -148,14 +148,6 @@ mongoose.Promise = global.Promise;
 app.use("/itinerary/uploads", express.static("uploads"));
 app.use("/activity/uploads", express.static("uploads"));
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(_dirname, "client", "build", "index.html"));
-  });
-}
-
 mongoose.connection
   .once("open", () => {
     console.log("Connection has been made, now make fireworks...");
@@ -182,3 +174,11 @@ app.use("/favourite", favouriteRoute);
 
 // app.use
 // app.use("/auth", routerAuth2);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(_dirname, "client", "build", "index.html"));
+  });
+}
