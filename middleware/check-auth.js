@@ -3,6 +3,7 @@ require("dotenv").config();
 
 module.exports = (req, res, next) => {
   // console.log(req.headers["authorization"]);
+
   const token = req.headers.authorization.split(" ")[1];
   let decoded = jwt.verify(token, process.env.JWT_KEY, (err, authData) => {
     if (err) {
@@ -13,5 +14,6 @@ module.exports = (req, res, next) => {
     }
   });
   req.decoded = decoded;
+
   next();
 };

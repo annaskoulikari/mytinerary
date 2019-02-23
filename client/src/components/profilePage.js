@@ -12,7 +12,8 @@ class ProfilePage extends Component {
     super(props);
     this.state = {
       logoutImage: logout,
-      isLoggedIn: false
+      isLoggedIn: false,
+      user: ""
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -20,15 +21,25 @@ class ProfilePage extends Component {
 
   handleClick() {
     window.localStorage.removeItem("user");
+    window.localStorage.removeItem("email");
     this.setState({ isLoggedIn: false });
   }
-  componentDidMount() {
+
+  async makeSureLogin() {
+    await this.props.getProfile();
+
     if (localStorage.getItem("user") != null) {
       this.setState({ isLoggedIn: true });
     }
-    this.props.getProfile();
-    console.log(this.props.profile);
+
+    let profile = this.props.profile[0];
+    this.setState({ user: profile });
+    console.log("ths is profile", profile);
   }
+  componentDidMount() {
+    this.makeSureLogin();
+  }
+
   render() {
     return (
       <div className="container">
@@ -44,14 +55,18 @@ class ProfilePage extends Component {
             <div className=" cardItem card border-info ">
               <div className="card-body text-info profileCard">
                 <h5 className="card-title ">Name: </h5>
-                <p className="card-text cardText">{this.props.profile.name}</p>
+                <p className="card-text cardText">
+                  {this.props.profile[0].firstName}
+                </p>
               </div>
             </div>
             <div />
             <div className=" cardItem card border-info ">
               <div className="card-body text-info profileCard">
                 <h5 className="card-title ">Email: </h5>
-                <p className="card-text cardText">{this.props.profile.email}</p>
+                <p className="card-text cardText">
+                  {this.props.profile[0].email}
+                </p>
               </div>
             </div>
             <div />

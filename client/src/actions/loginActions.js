@@ -1,4 +1,4 @@
-import { CHECK_ACCOUNT, AUTH_SIGN_UP } from "./types";
+import { AUTH_SIGN_UP } from "./types";
 import axios from "axios";
 
 export const checkAccount = (email, password) => dispatch => {
@@ -8,8 +8,9 @@ export const checkAccount = (email, password) => dispatch => {
     .then(res => {
       console.log(res);
       localStorage.setItem("user", res.data.token);
+      localStorage.setItem("email", res.data.user.email);
       dispatch({
-        type: CHECK_ACCOUNT,
+        type: AUTH_SIGN_UP,
         payload: res.data
       });
     })
@@ -30,6 +31,7 @@ export const oauthGoogle = accessToken => {
     });
     console.log("res", res);
     localStorage.setItem("user", res.data.token);
+    localStorage.setItem("email", res.data.user.email);
   };
 };
 
@@ -45,5 +47,6 @@ export const oauthFacebook = data => {
     });
     console.log("res", res);
     localStorage.setItem("user", res.data.token);
+    localStorage.setItem("email", res.data.user.email);
   };
 };

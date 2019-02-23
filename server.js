@@ -9,7 +9,7 @@ var routerAuth = require("./routes/authRoute");
 var routerAuth2 = require("./routes/authRoute2");
 var routerProfile = require("./routes/profileRoute");
 var passportSetup = require("./config/passport-setup");
-var profilePageRoute = require("./routes/profileBackendRoute");
+
 var favouriteRoute = require("./routes/favouriteRoute");
 require("dotenv").config();
 var cors = require("cors");
@@ -173,7 +173,7 @@ app.use("/testAccount", routerAccount);
 app.use("/testLogin", routerLogin);
 app.use("/testProfile", routerProfile);
 app.use("/auth", routerAuth);
-app.use("/profileBackendRoute", profilePageRoute);
+
 app.use("/favourite", favouriteRoute);
 
 // app.use

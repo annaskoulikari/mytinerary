@@ -39,15 +39,16 @@ router.post("/login", (req, res, next) => {
             // }
           );
           return res.status(200).json({
-            message: "Auth successful",
-            token: token,
-            profilePhoto: account[0].profilePhoto,
-            userName: account[0].userName,
-            password: account[0].password,
-            email: account[0].email,
-            firstName: account[0].firstName,
-            lastName: account[0].lastName,
-            country: account[0].country
+            user: {
+              profilePhoto: account[0].profilePhoto,
+              userName: account[0].userName,
+              password: account[0].password,
+              email: account[0].email,
+              firstName: account[0].firstName,
+              lastName: account[0].lastName,
+              country: account[0].country
+            },
+            token: token
           });
         }
         res.status(401).json({

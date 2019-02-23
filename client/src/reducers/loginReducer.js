@@ -1,22 +1,14 @@
-import { CHECK_ACCOUNT, AUTH_SIGN_UP } from "../actions/types";
+import { AUTH_SIGN_UP } from "../actions/types";
 
 const initialState = {
-  loggedInUser: [],
-  isAuthenticated: false,
-  token: "",
   user: "",
+  token: "",
+  isAuthenticated: false,
   errorMessage: ""
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case CHECK_ACCOUNT:
-      console.log("reducer");
-      return {
-        ...state,
-        loggedInUser: action.payload
-      };
-
     case AUTH_SIGN_UP:
       console.log("reducer");
       return {

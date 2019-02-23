@@ -42,13 +42,11 @@ class LoginPage extends Component {
     this.props.checkAccount(email, password);
   }
 
-  componentWillMount() {}
-
   async responseGoogle(res) {
     console.log("response google", res);
     await this.props.oauthGoogle(res.accessToken);
     if (!this.props.errorMessage) {
-      this.props.history.push("/profilePage");
+      this.props.history.push("/");
     }
   }
 
@@ -56,7 +54,7 @@ class LoginPage extends Component {
     console.log("responseFacebook", res);
     await this.props.oauthFacebook(res.accessToken);
     if (!this.props.errorMessage) {
-      this.props.history.push("/profilePage");
+      this.props.history.push("/");
     }
   }
 
