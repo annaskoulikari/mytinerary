@@ -7,7 +7,7 @@ export const postComment = itinerariesArray => dispatch => {
   console.log("axiosing");
 
   axios
-    .post("https://localhost:5000/testComment/commentsAll", {
+    .post("/testComment/commentsAll", {
       itinerariesArray: itinerariesArray
     })
     .then(res => {
