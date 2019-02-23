@@ -21,7 +21,7 @@ export const checkAccount = (email, password) => dispatch => {
 export const oauthGoogle = accessToken => {
   return async dispatch => {
     console.log("we received", accessToken);
-    const res = await axios.post("https://localhost:5000/auth/googlelogin", {
+    const res = await axios.post("/auth/googlelogin", {
       access_token: accessToken
     });
     dispatch({
@@ -36,7 +36,7 @@ export const oauthGoogle = accessToken => {
 export const oauthFacebook = data => {
   return async dispatch => {
     console.log("we received", data);
-    const res = await axios.post("https://localhost:5000/auth/facebooklogin", {
+    const res = await axios.post("/auth/facebooklogin", {
       access_token: data
     });
     dispatch({

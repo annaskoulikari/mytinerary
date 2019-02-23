@@ -22,17 +22,23 @@ const GridFsStorage = require("multer-gridfs-storage");
 const Grid = require("gridfs-stream");
 const methodOverride = require("method-override");
 const fs = require("fs");
-var https = require("https");
+//trying to take out https for heroku
+
+// var https = require("https");
+var http = require("http");
 
 var express = require("express");
 
-const certOptions = {
-  key: fs.readFileSync(path.resolve("./ssl/server.key")),
-  cert: fs.readFileSync(path.resolve("./ssl/server.crt"))
-};
+// const certOptions = {
+//   key: fs.readFileSync(path.resolve("./ssl/server.key")),
+//   cert: fs.readFileSync(path.resolve("./ssl/server.crt"))
+// };
 var app = express();
 
-const server = https.createServer(certOptions, app);
+//trying to take out https for heroku
+
+// const server = https.createServer(certOptions, app);
+const server = http.createServer(app);
 
 var port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`server running on port ${port}`));
@@ -48,8 +54,6 @@ var bodyParser = require("body-parser");
 require("dotenv").config();
 
 const socketio = require("socket.io");
-
-const http = require("http");
 
 // const server = http.createServer(app);
 //const server = http.Server(app);
