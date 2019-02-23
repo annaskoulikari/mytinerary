@@ -83,7 +83,7 @@ class Itinerary extends Component {
     var itineraryFavourite = itineraryId;
     var user = this.props.user;
     axios
-      .post("https://localhost:5000/testItinerary/itineraries/favourite", {
+      .post("/testItinerary/itineraries/favourite", {
         itineraryFavourite: itineraryFavourite,
         user: user
       })
