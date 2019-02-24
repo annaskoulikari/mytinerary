@@ -11,7 +11,7 @@ import LoginPage from "./components/loginPage";
 import SignupPage from "./components/createAccount";
 
 import Footer from "./components/footer";
-import ProfilePage from "./components/profilePage";
+import ProfilePageContainer from "./components/profilePageContainer";
 import Favourite from "./components/favourite";
 import ItineraryList from "./components/itineraryList";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -28,7 +28,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route path="/favouritePage" component={Favourite} />
-            <Route exact path="/profilePage" component={ProfilePage} />
+            <Route exact path="/profilePage" component={ProfilePageContainer} />
             <Route path="/itinerary/:city" component={ItineraryList} />
             <Route path="/citiesList" component={CitiesList} />
             <Route path="/loginPage" component={LoginPage} />

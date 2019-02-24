@@ -1,7 +1,7 @@
 import { GET_PROFILE } from "../actions/types";
 
 const initialState = {
-  profile: ""
+  profile: []
 };
 
 export default function(state = initialState, action) {
