@@ -9,7 +9,14 @@ var Account = require("../models/account");
 router.post("/profiles", checkAuth, (req, res) => {
   let userInfo = req.decoded;
   let emailOfUser = req.body.emailOfUser;
-  Account.find({ email: emailOfUser }).then(account => res.send(account));
+  Account.find({ email: emailOfUser })
+    .then(account => res.send(account))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
   // res.send(userInfo);
 });
 
