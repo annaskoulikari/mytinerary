@@ -22,5 +22,5 @@ export default combineReducers({
   loggedInUser: loginReducer,
   profile: profileReducer,
   favourites: favouritesReducer,
-  favouriteItinerary: favouritesReducer
+  addedFavourite: favouritesReducer
 });

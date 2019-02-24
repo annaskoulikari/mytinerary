@@ -1,8 +1,12 @@
-import { GET_FAVOURITES, GET_FAVOURITE_ITINERARY } from "../actions/types";
+import {
+  GET_FAVOURITES,
+  GET_FAVOURITE_ITINERARY,
+  ADD_TO_FAVOURITES
+} from "../actions/types";
 
 const initialState = {
   favourites: [],
-  favouriteItinerary: []
+  addedFavourite: []
 };
 
 export default function(state = initialState, action) {
@@ -12,10 +16,10 @@ export default function(state = initialState, action) {
         ...state,
         favourites: action.payload
       };
-    case GET_FAVOURITE_ITINERARY:
+    case ADD_TO_FAVOURITES:
       return {
         ...state,
-        favouriteItinerary: action.payload
+        addedFavourite: action.payload
       };
     default:
       return state;

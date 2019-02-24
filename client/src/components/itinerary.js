@@ -7,13 +7,12 @@ import { getProfile } from "../actions/profileActions";
 import { NavLink } from "react-router-dom";
 
 import ActivityTrial from "./activity";
-import axios from "axios";
 
 import "../App.css";
 import {
   getFavourites,
-  getFavouriteItinerary,
-  removeFavourite
+  removeFavourite,
+  addToFavourites
 } from "../actions/favouriteActions";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -82,14 +81,7 @@ class Itinerary extends Component {
     this.setState({ open: true });
     var itineraryFavourite = itineraryId;
     var user = this.props.user;
-    axios
-      .post("/testItinerary/itineraries/favourite", {
-        itineraryFavourite: itineraryFavourite,
-        user: user
-      })
-      .then(res => {
-        console.log(res);
-      });
+    this.props.addToFavourites(itineraryFavourite, user);
   }
 
   handleClose = () => {
@@ -337,7 +329,8 @@ export default connect(
     fetchItineraries,
     getProfile,
     getFavourites,
-    getFavouriteItinerary,
-    removeFavourite
+
+    removeFavourite,
+    addToFavourites
   }
 )(Itinerary);

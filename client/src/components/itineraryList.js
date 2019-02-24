@@ -6,10 +6,7 @@ import { fetchItineraries } from "../actions/itineraryActions";
 import { fetchActivities } from "../actions/activityActions";
 import { postComment } from "../actions/commentActions";
 import { NavLink } from "react-router-dom";
-import {
-  getFavourites,
-  getFavouriteItinerary
-} from "../actions/favouriteActions";
+import { getFavourites } from "../actions/favouriteActions";
 
 class ItineraryList extends Component {
   async fetchEverything() {
@@ -67,7 +64,6 @@ export default connect(
     fetchItineraries,
     fetchActivities,
     postComment,
-    getFavourites,
-    getFavouriteItinerary
+    getFavourites
   }
 )(ItineraryList);

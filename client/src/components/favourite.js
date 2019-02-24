@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import {
-  getFavourites,
-  getFavouriteItinerary
-} from "../actions/favouriteActions";
+import { getFavourites } from "../actions/favouriteActions";
 import { getProfile } from "../actions/profileActions";
 import PropTypes from "prop-types";
 import Header from "./header";
@@ -97,7 +94,6 @@ Favourite.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  favouriteItinerary: state.favouriteItinerary.favouriteItinerary,
   favourites: state.favourites.favourites,
   profile: state.profile.profile
 });
@@ -107,7 +103,7 @@ export default connect(
   {
     getProfile,
     getFavourites,
-    getFavouriteItinerary,
+
     fetchActivities,
     postComment
   }

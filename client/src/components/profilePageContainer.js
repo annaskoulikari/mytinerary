@@ -34,7 +34,6 @@ class ProfilePageContainer extends Component {
   render() {
     return (
       <div>
-        <div>This is profile Page Container</div>
         <div>
           <Header />
           {this.state.isLoggedIn ? (

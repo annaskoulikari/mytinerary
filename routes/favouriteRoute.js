@@ -26,12 +26,6 @@ router.post("/getfavourites", (req, res) => {
     });
 });
 
-router.post("/getFavouriteItinerary", (req, res) => {
-  Itinerary.find({ _id: { $in: req.body.id } }).then(itineraries => {
-    res.send(itineraries);
-  });
-});
-
 router.post("/deleteFavourite", (req, res) => {
   Account.findOneAndUpdate(
     { email: req.body.user.email },

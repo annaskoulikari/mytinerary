@@ -1,5 +1,21 @@
-import { GET_FAVOURITES, GET_FAVOURITE_ITINERARY } from "./types";
+import { GET_FAVOURITES, ADD_TO_FAVOURITES } from "./types";
 import axios from "axios";
+
+export const addToFavourites = (itineraryFavourite, user) => dispatch => {
+  console.log("user", user, "itineraryFavourite", itineraryFavourite);
+  axios
+    .post("/testItinerary/itineraries/favourite", {
+      itineraryFavourite: itineraryFavourite,
+      user: user
+    })
+    .then(res => {
+      console.log(res);
+      dispatch({
+        type: ADD_TO_FAVOURITES,
+        payload: res.data
+      });
+    });
+};
 
 export const getFavourites = user => dispatch => {
   console.log("you have reached getFavourite action creator");
@@ -37,20 +53,20 @@ export const removeFavourite = (id, user) => dispatch => {
     });
 };
 
-export const getFavouriteItinerary = itineraryID => dispatch => {
-  console.log("reached getfavourite id action creator");
-  console.log("this should be itineraryID", itineraryID);
+// export const getFavouriteItinerary = itineraryID => dispatch => {
+//   console.log("reached getfavourite id action creator");
+//   console.log("this should be itineraryID", itineraryID);
 
-  axios
-    .post("/favourite/getFavouriteItinerary", { id: itineraryID })
-    .then(res => {
-      console.log(res);
-      dispatch({
-        type: GET_FAVOURITE_ITINERARY,
-        payload: res.data
-      });
-    })
-    .catch(error => {
-      console.log(error.response);
-    });
-};
+//   axios
+//     .post("/favourite/getFavouriteItinerary", { id: itineraryID })
+//     .then(res => {
+//       console.log(res);
+//       dispatch({
+//         type: GET_FAVOURITE_ITINERARY,
+//         payload: res.data
+//       });
+//     })
+//     .catch(error => {
+//       console.log(error.response);
+//     });
+// };
