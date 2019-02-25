@@ -31,8 +31,8 @@ import IconButton from "@material-ui/core/IconButton";
 
 class Itinerary extends Component {
   async isLiked() {
-    var user = this.props.user.email;
-    await this.props.getFavourites(user);
+    // var user = this.props.user.email;
+    // await this.props.getFavourites(user);
 
     var favouritesArray = [];
     this.props.favourites.forEach(favourite =>
@@ -66,7 +66,7 @@ class Itinerary extends Component {
       this.setState({ isLoggedIn: false });
     }
 
-    this.props.getProfile();
+    // this.props.getProfile();
 
     this.isLiked();
 
@@ -80,7 +80,11 @@ class Itinerary extends Component {
   addToFavourite(itineraryId, e) {
     this.setState({ open: true });
     var itineraryFavourite = itineraryId;
-    var user = this.props.user;
+    // var user = this.props.user;
+    // var user = this.props.user[0];
+
+    var user = this.props.profile[0];
+    console.log("this should be user", user);
     this.props.addToFavourites(itineraryFavourite, user);
   }
 
@@ -257,7 +261,7 @@ class Itinerary extends Component {
                           )}
                         </div>
                       ) : !this.state.isLoggedIn ? (
-                        <IconButton color="disabled" onClick={this.openModal}>
+                        <IconButton color="primary" onClick={this.openModal}>
                           <Favorite />
                         </IconButton>
                       ) : (
@@ -285,8 +289,10 @@ class Itinerary extends Component {
                     </div>
                   </div>
                   <div className="itineraryHashtags">
-                    {this.props.itinerary.hashtags.map(hashtag => (
-                      <div className="itineraryHashtag">{hashtag}</div>
+                    {this.props.itinerary.hashtags.map((hashtag, index) => (
+                      <div key={index} className="itineraryHashtag">
+                        {hashtag}
+                      </div>
                     ))}
                   </div>
                 </div>

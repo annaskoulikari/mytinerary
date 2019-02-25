@@ -12,7 +12,7 @@ import SignupPage from "./components/createAccount";
 
 import Footer from "./components/footer";
 import ProfilePageContainer from "./components/profilePageContainer";
-import Favourite from "./components/favourite";
+import FavouritesContainer from "./components/favouritesContainer";
 import ItineraryList from "./components/itineraryList";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -27,7 +27,7 @@ class App extends Component {
         <div className="App">
           <Switch>
             <Route exact path="/" component={LandingPage} />
-            <Route path="/favouritePage" component={Favourite} />
+            <Route path="/favouritePage" component={FavouritesContainer} />
             <Route exact path="/profilePage" component={ProfilePageContainer} />
             <Route path="/itinerary/:city" component={ItineraryList} />
             <Route path="/citiesList" component={CitiesList} />

@@ -11,7 +11,7 @@ export const addToFavourites = (itineraryFavourite, user) => dispatch => {
     .then(res => {
       console.log(res);
       dispatch({
-        type: ADD_TO_FAVOURITES,
+        type: GET_FAVOURITES,
         payload: res.data
       });
     });

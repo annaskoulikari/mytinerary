@@ -12,8 +12,10 @@ import { postComment } from "../actions/commentActions";
 class Favourite extends Component {
   async fetchEverything() {
     let itinerariesArray = [];
-    this.props.getProfile();
-    var user = this.props.profile.email;
+    // await this.props.getProfile();
+    console.log(this.props.profile[0]);
+    var user = this.props.profile[0].email;
+    console.log("user", user);
 
     await this.props.getFavourites(user);
     // this.props.getFavourites(user);
@@ -65,7 +67,12 @@ class Favourite extends Component {
             </div>
           ) : this.props.favourites.length !== 0 ? (
             this.props.favourites.map(favourite => (
-              <Itinerary useCase="favourite" itinerary={favourite} />
+              <Itinerary
+                key={favourite._id}
+                useCase="favourite"
+                itinerary={favourite}
+                favourites={this.props.favourites}
+              />
             ))
           ) : (
             <div className="noLoginFavourites">

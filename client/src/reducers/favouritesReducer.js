@@ -1,8 +1,4 @@
-import {
-  GET_FAVOURITES,
-  GET_FAVOURITE_ITINERARY,
-  ADD_TO_FAVOURITES
-} from "../actions/types";
+import { GET_FAVOURITES, ADD_TO_FAVOURITES } from "../actions/types";
 
 const initialState = {
   favourites: [],
