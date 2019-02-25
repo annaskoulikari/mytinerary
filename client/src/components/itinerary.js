@@ -101,7 +101,7 @@ class Itinerary extends Component {
   }
 
   removeFromFavourite(id, e) {
-    var user = this.props.user;
+    var user = this.props.user[0];
     this.props.removeFavourite(id, user);
     this.setState({ open: false });
   }

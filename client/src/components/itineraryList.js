@@ -39,7 +39,11 @@ class ItineraryList extends Component {
         <h3>{this.state.city}</h3>
         <h3>Available MYitenaries</h3>
         {this.props.itineraries.map(itinerary => (
-          <Itinerary profile={this.props.user} itinerary={itinerary} />
+          <Itinerary
+            key={itinerary._id}
+            profile={this.props.user}
+            itinerary={itinerary}
+          />
         ))}
         <NavLink to="/citiesList">Choose Another City</NavLink>
       </div>

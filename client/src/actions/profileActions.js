@@ -19,5 +19,8 @@ export const getProfile = () => dispatch => {
         type: GET_PROFILE,
         payload: res.data
       });
+    })
+    .catch(err => {
+      console.log(err);
     });
 };

@@ -91,24 +91,19 @@ router.post("/itineraries", upload.single("itineraryImage"), (req, res) => {
 // });
 
 router.post("/itineraries/favourite", (req, res) => {
+  console.log("req.body for adding faovurite", req.body);
   Account.findOneAndUpdate(
     { email: req.body.user.email },
-    { $push: { favourite: req.body.id } },
+    { $push: { favourite: req.body.itineraryFavourite } },
     { upsert: true }
   )
 
     .then(account => {
-      // let favouriteArray = [];
+      console.log("account", account);
       let favouriteArray = account.favourite;
       console.log("favouriteArray before", favouriteArray);
-      favouriteArray.push(req.body.id);
+      favouriteArray.push(req.body.itineraryFavourite);
       console.log("favouriteArray after", favouriteArray);
-
-      // oldArray.forEach(item => {
-      //   if (item != req.body.id) {
-      //     favouriteArray.push(item);
-      //   }
-      // });
 
       return favouriteArray;
     })
@@ -125,35 +120,5 @@ router.post("/itineraries/favourite", (req, res) => {
       });
     });
 });
-
-// router.post("/itineraries/favourite", (req, res) => {
-//   // console.log(req);
-//   console.log("this is user from favourite", req.body.user);
-//   console.log("this is id from favourite", req.body.itineraryFavourite);
-//   // res.send("you reached the favourite backend route!");
-
-//   Account.findOne({ email: req.body.user.email }).then(user => {
-//     console.log("favourites before adding", user.favourite);
-
-//     if (user.favourite.indexOf(req.body.itineraryFavourite) != -1) {
-//       console.log("this itinerary has already been liked");
-//     } else {
-//       Account.findOneAndUpdate(
-//         { email: req.body.user.email },
-//         { $push: { favourite: req.body.itineraryFavourite } },
-//         { upsert: true },
-//         function(err, updatedFavourites) {
-//           if (err) {
-//             console.log("error occured");
-//           } else {
-//             console.log(updatedFavourites);
-//           }
-//         }
-//       );
-//     }
-
-//     console.log("favourites after adding", user.favourite);
-//   });
-// });
 
 module.exports = router;

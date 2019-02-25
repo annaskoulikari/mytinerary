@@ -14,11 +14,14 @@ export const addToFavourites = (itineraryFavourite, user) => dispatch => {
         type: GET_FAVOURITES,
         payload: res.data
       });
+    })
+    .catch(err => {
+      console.log(err);
     });
 };
 
 export const getFavourites = user => dispatch => {
-  console.log("you have reached getFavourite action creator");
+  console.log("let this be user of getfavourites action creator", user);
   axios
     .post("/favourite/getfavourites", {
       user: user
@@ -52,21 +55,3 @@ export const removeFavourite = (id, user) => dispatch => {
       console.log(error.response);
     });
 };
-
-// export const getFavouriteItinerary = itineraryID => dispatch => {
-//   console.log("reached getfavourite id action creator");
-//   console.log("this should be itineraryID", itineraryID);
-
-//   axios
-//     .post("/favourite/getFavouriteItinerary", { id: itineraryID })
-//     .then(res => {
-//       console.log(res);
-//       dispatch({
-//         type: GET_FAVOURITE_ITINERARY,
-//         payload: res.data
-//       });
-//     })
-//     .catch(error => {
-//       console.log(error.response);
-//     });
-// };

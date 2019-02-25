@@ -17,7 +17,7 @@ class Favourite extends Component {
     var user = this.props.profile[0].email;
     console.log("user", user);
 
-    await this.props.getFavourites(user);
+    // await this.props.getFavourites(user);
     // this.props.getFavourites(user);
 
     this.props.favourites.map(itinerary =>

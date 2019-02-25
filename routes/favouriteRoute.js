@@ -5,7 +5,8 @@ var Itinerary = require("../models/itinerary");
 const checkItin = require("../middleware/check-itineraries");
 
 router.post("/getfavourites", (req, res) => {
-  let user = req.body.user;
+  let user = req.body.user.email;
+  console.log("let this be user of getfavourites back end", user);
 
   Account.findOne({ email: user })
     .then(account => {

@@ -36,8 +36,10 @@ class FavouritesContainer extends Component {
   render() {
     return (
       <div>
-        <div>THIS IS PROFILE CONTAINER</div>
-        <Favourite profile={this.props.profile[0]} />
+        <Favourite
+          profile={this.props.profile[0]}
+          favourites={this.props.favourites}
+        />
       </div>
     );
   }
@@ -48,7 +50,8 @@ FavouritesContainer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile.profile
+  profile: state.profile.profile,
+  favourites: state.favourites.favourites
 });
 
 export default connect(

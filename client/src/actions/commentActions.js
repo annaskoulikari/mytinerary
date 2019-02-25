@@ -16,6 +16,9 @@ export const postComment = itinerariesArray => dispatch => {
         type: POST_COMMENT,
         payload: res.data
       });
+    })
+    .catch(err => {
+      console.log(err);
     });
 };
 
@@ -49,5 +52,8 @@ export const addComment = (
         type: POST_COMMENT,
         payload: res.data
       });
+    })
+    .catch(err => {
+      console.log(err);
     });
 };
