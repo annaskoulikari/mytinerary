@@ -40,6 +40,7 @@ class LoginPage extends Component {
     const email = this.state.email;
     const password = this.state.password;
     this.props.checkAccount(email, password);
+    this.props.history.push("/");
   }
 
   async responseGoogle(res) {

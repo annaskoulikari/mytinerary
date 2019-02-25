@@ -27,7 +27,7 @@ class SignupPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedFile: null,
+      // selectedFile: null,
       submitReady: false,
       userName: null,
       password: null,
@@ -86,6 +86,7 @@ class SignupPage extends Component {
         country
       );
     }
+    this.props.history.push("/");
     // console.log(this.props.message);
   };
 
