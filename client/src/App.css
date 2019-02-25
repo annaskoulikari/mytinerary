@@ -103,6 +103,7 @@
 .footerBar {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .bottomBar {
