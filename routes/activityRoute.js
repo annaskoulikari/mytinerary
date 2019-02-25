@@ -42,9 +42,16 @@ router.post("/activities", upload.single("activityImage"), (req, res) => {
     itinerary_id: req.body.itinerary_id,
     activityImage: req.file.path
   });
-  Activity.create(activity).then(function(activity) {
-    res.send(activity);
-  });
+  Activity.create(activity)
+    .then(function(activity) {
+      res.send(activity);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
 });
 
 // update an itinerary in the db

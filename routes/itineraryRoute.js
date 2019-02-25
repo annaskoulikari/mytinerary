@@ -21,9 +21,16 @@ router.get("/itineraries/:city", (req, res) => {
   console.log(req.params);
   var cityIdentified = req.params.city;
   console.log(cityIdentified);
-  Itinerary.find({ city: cityIdentified }).then(function(itineraries) {
-    res.send(itineraries);
-  });
+  Itinerary.find({ city: cityIdentified })
+    .then(function(itineraries) {
+      res.send(itineraries);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
 });
 
 // add a new itinerary to the db
@@ -41,42 +48,49 @@ router.post("/itineraries", upload.single("itineraryImage"), (req, res) => {
     hashtags: req.body.hashtags,
     city: req.body.city
   });
-  Itinerary.create(itinerary).then(function(itinerary) {
-    res.send(itinerary);
-  });
+  Itinerary.create(itinerary)
+    .then(function(itinerary) {
+      res.send(itinerary);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
 });
+
+// router.post("/itineraries/favourite", (req, res) => {
+//   // console.log(req);
+//   console.log("this is user from favourite", req.body.user);
+//   console.log("this is id from favourite", req.body.itineraryFavourite);
+//   // res.send("you reached the favourite backend route!");
+
+//   Account.findOne({ email: req.body.user.email }).then(user => {
+//     console.log("favourites before adding", user.favourite);
+
+//     if (user.favourite.indexOf(req.body.itineraryFavourite) != -1) {
+//       console.log("this itinerary has already been liked");
+//     } else {
+//       Account.findOneAndUpdate(
+//         { email: req.body.user.email },
+//         { $push: { favourite: req.body.itineraryFavourite } },
+//         { upsert: true },
+//         function(err, updatedFavourites) {
+//           if (err) {
+//             console.log("error occured");
+//           } else {
+//             console.log(updatedFavourites);
+//           }
+//         }
+//       );
+//     }
+
+//     console.log("favourites after adding", user.favourite);
+//   });
+// });
 
 router.post("/itineraries/favourite", (req, res) => {
-  // console.log(req);
-  console.log("this is user from favourite", req.body.user);
-  console.log("this is id from favourite", req.body.itineraryFavourite);
-  // res.send("you reached the favourite backend route!");
-
-  Account.findOne({ email: req.body.user.email }).then(user => {
-    console.log("favourites before adding", user.favourite);
-
-    if (user.favourite.indexOf(req.body.itineraryFavourite) != -1) {
-      console.log("this itinerary has already been liked");
-    } else {
-      Account.findOneAndUpdate(
-        { email: req.body.user.email },
-        { $push: { favourite: req.body.itineraryFavourite } },
-        { upsert: true },
-        function(err, updatedFavourites) {
-          if (err) {
-            console.log("error occured");
-          } else {
-            console.log(updatedFavourites);
-          }
-        }
-      );
-    }
-
-    console.log("favourites after adding", user.favourite);
-  });
-});
-
-router.post("/itineraries.favourite", (req, res) => {
   Account.findOneAndUpdate(
     { email: req.body.user.email },
     { $push: { favourite: req.body.id } },

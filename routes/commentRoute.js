@@ -9,11 +9,16 @@ const jwt = require("jsonwebtoken");
 router.post("/commentsAll", (req, res) => {
   var itinerariesArray = req.body.itinerariesArray;
   console.log("this should be array of itineraries", itinerariesArray);
-  Comment.find({ itinerary_id: { $in: itinerariesArray } }).then(function(
-    comments
-  ) {
-    res.send(comments);
-  });
+  Comment.find({ itinerary_id: { $in: itinerariesArray } })
+    .then(function(comments) {
+      res.send(comments);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
 });
 
 // the checkAuth way
@@ -28,13 +33,20 @@ router.post("/comments", checkAuth, (req, res) => {
     user: userInfo.name,
     itinerary_id: req.body.itinerary_id
   });
-  Comment.create(comment).then(
-    Comment.find({ itinerary_id: { $in: itinerariesArray } }).then(function(
-      comments
-    ) {
-      res.send(comments);
-    })
-  );
+  Comment.create(comment)
+    .then(
+      Comment.find({ itinerary_id: { $in: itinerariesArray } }).then(function(
+        comments
+      ) {
+        res.send(comments);
+      })
+    )
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
 });
 
 module.exports = router;

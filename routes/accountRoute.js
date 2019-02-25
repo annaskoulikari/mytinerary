@@ -6,13 +6,13 @@ const jwt = require("jsonwebtoken");
 
 // get a list of cities rom the db
 
-router.get("/accounts", (req, res) => {
-  console.log(req.params);
-  Account.find({}).then(function(accounts) {
-    res.send(accounts);
-    console.log(accounts);
-  });
-});
+// router.get("/accounts", (req, res) => {
+//   console.log(req.params);
+//   Account.find({}).then(function(accounts) {
+//     res.send(accounts);
+//     console.log(accounts);
+//   });
+// });
 
 // add a new city to the db
 
