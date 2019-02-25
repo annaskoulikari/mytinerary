@@ -46,7 +46,7 @@ class Favourite extends Component {
   }
   render() {
     return (
-      <div className="container">
+      <div className="container" style={{ marginBottom: "40px" }}>
         <Header />
         <h1>Favourites</h1>
         <div className="favouriteContent">

@@ -26,7 +26,7 @@ class LandingPage extends Component {
   }
   render() {
     return (
-      <div className="container">
+      <div className="container" style={{ marginBottom: "40px" }}>
         <Header />
         <div className="row landingPageContents">
           <div className="logoImage">

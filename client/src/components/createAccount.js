@@ -153,11 +153,11 @@ class SignupPage extends Component {
     const { formErrors } = this.state;
 
     return (
-      <div>
+      <div style={{ marginBottom: "50px" }}>
         <Header />
         <h1> Create Account</h1>
 
-        <form>
+        {/* <form>
           <label>
             Upload file:
             <input
@@ -168,7 +168,7 @@ class SignupPage extends Component {
           </label>
           <br />
           <button onClick={this.handleUpload}>Submit</button>
-        </form>
+        </form> */}
 
         <form
           onChange={this.handleSubmitButtonChange}

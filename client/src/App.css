@@ -65,7 +65,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 25px;
+  margin: 5px;
 }
 
 .citiesArrow {
@@ -109,6 +109,8 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+  display: block;
+  background: white;
 }
 
 .accountLogo {
@@ -567,7 +569,7 @@
 }
 
 .cityList {
-  height: 500px;
+  height: 400px;
   overflow: scroll;
 }
 
@@ -579,6 +581,7 @@
 .favouriteContent {
   display: flex;
   flex-direction: column;
+  /* margin-bottom: 20px; */
 }
 
 .profileContents {
@@ -601,4 +604,8 @@
   flex: 1;
   width: 90%;
   margin: 10px;
+}
+
+.itinerariesContainer {
+  margin-bottom: 20px;
 }

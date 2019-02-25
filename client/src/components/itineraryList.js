@@ -24,12 +24,20 @@ class ItineraryList extends Component {
 
   componentDidMount() {
     this.fetchEverything();
+    console.log("this.props.itineraries", this.props.itineraries);
+
+    if (this.props.itineraries.length > 0) {
+      this.setState({ itinerariesPresent: true });
+    } else {
+      this.setState({ itinerariesPresent: false });
+    }
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      city: ""
+      city: "",
+      itinerariesPresent: false
     };
   }
 
@@ -38,13 +46,37 @@ class ItineraryList extends Component {
       <div>
         <h3>{this.state.city}</h3>
         <h3>Available MYitenaries</h3>
-        {this.props.itineraries.map(itinerary => (
+        {this.state.itinerariesPresent ? (
+          <div className="itinerariesContainer">
+            {" "}
+            {this.props.itineraries.map(itinerary => (
+              <Itinerary
+                key={itinerary._id}
+                profile={this.props.user}
+                itinerary={itinerary}
+              />
+            ))}
+          </div>
+        ) : (
+          <div>
+            Oops this city does not yet have any itineraries available!{" "}
+            <span
+              role="img"
+              aria-label="smiling face with open mouth and cold sweat"
+            >
+              😅{" "}
+            </span>
+            Try another city!
+          </div>
+        )}
+
+        {/* {this.props.itineraries.map(itinerary => (
           <Itinerary
             key={itinerary._id}
             profile={this.props.user}
             itinerary={itinerary}
           />
-        ))}
+        ))} */}
         <NavLink to="/citiesList">Choose Another City</NavLink>
       </div>
     );
