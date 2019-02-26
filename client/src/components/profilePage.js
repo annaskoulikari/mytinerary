@@ -15,10 +15,7 @@ class ProfilePage extends Component {
         <h1>Profile</h1>
 
         <div className="profileContents">
-          {/* <img
-              alt="profile"
-              src={this.props.loggedInUser.user.profilePhoto}
-            /> */}
+          <img alt="profile" src={this.props.profile[0].profilePhoto} />
           <div className=" cardItem card border-info ">
             <div className="card-body text-info profileCard">
               <h5 className="card-title ">Name: </h5>
