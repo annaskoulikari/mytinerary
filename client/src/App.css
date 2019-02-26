@@ -610,3 +610,7 @@
 .itinerariesContainer {
   margin-bottom: 20px;
 }
+
+.profilePhoto {
+  border-radius: 50%;
+}

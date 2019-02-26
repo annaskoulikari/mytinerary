@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import AccountCircle from "@material-ui/icons/AccountCircle";
 import { getProfile } from "../actions/profileActions";
 
 class ProfilePage extends Component {
@@ -12,10 +13,23 @@ class ProfilePage extends Component {
   render() {
     return (
       <div className="container">
-        <h1>Profile</h1>
+        <h1 style={{ fontSize: "20px" }}>Profile</h1>
 
         <div className="profileContents">
-          <img alt="profile" src={this.props.profile[0].profilePhoto} />
+          {this.props.profile[0].profilePhoto != null ? (
+            <div>
+              <img
+                className="profilePhoto"
+                alt="profile"
+                src={this.props.profile[0].profilePhoto}
+              />
+            </div>
+          ) : (
+            <div>
+              <AccountCircle style={{ fontSize: 100 }} />
+            </div>
+          )}
+
           <div className=" cardItem card border-info ">
             <div className="card-body text-info profileCard">
               <h5 className="card-title ">Name: </h5>

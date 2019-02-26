@@ -22,8 +22,10 @@ passport.use(
           let user = currentUser;
           done(null, user);
         } else {
+          var profilePhoto = profile.photos[0].value;
+          var profilePhotoEnlarged = profilePhoto.replace("sz=50", "sz=150");
           new Account({
-            profilePhoto: profile.photos[0].value,
+            profilePhoto: profilePhotoEnlarged,
             userName: profile.displayName,
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
@@ -49,7 +51,7 @@ passport.use(
       clientSecret: process.env.clientSecretFB
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log("this is profile", profile);
+      console.log("this is profile from facebook", profile);
       Account.findOne({ email: profile.emails[0].value }).then(currentUser => {
         if (currentUser) {
           console.log("user is", currentUser);
@@ -57,6 +59,7 @@ passport.use(
           done(null, user);
         } else {
           new Account({
+            profilePhoto: profile.photos[0].value,
             userName: profile.displayName,
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
