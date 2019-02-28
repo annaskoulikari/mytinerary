@@ -173,14 +173,12 @@ class Menu extends React.Component {
   render() {
     return (
       <div>
-        <br />
-
         <IconButton
           aria-label="More"
           aria-haspopup="true"
           onClick={this.handleClickOpen}
         >
-          <MenuIcon />
+          <MenuIcon style={{ fontSize: 36, color: "#484848" }} />
         </IconButton>
         <MenuWrapped
           open={this.state.open}

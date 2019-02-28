@@ -25,31 +25,27 @@ class Header extends Component {
   render() {
     const style = {
       width: 96,
-      height: 96
+      height: 96,
+      fontSize: 36
     };
 
     return (
-      <React.Fragment>
+      <div className="headerContainer">
         <div className="header">
           <div className="profile">
             <NavLink to="/profilePage">
               {this.state.isLoggedIn ? (
-                <IconButton style={style}>
-                  <AccountCircle />
-                </IconButton>
+                <AccountCircle style={{ fontSize: 36, color: "#484848" }} />
               ) : (
-                <IconButton style={style} disabled={true}>
-                  <AccountCircle />
-                </IconButton>
+                <AccountCircle style={{ fontSize: 36, color: "#D8D8D8" }} />
               )}
             </NavLink>
           </div>
           <div className="menu">
             <Menu />
           </div>
-          <div />
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }

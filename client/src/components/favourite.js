@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getFavourites } from "../actions/favouriteActions";
 import { getProfile } from "../actions/profileActions";
 import PropTypes from "prop-types";
-import Header from "./header";
+
 import Itinerary from "./itinerary";
 import { fetchActivities } from "../actions/activityActions";
 import { postComment } from "../actions/commentActions";
@@ -47,7 +47,6 @@ class Favourite extends Component {
   render() {
     return (
       <div className="container" style={{ marginBottom: "40px" }}>
-        <Header />
         <h1>Favourites</h1>
         <div className="favouriteContent">
           {!this.state.isLoggedIn ? (

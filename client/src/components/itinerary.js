@@ -24,6 +24,11 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 
+import ThumbUp from "@material-ui/icons/ThumbUp";
+import AccessTime from "@material-ui/icons/AccessTime";
+
+import Down from "@material-ui/icons/KeyboardArrowDown";
+import Up from "@material-ui/icons/KeyboardArrowUp";
 import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import Close from "@material-ui/icons/Close";
@@ -230,89 +235,137 @@ class Itinerary extends Component {
             </Dialog>
           </div>
         )}
-
-        <Card>
-          <CardContent>
-            <div className="card">
-              <div className="horizontal cardContainer">
-                <div className="card-content cardImage">
-                  <div className="card-image">
-                    <img
-                      className="responsive-img circle itineraryImage"
-                      src={this.props.itinerary.itineraryImage}
-                      alt="profile"
-                    />
-                  </div>
-                  <p>{this.props.itinerary.profileName}</p>
-                </div>
-
-                <div className="card-content cardInfo">
-                  <div className="itineraryHeader">
-                    <span className="card-title itineraryTitle">
-                      {this.props.itinerary.title}
-                    </span>
-                    <div>
-                      {this.state.itineraryAsFavourite ? (
-                        <div className="likeFavourite">
-                          {this.state.liked ? (
-                            <Favorite onClick={this.openModal} />
-                          ) : (
-                            <FavoriteBorder onClick={this.openModal} />
-                          )}
-                        </div>
-                      ) : !this.state.isLoggedIn ? (
-                        <IconButton color="primary" onClick={this.openModal}>
-                          <Favorite />
-                        </IconButton>
-                      ) : (
-                        <div
-                          onClick={e =>
-                            this.addToFavourite(this.props.itinerary._id, e)
-                          }
-                          className="btn-floating pink itineraryLike"
-                        >
-                          {this.state.liked ? <Favorite /> : <FavoriteBorder />}
-                        </div>
-                      )}
+        <div style={{ marginTop: 20 }}>
+          <Card
+            style={{
+              boxShadow:
+                "0px 4px 6px 0px rgba(0,0,0,0.2), 0px 4px 4px 0px rgba(0,0,0,0.14), 0px 6px 4px -4px rgba(0,0,0,0.12)"
+            }}
+          >
+            <CardContent>
+              <div className="card">
+                <div className="horizontal cardContainer">
+                  <div className="card-content cardImage">
+                    <div className="card-image">
+                      <img
+                        className="responsive-img circle itineraryImage"
+                        src={this.props.itinerary.itineraryImage}
+                        alt="profile"
+                      />
                     </div>
+                    <p
+                      style={{
+                        fontFamily: "Roboto",
+                        color: "#484848",
+                        fontWeight: "bolder",
+                        fontStyle: "italic",
+                        marginTop: 10
+                      }}
+                    >
+                      {this.props.itinerary.profileName}
+                    </p>
                   </div>
 
-                  <div className="itineraryInfo">
-                    <div className="itineraryLikes">
-                      Likes: {this.props.itinerary.likes}
-                    </div>
-                    <div className="itineraryHours">
-                      {this.props.itinerary.hours} Hours
-                    </div>
-                    <div className="itineraryExpense">
-                      {this.props.itinerary.expense}
-                    </div>
-                  </div>
-                  <div className="itineraryHashtags">
-                    {this.props.itinerary.hashtags.map((hashtag, index) => (
-                      <div key={index} className="itineraryHashtag">
-                        {hashtag}
+                  <div className="card-content cardInfo">
+                    <div className="itineraryHeader">
+                      <span className="card-title itineraryTitle">
+                        {this.props.itinerary.title}
+                      </span>
+                      <div>
+                        {this.state.itineraryAsFavourite ? (
+                          <div className="likeFavourite">
+                            {this.state.liked ? (
+                              <Favorite
+                                onClick={this.openModal}
+                                style={{ color: "#FF5B5E" }}
+                              />
+                            ) : (
+                              <FavoriteBorder onClick={this.openModal} />
+                            )}
+                          </div>
+                        ) : !this.state.isLoggedIn ? (
+                          <IconButton color="primary" onClick={this.openModal}>
+                            <Favorite style={{ color: "#D8D8D8" }} />
+                          </IconButton>
+                        ) : (
+                          <div
+                            onClick={e =>
+                              this.addToFavourite(this.props.itinerary._id, e)
+                            }
+                            className="btn-floating pink itineraryLike"
+                          >
+                            {this.state.liked ? (
+                              <Favorite style={{ color: "#FF5B5E" }} />
+                            ) : (
+                              <FavoriteBorder />
+                            )}
+                          </div>
+                        )}
                       </div>
-                    ))}
+                    </div>
+
+                    <div className="itineraryInfo">
+                      <div className="itineraryLikes">
+                        <ThumbUp
+                          style={{
+                            fontSize: 18,
+                            color: "#5C5B5B",
+                            marginRight: 5
+                          }}
+                        />
+                        {this.props.itinerary.likes}
+                      </div>
+                      <div className="itineraryHours">
+                        <AccessTime
+                          style={{
+                            fontSize: 18,
+                            color: "#5C5B5B",
+                            marginRight: 5
+                          }}
+                        />
+                        {this.props.itinerary.hours} hr
+                      </div>
+                      <div
+                        className="itineraryExpense"
+                        style={{ color: "#5C5B5B" }}
+                      >
+                        {this.props.itinerary.expense}
+                      </div>
+                    </div>
+                    <div className="itineraryHashtags">
+                      {this.props.itinerary.hashtags.map((hashtag, index) => (
+                        <div key={index} className="itineraryHashtag">
+                          {hashtag}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            {this.state.showActivity ? (
-              <ActivityTrial property={this.props.itinerary._id} />
-            ) : null}
-          </CardContent>
-          <CardActions style={style}>
-            <div className="cardAction">
+              {this.state.showActivity ? (
+                <ActivityTrial property={this.props.itinerary._id} />
+              ) : null}
+            </CardContent>
+            <CardActions style={{ justifyContent: "center" }}>
               <button
+                style={{ backgroundColor: "#ff5b5e", borderColor: "#ff5b5e" }}
+                className="btn btn-secondary cardAction"
                 id={this.props.itinerary._id}
                 onClick={e => this.handleToggle(e)}
               >
-                {this.state.showActivity ? "Close" : "View All"}
+                {this.state.showActivity ? (
+                  <div className="center">
+                    <span>Close</span> <Up />
+                  </div>
+                ) : (
+                  <div className="center">
+                    <span>View All</span> <Down />
+                  </div>
+                )}
               </button>
-            </div>
-          </CardActions>
-        </Card>
+            </CardActions>
+          </Card>
+        </div>
       </div>
     );
   }

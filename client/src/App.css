@@ -37,7 +37,7 @@
   display: flex;
   justify-content: center;
   margin: 10px;
-  margin-top: 30px;
+  margin-top: 90px;
 }
 
 .landingPageText {
@@ -46,7 +46,8 @@
   text-align: center;
 
   padding: 20px;
-  font-size: 25px;
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
 }
 
 .landingPageContents {
@@ -104,6 +105,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
 .bottomBar {
@@ -112,6 +114,9 @@
   width: 100%;
   display: block;
   background: white;
+  height: 60px;
+  border-top: 1px solid #d8d8d8;
+  z-index: 2;
 }
 
 .accountLogo {
@@ -125,20 +130,31 @@
 .header {
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #d8d8d8;
+  margin-bottom: 10px;
+}
+
+.headerContainer {
+  display: block;
+  background: white;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
 }
 
 .profile {
   flex: 1;
   display: flex;
   justify-content: flex-start;
-  margin: 10px;
+  padding: 12px;
+  background: white;
 }
 
 .menu {
   flex: 1;
   display: flex;
   justify-content: flex-end;
-  margin: 10px;
+  background: white;
 }
 
 /* Position and sizing of burger button */
@@ -224,77 +240,6 @@
   flex: 1;
 }
 
-/* .itineraryContainer {
-  border: solid;
-  display: flex;
-  flex-direction: column;
-}
-
-.itineraryFirstRow {
-  order: 1;
-  display: flex;
-}
-
-.itinerarySecondRow {
-  order: 2;
-  display: flex;
-}
-
-.profileName {
-  flex: 1;
-}
-
-.itineraryHashtags {
-  flex: 1;
-}
-
-.itineraryThirdRow {
-  order: 3;
-}
-
-.profilePhoto {
-  flex: 1;
-  border: solid;
-}
-
-.itineraryInfo {
-  flex: 4;
-  border: solid;
-  display: flex;
-  flex-direction: column;
-}
-
-.itineraryTitle {
-  flex: 1;
-}
-
-.itineraryDetails {
-  flex: 1;
-  display: flex;
-}
-
-.itineraryLikes {
-  flex: 1;
-}
-
-.itineraryDuration {
-  flex: 1;
-}
-
-.itineraryExpense {
-  flex: 1;
-} */
-
-/* h3 {
-  background: blue;
-  color: #fff;
-  font-size: 36px;
-  line-height: 100px;
-  margin: 10px;
-  padding: 2%;
-  position: relative;
-  text-align: center;
-} */
 .variable-width .slick-slide p {
   background: blue;
   height: 100px;
@@ -464,15 +409,25 @@
 .itineraryHours,
 .itineraryExpense {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .itineraryHashtags {
   display: flex;
   flex: 1;
+  justify-content: space-evenly;
+  font-family: "Roboto", sans-serif;
+  color: #484848;
+  font-weight: lighter;
 }
 
 .itineraryHashtag {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .itineraryHeader {
   display: flex;
@@ -481,6 +436,14 @@
 
 .itineraryTitle {
   flex: 4;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  color: #484848;
+  margin-bottom: 0;
+  font-size: 14pt;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .itineraryLike {
@@ -503,7 +466,7 @@
 }
 
 .cardAction {
-  justify-content: center;
+  width: 100%;
 }
 
 .commentMaterial {
@@ -572,7 +535,7 @@
 }
 
 .cityList {
-  height: 400px;
+  height: 500px;
   overflow: scroll;
 }
 
@@ -634,4 +597,36 @@
 
   padding: 35px;
   border: solid;
+}
+.active {
+  color: #484848;
+}
+
+.inactive {
+  color: #484848;
+}
+
+.btn-primary {
+  background-color: #008489;
+  border-color: #008489;
+}
+
+.card {
+  border: none;
+}
+
+.itineraryListContainer {
+  margin-bottom: 40px;
+  z-index: 1;
+}
+
+/* .btn-secondary {
+  background-color: #ff5b5e;
+  border-color: #ff5b5e;
+} */
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

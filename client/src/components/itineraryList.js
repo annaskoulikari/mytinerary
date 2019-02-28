@@ -7,6 +7,7 @@ import { fetchActivities } from "../actions/activityActions";
 import { postComment } from "../actions/commentActions";
 import { NavLink } from "react-router-dom";
 import { getFavourites } from "../actions/favouriteActions";
+import Header from "./header";
 
 class ItineraryList extends Component {
   async fetchEverything() {
@@ -44,33 +45,36 @@ class ItineraryList extends Component {
   render() {
     return (
       <div>
-        <h3>{this.state.city}</h3>
-        <h3>Available MYitenaries</h3>
-        {this.state.itinerariesPresent ? (
-          <div className="itinerariesContainer">
-            {" "}
-            {this.props.itineraries.map(itinerary => (
-              <Itinerary
-                key={itinerary._id}
-                profile={this.props.user}
-                itinerary={itinerary}
-              />
-            ))}
-          </div>
-        ) : (
-          <div>
-            Oops this city does not yet have any itineraries available!{" "}
-            <span
-              role="img"
-              aria-label="smiling face with open mouth and cold sweat"
-            >
-              😅{" "}
-            </span>
-            Try another city!
-          </div>
-        )}
+        <Header />
+        <div className="container itineraryListContainer">
+          <h3>{this.state.city}</h3>
+          <h3>Available MYitenaries</h3>
+          {this.state.itinerariesPresent ? (
+            <div className="itinerariesContainer">
+              {" "}
+              {this.props.itineraries.map(itinerary => (
+                <Itinerary
+                  key={itinerary._id}
+                  profile={this.props.user}
+                  itinerary={itinerary}
+                />
+              ))}
+            </div>
+          ) : (
+            <div>
+              Oops this city does not yet have any itineraries available!{" "}
+              <span
+                role="img"
+                aria-label="smiling face with open mouth and cold sweat"
+              >
+                😅{" "}
+              </span>
+              Try another city!
+            </div>
+          )}
 
-        <NavLink to="/citiesList">Choose Another City</NavLink>
+          <NavLink to="/citiesList">Choose Another City</NavLink>
+        </div>
       </div>
     );
   }

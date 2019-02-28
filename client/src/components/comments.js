@@ -78,6 +78,7 @@ class Comments extends Component {
                 <Send
                   className="sendButton"
                   onClick={e => this.handleSubmit(e)}
+                  style={{ color: "#484848" }}
                 />
               </div>
             </form>

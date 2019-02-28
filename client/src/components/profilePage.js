@@ -12,7 +12,7 @@ class ProfilePage extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <h1 style={{ fontSize: "20px" }}>Profile</h1>
 
         <div className="profileContents">

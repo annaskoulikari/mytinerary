@@ -4,20 +4,9 @@ import { getProfile } from "../actions/profileActions";
 import { getFavourites } from "../actions/favouriteActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import Header from "./header";
 
 class FavouritesContainer extends Component {
-  // constructor(props){
-  //     super(props)
-  // }
-
-  //  getProfile = () =>  {
-  //     this.props.getProfile()
-  // }
-
-  //   getFavourites = user => {
-  //     this.props.getFavourites(user);
-  //   };
-
   getProfileAndFavourites = callback => {
     this.props.getProfile();
     var user = this.props.profile;
@@ -36,6 +25,7 @@ class FavouritesContainer extends Component {
   render() {
     return (
       <div>
+        <Header />
         <Favourite
           profile={this.props.profile[0]}
           favourites={this.props.favourites}
