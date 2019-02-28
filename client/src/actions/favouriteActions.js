@@ -1,4 +1,4 @@
-import { GET_FAVOURITES, ADD_TO_FAVOURITES } from "./types";
+import { GET_FAVOURITES } from "./types";
 import axios from "axios";
 
 export const addToFavourites = (itineraryFavourite, user) => dispatch => {

@@ -11,14 +11,7 @@ export default function(state = initialState, action) {
       console.log("reducer");
       return {
         ...state,
-        account: {
-          userName: action.userName,
-          password: action.password,
-          email: action.email,
-          firstName: action.firstName,
-          lastName: action.lastName,
-          country: action.country
-        }
+        account: action.payload
       };
     case ACCOUNT_EXISTS:
       console.log("reducer");

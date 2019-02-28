@@ -8,6 +8,7 @@ var routerLogin = require("./routes/loginRoute");
 var routerAuth = require("./routes/authRoute");
 var routerAuth2 = require("./routes/authRoute2");
 var routerProfile = require("./routes/profileRoute");
+var routerPhoto = require("./routes/photoRoute");
 var passportSetup = require("./config/passport-setup");
 
 var favouriteRoute = require("./routes/favouriteRoute");
@@ -97,6 +98,7 @@ app.set("io", io);
 console.log("this is app", app.io);
 
 app.use(express.static("uploads"));
+app.use("/uploads", express.static("uploads"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -173,7 +175,7 @@ app.use("/testAccount", routerAccount);
 app.use("/testLogin", routerLogin);
 app.use("/testProfile", routerProfile);
 app.use("/auth", routerAuth);
-
+app.use("/testUpload", routerPhoto);
 app.use("/favourite", favouriteRoute);
 
 // app.use

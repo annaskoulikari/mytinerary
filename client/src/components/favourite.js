@@ -29,10 +29,10 @@ class Favourite extends Component {
   }
 
   componentDidMount() {
-    this.fetchEverything();
     let user = localStorage.getItem("user");
     if (user) {
       this.setState({ isLoggedIn: true });
+      this.fetchEverything();
     } else {
       this.setState({ isLoggedIn: false });
     }

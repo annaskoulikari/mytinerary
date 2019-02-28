@@ -27,14 +27,14 @@ class SignupPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // selectedFile: null,
+      selectedFile: null,
       submitReady: false,
       userName: null,
       password: null,
       email: null,
       firstName: null,
       lastName: null,
-      country: null,
+      country: "Choose Your Country",
       formErrors: {
         userName: "",
         password: "",
@@ -50,10 +50,15 @@ class SignupPage extends Component {
   }
 
   componentDidMount() {
+    this.setState({ country: "Choose Your Country" });
     this.props.fetchCountries();
-    console.log(this.props.countries);
-    console.log(this.props);
   }
+
+  handleSelectedFile = event => {
+    console.log("this is event", event);
+    console.log("selectedfile", event.target.files[0]);
+    this.setState({ selectedFile: event.target.files[0] });
+  };
 
   handleSubmit = e => {
     e.preventDefault();
@@ -70,24 +75,39 @@ class SignupPage extends Component {
     }
 
     if (formValid(this.state)) {
-      const userName = this.state.userName;
-      const password = this.state.password;
-      const email = this.state.email;
-      const firstName = this.state.firstName;
-      const lastName = this.state.lastName;
-      const country = this.state.country;
+      let formData = new FormData();
 
-      this.props.createAccount(
-        userName,
-        password,
-        email,
-        firstName,
-        lastName,
-        country
-      );
+      // const userName = this.state.userName;
+      // const password = this.state.password;
+      // const email = this.state.email;
+      // const firstName = this.state.firstName;
+      // const lastName = this.state.lastName;
+      // const country = this.state.country;
+      // console.log(
+      //   "this should be this.state.selectedFile",
+      //   this.state.selectedFile
+      // );
+
+      formData.append("file", this.state.selectedFile);
+      formData.append("userName", this.state.userName);
+      formData.append("password", this.state.password);
+      formData.append("email", this.state.email);
+      formData.append("firstName", this.state.firstName);
+      formData.append("lastName", this.state.lastName);
+      formData.append("country", this.state.country);
+
+      //console.log("this is fd", { fd });
+
+      this.props.createAccount(formData);
+
+      // axios
+      //   .post("/testAccount/accounts", fd)
+      //   .then(res => console.log(res))
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
     }
     this.props.history.push("/");
-    // console.log(this.props.message);
   };
 
   handleSubmitButtonChange = e => {
@@ -137,55 +157,34 @@ class SignupPage extends Component {
     this.setState({ formErrors, [name]: value }, () => console.log(this.state));
   };
 
-  handleSelectedFile = event => {
-    console.log("selectedfile", event.target.files[0]);
-    this.setState({ selectedFile: event.target.files[0] });
-  };
-
-  handleUpload = () => {
-    const data = new FormData();
-    data.append("file", this.state.selectedFile, this.state.selectedFile.name);
-    axios
-      .post("https://localhost:5000/uploads", data)
-      .then(res => console.log("this is after uploading file res", res));
-  };
-
   render() {
     const { formErrors } = this.state;
 
     return (
       <div style={{ marginBottom: "50px" }}>
         <Header />
-        <h1> Create Account</h1>
-
-        {/* <form>
-          <label>
-            Upload file:
-            <input
-              type="file"
-              ref={this.fileInput}
-              onChange={this.handleSelectedFile}
-            />
-          </label>
-          <br />
-          <button onClick={this.handleUpload}>Submit</button>
-        </form> */}
+        <h1 style={{ fontSize: "20px" }}> Create Account</h1>
 
         <form
           onChange={this.handleSubmitButtonChange}
           onSubmit={this.handleSubmit}
         >
-          {/* <div>
-            <label>Profile Photo:</label>
-            <input
-              type="file"
-              name="file"
-              id="file"
-              class="custom-file-input"
-              onChange={this.fileSelectedHandler}
-            />
-          </div> */}
+          <label className="profileImageUpload" for="file">
+            <div className="box"> Add Photo </div>{" "}
+          </label>
+          <input
+            // style={{ display: "none" }}
+            id="file"
+            name="file"
+            type="file"
+            onChange={this.handleSelectedFile}
+          />
 
+          {/* <label >
+            Add Photo
+            <input name="file" type="file" onChange={this.handleSelectedFile} />
+          </label> */}
+          <br />
           <div className="userName form-Group input">
             <label
               className="form-label"
@@ -303,9 +302,10 @@ class SignupPage extends Component {
               onChange={this.handleChange}
               required
               style={{ flex: 2 }}
+              value={this.state.country}
             >
-              <option value="" disabled selected>
-                Choose your Country{" "}
+              <option value="Choose Your Country" disabled>
+                Choose Your Country{" "}
               </option>
               {this.props.countries.map(country => (
                 <option key={country._id} value={country.country}>
@@ -321,7 +321,7 @@ class SignupPage extends Component {
               I agree to MYtinerary's Terms &amp; Conditions
             </label>
           </div>
-          <div style={{ margin: "30px" }}>
+          <div style={{ marginBottom: "80px", marginTop: "20px" }}>
             <button
               className={
                 this.state.submitReady

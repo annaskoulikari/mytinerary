@@ -70,13 +70,6 @@ class ItineraryList extends Component {
           </div>
         )}
 
-        {/* {this.props.itineraries.map(itinerary => (
-          <Itinerary
-            key={itinerary._id}
-            profile={this.props.user}
-            itinerary={itinerary}
-          />
-        ))} */}
         <NavLink to="/citiesList">Choose Another City</NavLink>
       </div>
     );

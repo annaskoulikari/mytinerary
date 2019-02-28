@@ -26,7 +26,14 @@ class CitiesList extends Component {
   }
 
   render() {
-    const filteredCities = this.props.cities.filter(city => {
+    const citiesAlphabetical = this.props.cities.sort(function(a, b) {
+      var textA = a.name.toLowerCase();
+      var textB = b.name.toLowerCase();
+      return textA < textB ? -1 : textA > textB ? 1 : 0;
+    });
+    console.log("citiesAlphabetical", citiesAlphabetical);
+
+    const filteredCities = citiesAlphabetical.filter(city => {
       return (
         city.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
       );

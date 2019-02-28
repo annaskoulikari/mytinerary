@@ -2,35 +2,19 @@ import { CREATE_ACCOUNT } from "./types";
 
 import axios from "axios";
 
-export const createAccount = (
-  userName,
-  password,
-  email,
-  firstName,
-  lastName,
-  country
-) => {
-  console.log("adding account");
+export const createAccount = formData => dispatch => {
+  console.log(formData);
   axios
-    .post(`/testAccount/accounts`, {
-      userName,
-      password,
-      email,
-      firstName,
-      lastName,
-      country
-    })
+    .post(`/testAccount/accounts`, formData)
     .then(res => {
       console.log(res);
       console.log(res.data);
+      dispatch({
+        type: CREATE_ACCOUNT,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
     });
-  return {
-    type: CREATE_ACCOUNT,
-    userName,
-    password,
-    email,
-    firstName,
-    lastName,
-    country
-  };
 };
