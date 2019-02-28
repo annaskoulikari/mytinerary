@@ -496,8 +496,10 @@
 }
 
 .itineraryImage {
+  object-fit: cover;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
-  max-height: 75px;
 }
 
 .cardAction {
@@ -612,6 +614,9 @@
 }
 
 .profilePhoto {
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
 }
 
