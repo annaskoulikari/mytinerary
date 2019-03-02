@@ -72,8 +72,23 @@ class ItineraryList extends Component {
               Try another city!
             </div>
           )}
-
-          <NavLink to="/citiesList">Choose Another City</NavLink>
+          {/* 
+          <NavLink to="/citiesList">Choose Another City</NavLink> */}
+          <NavLink to="/citiesList">
+            <button
+              style={{
+                borderColor: "#ff5b5e",
+                color: "#ff5b5e",
+                width: "75%",
+                paddingTop: 10,
+                paddingBottom: 10,
+                fontWeight: "bold"
+              }}
+              className="btn btn-outline-primary"
+            >
+              Choose Another City
+            </button>
+          </NavLink>
         </div>
       </div>
     );

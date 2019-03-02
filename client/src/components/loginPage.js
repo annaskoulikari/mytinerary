@@ -157,7 +157,7 @@ class LoginPage extends Component {
                 render={renderProps => (
                   <button
                     onClick={renderProps.onClick}
-                    className="btn btn-danger google "
+                    className="btn btn-primary google "
                   >
                     <div>
                       <img

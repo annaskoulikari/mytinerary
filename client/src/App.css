@@ -667,6 +667,11 @@
   color: #484848;
 }
 
+.btn-primary:hover {
+  background-color: white;
+  color: #484848;
+}
+
 .facebook {
   background-color: #4c69ba;
   border-color: #4c69ba;

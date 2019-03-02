@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import { getProfile } from "../actions/profileActions";
-import { FormHelperText } from "@material-ui/core";
 
 class LandingPage extends Component {
   componentDidMount() {
@@ -46,7 +45,11 @@ class LandingPage extends Component {
                 <div className="startBrowsingContents">
                   <div>
                     <div
-                      style={{ display: "flex", justifyContent: "flex-start" }}
+                      style={{
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        color: "#ff5b5e"
+                      }}
                     >
                       Start Browsing
                     </div>
