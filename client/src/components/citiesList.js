@@ -55,38 +55,51 @@ class CitiesList extends Component {
     return (
       <div>
         <Header />
-        <div style={{ marginLeft: 40, marginBottom: 30 }}>
-          <div style={{ textAlign: "left", marginBottom: 5 }}>
-            Filter our current cities
+        <div style={{ marginTop: 70 }}>
+          <div style={{ marginLeft: 40, marginBottom: 30 }}>
+            <div
+              style={{
+                textAlign: "left",
+                marginBottom: 5,
+                fontFmaily: "Roboto",
+                color: "#484848"
+              }}
+            >
+              Filter our current cities
+            </div>
+            <Paper style={root} elevation={1}>
+              <InputBase
+                style={input}
+                onChange={this.updateSearch.bind(this)}
+              />
+            </Paper>
           </div>
-          <Paper style={root} elevation={1}>
-            <InputBase style={input} onChange={this.updateSearch.bind(this)} />
-          </Paper>
-        </div>
-        <div className="cityList">
-          <div className="list-group ">
-            {filteredCities.map(city => (
-              <div
-                className="list-group-item list-group-item-action"
-                key={city._id}
-              >
-                <NavLink to={"/itinerary/" + city.name}>
-                  <div style={{ display: "flex", paddingLeft: "30px" }}>
-                    <div style={{ fontSize: "30px" }}>{city.flag}</div>
-                    <div
-                      style={{
-                        fontSize: "30px",
-                        paddingLeft: "30px",
-                        color: "black"
-                      }}
-                    >
-                      {" "}
-                      {city.name}
+          <div className="cityList">
+            <div className="list-group ">
+              {filteredCities.map(city => (
+                <div
+                  className="list-group-item list-group-item-action"
+                  key={city._id}
+                >
+                  <NavLink to={"/itinerary/" + city.name}>
+                    <div style={{ display: "flex", paddingLeft: "30px" }}>
+                      <div style={{ fontSize: "30px" }}>{city.flag}</div>
+                      <div
+                        style={{
+                          fontSize: "30px",
+                          paddingLeft: "30px",
+                          color: "#484848",
+                          fontFamily: "Roboto"
+                        }}
+                      >
+                        {" "}
+                        {city.name}
+                      </div>
                     </div>
-                  </div>
-                </NavLink>
-              </div>
-            ))}
+                  </NavLink>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

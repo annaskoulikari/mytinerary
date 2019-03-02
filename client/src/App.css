@@ -48,6 +48,8 @@
   padding: 20px;
   font-size: 20px;
   font-family: "Roboto", sans-serif;
+  color: #484848;
+  font-weight: lighter;
 }
 
 .landingPageContents {
@@ -76,10 +78,16 @@
 
 .signUpText {
   text-align: center;
+  font-family: "Roboto", sans-serif;
+  color: #484848;
+  font-weight: lighter;
+  margin: 20px;
+  margin-top: 50px;
 }
 
 .signUpOptions {
   display: flex;
+  flex-direction: column;
 }
 
 .loginOption {
@@ -87,6 +95,16 @@
   justify-content: center;
   flex: 1;
   margin: 10px;
+}
+
+.loginOptionContainer {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.signupOptionContainer {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .createAccountOption {
@@ -140,6 +158,7 @@
   position: fixed;
   width: 100%;
   z-index: 2;
+  top: 0;
 }
 
 .profile {
@@ -524,16 +543,6 @@
   margin: 10px;
 }
 
-.googleButton {
-  margin: 20px;
-  width: 80%;
-}
-
-.facebookButton {
-  margin: 20px;
-  width: 80%;
-}
-
 .cityList {
   height: 500px;
   overflow: scroll;
@@ -542,6 +551,12 @@
 .noLoginFavourites {
   font-size: 20px;
   margin: 20px;
+  margin-top: 40px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .favouriteContent {
@@ -559,6 +574,7 @@
 
 .profileCard {
   display: flex;
+  border-bottom: 1px solid #d8d8d8;
 }
 
 .cardText {
@@ -589,14 +605,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
 
 .profileImageUpload {
   border-radius: 50%;
-
-  padding: 35px;
-  border: solid;
+  padding: 20px;
+  border: 2px solid #d8d8d8;
+  color: #484848;
+  font-weight: bold;
+  font-size: 10;
 }
 .active {
   color: #484848;
@@ -611,6 +628,11 @@
   border-color: #008489;
 }
 
+.btn-outline-primary {
+  color: #008489;
+  border-color: #008489;
+}
+
 .card {
   border: none;
 }
@@ -620,13 +642,100 @@
   z-index: 1;
 }
 
-/* .btn-secondary {
-  background-color: #ff5b5e;
-  border-color: #ff5b5e;
-} */
-
 .center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.profileText {
+  color: #484848;
+  font-family: "Roboto", sans-serif;
+}
+
+.loginButtons {
+  font-family: "Roboto", sans-serif;
+}
+
+.google {
+  background-color: white;
+  border-color: #484848;
+  width: 70%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+  color: #484848;
+}
+
+.facebook {
+  background-color: #4c69ba;
+  border-color: #4c69ba;
+  width: 70%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.facebookButton {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.googleButton {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.createAccount {
+  font-weight: bold;
+  width: 70%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.createAccountButton {
+  display: flex;
+  justify-content: center;
+
+  margin: 6px;
+}
+
+.roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+.form-label {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  color: #484848;
+}
+
+.startBrowsingContainer {
+  display: flex;
+
+  justify-content: center;
+}
+
+.startBrowsingContents {
+  display: flex;
+  width: 75%;
+  justify-content: space-between;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  padding-right: 36px;
+  padding-left: 36px;
+  border: 1px solid #d8d8d8;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px;
+  font-family: "Roboto", sans-serif;
+  color: #484848;
+  font-size: 18px;
+  font-weight: bold;
 }

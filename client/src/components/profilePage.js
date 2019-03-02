@@ -13,7 +13,11 @@ class ProfilePage extends Component {
   render() {
     return (
       <div>
-        <h1 style={{ fontSize: "20px" }}>Profile</h1>
+        <h1
+          style={{ fontSize: "20px", color: "#484848", fontFamily: "Roboto" }}
+        >
+          Profile
+        </h1>
 
         <div className="profileContents">
           {this.props.profile[0].profilePhoto != null ? (
@@ -32,17 +36,51 @@ class ProfilePage extends Component {
 
           <div className=" cardItem card border-info ">
             <div className="card-body text-info profileCard">
-              <h5 className="card-title ">Name: </h5>
-              <p className="card-text cardText">
-                {this.props.profile[0].firstName}
+              <h5
+                className="card-title "
+                style={{
+                  fontFmaily: "Roboto",
+                  color: "#484848",
+                  fontWeight: 300
+                }}
+              >
+                Name:{" "}
+              </h5>
+              <p
+                className="card-text cardText"
+                style={{
+                  fontFmaily: "Roboto",
+                  color: "#484848",
+                  fontWeight: "bold"
+                }}
+              >
+                {this.props.profile[0].firstName +
+                  " " +
+                  this.props.profile[0].lastName}
               </p>
             </div>
           </div>
           <div />
           <div className=" cardItem card border-info ">
             <div className="card-body text-info profileCard">
-              <h5 className="card-title ">Email: </h5>
-              <p className="card-text cardText">
+              <h5
+                className="card-title "
+                style={{
+                  fontFmaily: "Roboto",
+                  color: "#484848",
+                  fontWeight: 300
+                }}
+              >
+                Email:{" "}
+              </h5>
+              <p
+                className="card-text cardText"
+                style={{
+                  fontFmaily: "Roboto",
+                  color: "#484848",
+                  fontWeight: 300
+                }}
+              >
                 {this.props.profile[0].email}
               </p>
             </div>

@@ -46,7 +46,10 @@ class Favourite extends Component {
   }
   render() {
     return (
-      <div className="container" style={{ marginBottom: "40px" }}>
+      <div
+        className="container"
+        style={{ marginBottom: "70px", marginTop: "70px" }}
+      >
         <h1>Favourites</h1>
         <div className="favouriteContent">
           {!this.state.isLoggedIn ? (

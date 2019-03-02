@@ -26,19 +26,23 @@ class ProfilePageContainer extends Component {
   componentDidMount() {
     if (localStorage.getItem("user") != null) {
       this.setState({ isLoggedIn: true });
+      this.props.getProfile();
     }
-    this.props.getProfile();
-    console.log(this.props.profile[0]);
   }
 
   render() {
     return (
       <div>
         <Header />
-        <div className="container" style={{ marginBottom: "60px" }}>
+        <div
+          className="container"
+          style={{
+            marginBottom: "60px",
+            zIndex: 2
+          }}
+        >
           {this.state.isLoggedIn ? (
-            <div>
-              {" "}
+            <div style={{ marginTop: "70px" }}>
               {this.props.profile.map(profile => (
                 <ProfilePage key={profile._id} profile={profile} />
               ))}
@@ -47,7 +51,7 @@ class ProfilePageContainer extends Component {
                 onClick={e => this.handleClick(e)}
               >
                 Log Out
-              </div>{" "}
+              </div>
             </div>
           ) : (
             <div className="noLoginFavourites">

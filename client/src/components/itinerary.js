@@ -229,7 +229,7 @@ class Itinerary extends Component {
                   color="primary"
                   autoFocus
                 >
-                  <NavLink to="/">Go to Login</NavLink>
+                  <NavLink to="/loginPage">Go to Login</NavLink>
                 </Button>
               </DialogActions>
             </Dialog>

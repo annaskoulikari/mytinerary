@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logotest from "../MYtineraryLogo.png";
+import logotest from "../mytinerary_logo.png";
 
 import "../App.css";
 import { NavLink } from "react-router-dom";
@@ -12,11 +12,10 @@ import { FormHelperText } from "@material-ui/core";
 
 class LandingPage extends Component {
   componentDidMount() {
-    this.props.getProfile();
-
     let user = localStorage.getItem("user");
     if (user) {
       this.setState({ isLoggedIn: true });
+      this.props.getProfile();
     }
   }
   constructor(props) {
@@ -42,29 +41,70 @@ class LandingPage extends Component {
               Find your perfect trip, designed by insiders who know and love
               their cities{" "}
             </p>
-            <div className="startBrowsing">
+            <NavLink to="/citiesList">
+              <div className="startBrowsingContainer">
+                <div className="startBrowsingContents">
+                  <div>
+                    <div
+                      style={{ display: "flex", justifyContent: "flex-start" }}
+                    >
+                      Start Browsing
+                    </div>
+                    <div style={{ fontSize: 16, fontWeight: "lighter" }}>
+                      Explore all the cities
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <ChevronRight style={{ fontSize: 36 }} />
+                  </div>
+                </div>
+              </div>
+            </NavLink>
+            {/* <div className="startBrowsing">
               <p style={{ marginBottom: "none" }}>Start browsing</p>
               <NavLink to="/citiesList">
                 <ChevronRight style={{ fontSize: 70, color: "#484848" }} />
               </NavLink>
-            </div>
+            </div> */}
 
             {this.state.isLoggedIn ? null : (
               <div>
                 <p className="signUpText">Want to build your own MYtinerary?</p>
                 <div className="signUpOptions">
-                  <NavLink
-                    to="/loginPage"
-                    className="loginOption btn btn-outline-info"
-                  >
-                    Log in
-                  </NavLink>
-                  <NavLink
-                    to="/signupPage"
-                    className="createAccountOption btn btn-outline-info"
-                  >
-                    Create Account
-                  </NavLink>
+                  <div className="loginOptionContainer">
+                    <NavLink to="/loginPage">
+                      <button
+                        style={{
+                          backgroundColor: "#ff5b5e",
+                          borderColor: "#ff5b5e",
+                          width: "75%",
+                          paddingTop: 10,
+                          paddingBottom: 10,
+                          fontWeight: "bold"
+                        }}
+                        className="btn btn-secondary"
+                      >
+                        Log in
+                      </button>
+                    </NavLink>
+                  </div>
+                  <div className="signupOptionContainer">
+                    <NavLink to="/signupPage">
+                      <button
+                        style={{
+                          borderColor: "#ff5b5e",
+                          color: "#ff5b5e",
+                          width: "75%",
+                          paddingTop: 10,
+                          paddingBottom: 10,
+                          fontWeight: "bold"
+                        }}
+                        className="btn btn-outline-primary"
+                      >
+                        Create Account
+                      </button>
+                    </NavLink>
+                  </div>
                 </div>
               </div>
             )}
