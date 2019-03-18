@@ -36,9 +36,6 @@ import IconButton from "@material-ui/core/IconButton";
 
 class Itinerary extends Component {
   async isLiked() {
-    // var user = this.props.user.email;
-    // await this.props.getFavourites(user);
-
     var favouritesArray = [];
     this.props.favourites.forEach(favourite =>
       favouritesArray.push(favourite._id)
@@ -71,8 +68,6 @@ class Itinerary extends Component {
       this.setState({ isLoggedIn: false });
     }
 
-    // this.props.getProfile();
-
     this.isLiked();
 
     if (this.props.useCase === "favourite") {
@@ -85,8 +80,6 @@ class Itinerary extends Component {
   addToFavourite(itineraryId, e) {
     this.setState({ open: true });
     var itineraryFavourite = itineraryId;
-    // var user = this.props.user;
-    // var user = this.props.user[0];
 
     var user = this.props.profile[0];
     console.log("this should be user", user);
@@ -119,10 +112,6 @@ class Itinerary extends Component {
   }
 
   render() {
-    const style = {
-      justifyContent: "center"
-    };
-
     const dialog = {
       textAlign: "center"
     };

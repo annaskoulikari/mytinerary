@@ -14,7 +14,7 @@ class ActivityTrial extends Component {
   componentDidMount() {}
 
   render() {
-    var itinerary_id = this.props.property;
+    let itinerary_id = this.props.property;
     let activitiesArray = [];
     this.props.activities.activities.forEach(activity => {
       if (activity.itinerary_id === itinerary_id) {
@@ -38,7 +38,6 @@ class ActivityTrial extends Component {
 
 ActivityTrial.propTypes = {
   fetchActivities: PropTypes.func.isRequired
-  // activities: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({

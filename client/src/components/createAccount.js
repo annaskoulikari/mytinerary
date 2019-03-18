@@ -342,17 +342,6 @@ class SignupPage extends Component {
                   OK
                 </button>
               )}
-              {/* <button
-                className={
-                  this.state.submitReady
-                    ? "btn btn-primary"
-                    : "btn btn-outline-primary"
-                }
-                style={{ background: this.state.color }}
-                type="submit"
-              >
-                OK
-              </button> */}
             </div>
           </form>
         </div>
@@ -364,7 +353,6 @@ class SignupPage extends Component {
 SignupPage.propTypes = {
   fetchCountries: PropTypes.func.isRequired,
   createAccount: PropTypes.func.isRequired
-  //accounts: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({

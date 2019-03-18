@@ -51,7 +51,6 @@ class ItineraryList extends Component {
           <h3>Available MYitenaries</h3>
           {this.state.itinerariesPresent ? (
             <div className="itinerariesContainer">
-              {" "}
               {this.props.itineraries.map(itinerary => (
                 <Itinerary
                   key={itinerary._id}
@@ -72,8 +71,7 @@ class ItineraryList extends Component {
               Try another city!
             </div>
           )}
-          {/* 
-          <NavLink to="/citiesList">Choose Another City</NavLink> */}
+
           <NavLink to="/citiesList">
             <button
               style={{

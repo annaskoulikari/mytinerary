@@ -32,14 +32,12 @@ export const addComment = (
   comment,
   itinerariesArray
 ) => dispatch => {
-  console.log(localStorage.getItem("user"));
   console.log("you reached the addComment actioncreator");
   axios
     .post(
       `/testComment/comments`,
       {
         itinerary_id,
-
         comment,
         itinerariesArray
       },

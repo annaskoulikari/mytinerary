@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import "../App.css";
 import { NavLink } from "react-router-dom";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import IconButton from "@material-ui/core/IconButton";
 
 import Menu from "./menu.js";
 
@@ -23,12 +22,6 @@ class Header extends Component {
   }
 
   render() {
-    const style = {
-      width: 96,
-      height: 96,
-      fontSize: 36
-    };
-
     return (
       <div className="headerContainer">
         <div className="header">

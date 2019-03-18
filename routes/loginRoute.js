@@ -1,6 +1,6 @@
-var express = require("express");
-var router = express.Router();
-var Account = require("../models/account");
+const express = require("express");
+const router = express.Router();
+const Account = require("../models/account");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -15,15 +15,14 @@ router.post("/login", (req, res, next) => {
         });
       }
       console.log(account);
-      bcrypt.hash(req.body.password, account[0].password, (err, hash) => {
+      bcrypt.compare(req.body.password, account[0].password, (err, resp) => {
         console.log(err);
-        console.log(hash);
         if (err) {
           return res.status(401).json({
             message: "Auth failed2"
           });
         }
-        if (hash) {
+        if (resp) {
           const token = jwt.sign(
             {
               email: account[0].email,
@@ -34,15 +33,11 @@ router.post("/login", (req, res, next) => {
             {
               expiresIn: "24h"
             }
-            // (err, token) => {
-            //   res.send({ token: token });
-            // }
           );
           return res.status(200).json({
             user: {
               profilePhoto: account[0].profilePhoto,
               userName: account[0].userName,
-              password: account[0].password,
               email: account[0].email,
               firstName: account[0].firstName,
               lastName: account[0].lastName,

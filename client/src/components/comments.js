@@ -25,11 +25,10 @@ class Comments extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    var comment = this.state.multiline;
+    let comment = this.state.multiline;
 
-    // var comment = this.comment.current.value;
-    var itinerary_id = this.props.property;
-    var itinerariesArray = [];
+    let itinerary_id = this.props.property;
+    let itinerariesArray = [];
     this.props.itineraries.forEach(itinerary => {
       itinerariesArray.push(itinerary._id);
     });

@@ -1,8 +1,7 @@
-var express = require("express");
-var router = express.Router();
-var Account = require("../models/account");
-var Itinerary = require("../models/itinerary");
-const checkItin = require("../middleware/check-itineraries");
+const express = require("express");
+const router = express.Router();
+const Account = require("../models/account");
+const Itinerary = require("../models/itinerary");
 
 router.post("/getfavourites", (req, res) => {
   let user = req.body.user.email;

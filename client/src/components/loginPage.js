@@ -9,13 +9,11 @@ import {
 import PropTypes from "prop-types";
 
 import GoogleLogin from "react-google-login";
-// import FacebookLogin from "react-facebook-login";
+
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import Header from "./header";
 import google from "../google_logo.png";
 import facebook from "../facebook_logo.png";
-
-//import queryString from "query-string";
 
 class LoginPage extends Component {
   constructor(props) {
@@ -174,16 +172,7 @@ class LoginPage extends Component {
                 onFailure={this.responseGoogle}
               />
             </div>
-            {/* <div className="facebookButton">
-              <FacebookLogin
-                appId="783669185332730"
-                // autoLoad={true}
-                textButton="Log in with Facebook"
-                // field="name, email, picture"
-                callback={this.responseFacebook}
-                cssClass="btn btn-secondary facebook"
-              />
-            </div> */}
+
             <div className="facebookButton">
               <FacebookLogin
                 appId="783669185332730"
@@ -225,7 +214,6 @@ class LoginPage extends Component {
 
 LoginPage.propTypes = {
   checkAccount: PropTypes.func.isRequired
-  //loggedInUser: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({

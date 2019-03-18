@@ -65,7 +65,7 @@ class OAuth extends Component {
   render() {
     const { email } = this.state.user;
     const { provider } = this.props;
-    //const { disabled } = this.state;
+
     return (
       <div>
         {email ? (

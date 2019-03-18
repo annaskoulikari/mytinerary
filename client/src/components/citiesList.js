@@ -27,8 +27,8 @@ class CitiesList extends Component {
 
   render() {
     const citiesAlphabetical = this.props.cities.sort(function(a, b) {
-      var textA = a.name.toLowerCase();
-      var textB = b.name.toLowerCase();
+      let textA = a.name.toLowerCase();
+      let textB = b.name.toLowerCase();
       return textA < textB ? -1 : textA > textB ? 1 : 0;
     });
     console.log("citiesAlphabetical", citiesAlphabetical);

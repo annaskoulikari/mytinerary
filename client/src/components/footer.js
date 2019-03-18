@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import home from "../homeIcon.png";
+
 import "../App.css";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import ArrowLeft from "@material-ui/icons/ArrowLeft";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,7 +9,6 @@ import IconButton from "@material-ui/core/IconButton";
 import { createBrowserHistory } from "history";
 
 import HomeIcon from "@material-ui/icons/Home";
-import SvgIcon from "@material-ui/core/SvgIcon";
 
 class Footer extends Component {
   constructor(props) {
@@ -21,13 +20,6 @@ class Footer extends Component {
   }
 
   render() {
-    // function HomeIcon(props) {
-    //   return (
-    //     <SvgIcon {...props}>
-    //       <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-    //     </SvgIcon>
-    //   );
-    // }
     const history = createBrowserHistory();
     return (
       <div className="bottomBar">
@@ -37,7 +29,6 @@ class Footer extends Component {
               <div>
                 <HomeIcon style={{ fontSize: 36, color: "#484848" }} />
               </div>
-              {/* <img className="footerBarHome" src={home} alt="home logo" /> */}
             </NavLink>
           </div>
         ) : (

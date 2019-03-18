@@ -1,11 +1,8 @@
-var express = require("express");
-var router = express.Router();
-var Account = require("../models/account");
+const express = require("express");
+const router = express.Router();
+const Account = require("../models/account");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
-var ProfilePhoto = require("../models/profilePhoto");
-const fs = require("fs");
 
 const multer = require("multer");
 
@@ -39,9 +36,6 @@ const upload = multer({
 });
 
 router.post("/accounts", upload.single("file"), (req, res, next) => {
-  console.log("this is req.body", req.body);
-  console.log("this is req.file", req.file.path);
-
   Account.findOne(
     {
       email: req.body.email

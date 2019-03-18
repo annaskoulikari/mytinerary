@@ -6,10 +6,9 @@ var routerCountry = require("./routes/countryRoute");
 var routerAccount = require("./routes/accountRoute");
 var routerLogin = require("./routes/loginRoute");
 var routerAuth = require("./routes/authRoute");
-var routerAuth2 = require("./routes/authRoute2");
+
 var routerProfile = require("./routes/profileRoute");
-var routerPhoto = require("./routes/photoRoute");
-var passportSetup = require("./config/passport-setup");
+//var routerPhoto = require("./routes/photoRoute");
 
 var favouriteRoute = require("./routes/favouriteRoute");
 require("dotenv").config();
@@ -175,11 +174,8 @@ app.use("/testAccount", routerAccount);
 app.use("/testLogin", routerLogin);
 app.use("/testProfile", routerProfile);
 app.use("/auth", routerAuth);
-app.use("/testUpload", routerPhoto);
+//app.use("/testUpload", routerPhoto);
 app.use("/favourite", favouriteRoute);
-
-// app.use
-// app.use("/auth", routerAuth2);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -188,11 +184,3 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(_dirname, "client", "build", "index.html"));
   });
 }
-
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.join(_dirname, "client", "build", "index.html"));
-//   });
-// }

@@ -47,11 +47,6 @@ class MenuShow extends React.Component {
     this.props.onClose(value);
   };
 
-  // handleSelectedMenuItem = value => {
-  //   this.setState({ selected: value });
-  //   console.log(e)
-  // };
-
   render() {
     const { classes, onClose, ...other } = this.props;
 

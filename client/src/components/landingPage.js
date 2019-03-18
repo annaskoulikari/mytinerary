@@ -63,12 +63,6 @@ class LandingPage extends Component {
                 </div>
               </div>
             </NavLink>
-            {/* <div className="startBrowsing">
-              <p style={{ marginBottom: "none" }}>Start browsing</p>
-              <NavLink to="/citiesList">
-                <ChevronRight style={{ fontSize: 70, color: "#484848" }} />
-              </NavLink>
-            </div> */}
 
             {this.state.isLoggedIn ? null : (
               <div>

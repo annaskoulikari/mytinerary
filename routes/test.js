@@ -1,6 +1,6 @@
-var express = require("express");
-var router = express.Router();
-var City = require("../models/city");
+const express = require("express");
+const router = express.Router();
+const City = require("../models/city");
 
 // get a list of cities rom the db
 

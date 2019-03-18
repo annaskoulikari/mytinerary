@@ -1,8 +1,8 @@
-var express = require("express");
-var router = express.Router();
-var Itinerary = require("../models/itinerary");
+const express = require("express");
+const router = express.Router();
+const Itinerary = require("../models/itinerary");
 const multer = require("multer");
-var Account = require("../models/account");
+const Account = require("../models/account");
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -19,7 +19,7 @@ const upload = multer({ storage: storage });
 
 router.get("/itineraries/:city", (req, res) => {
   console.log(req.params);
-  var cityIdentified = req.params.city;
+  let cityIdentified = req.params.city;
   console.log(cityIdentified);
   Itinerary.find({ city: cityIdentified })
     .then(function(itineraries) {

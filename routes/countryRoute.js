@@ -1,6 +1,6 @@
-var express = require("express");
-var router = express.Router();
-var Country = require("../models/country");
+const express = require("express");
+const router = express.Router();
+const Country = require("../models/country");
 
 // get a list of countries rom the db
 
