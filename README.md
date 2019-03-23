@@ -37,3 +37,14 @@ npm run client
 - bcrypt
 - jsonwebtoken
 - react
+
+## More Info
+
+### Author
+
+:raising_hand: Anna Skoulikari
+
+Find me on:
+
+[Named Link](https://www.linkedin.com/in/annaskoulikari/ "Linkedin")
+[Medium](https://medium.com/anna-skoulikari "Medium")
