@@ -4,13 +4,13 @@ This is an app I built while training to become a fullstack developer in a codin
 
 It is a travel app built with the MERN stack along with Redux for state management.
 
-### `Getting Started`
+## Getting Started
 
 Include a .env file in the server directory with the following environment variables.
 
 db_url = 'mongodb://<USERNAME>:<PASSWROD>@<DATABASENAME>'
 
-### `Built With`
+## Built With
 
 - nodejs
 - express
