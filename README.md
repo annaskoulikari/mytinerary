@@ -44,6 +44,8 @@ npm run client
 
 :raising_hand: Anna Skoulikari
 
+email : :envelope: annaskoulikari@gmail.com
+
 Find me on:
 
 - [Linkedin](https://www.linkedin.com/in/annaskoulikari/ "Linkedin")
