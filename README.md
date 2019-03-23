@@ -6,9 +6,9 @@ It is a travel app built with the MERN stack along with Redux for state manageme
 
 ## Getting Started
 
-Include a .env file in the server directory with the following environment variables.
+Include a `.env` file in the `server` directory with the following environment variables.
 
-db_url = 'mongodb://<USERNAME>:<PASSWROD>@<DATABASENAME>'
+db_url = 'mongodb://localhost/<DATABASE_NAME>'
 
 ## Built With
 
