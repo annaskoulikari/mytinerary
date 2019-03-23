@@ -46,5 +46,5 @@ npm run client
 
 Find me on:
 
-[Linkedin](https://www.linkedin.com/in/annaskoulikari/ "Linkedin")
-[Medium](https://medium.com/anna-skoulikari "Medium")
+- [Linkedin](https://www.linkedin.com/in/annaskoulikari/ "Linkedin")
+- [Medium](https://medium.com/anna-skoulikari "Medium")
