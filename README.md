@@ -48,3 +48,4 @@ Find me on:
 
 - [Linkedin](https://www.linkedin.com/in/annaskoulikari/ "Linkedin")
 - [Medium](https://medium.com/anna-skoulikari "Medium")
+- [Youtube](https://www.youtube.com/channel/UCa6kP6qEgN6VL1lraEiybmw "Youtube")
