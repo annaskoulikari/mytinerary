@@ -30,13 +30,14 @@ npm run client
 
 ## Built With
 
-- nodejs
-- express
-- mongodb
-- mongoose
-- bcrypt
-- jsonwebtoken
-- react
+- Node.js
+- Express
+- MongoDB
+- Mongoose
+- Bcrypt
+- Jsonwebtoken
+- React
+- Redux
 
 ## More Info
 
