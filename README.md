@@ -2,7 +2,7 @@
 
 This is an app I built while training to become a fullstack developer in a coding bootcamp.
 
-It is a travel app built with the MERN stack along with Redux for state management.
+It is a travel :car::airplane::ship: app built with the MERN stack along with Redux for state management.
 
 ## Getting Started
 
