@@ -2,7 +2,7 @@
 
 This is an app I built while training to become a fullstack developer in a coding bootcamp.
 
-If you want to watch a video app demo of it then click [here](https://www.youtube.com/watch?v=iWesF6zGkWo):video_camera:!
+If you want to watch a video app demo of it then click [here](https://www.youtube.com/watch?v=iWesF6zGkWo) :video_camera: !
 
 It is a travel app built with the MERN stack along with Redux for state management.
 
