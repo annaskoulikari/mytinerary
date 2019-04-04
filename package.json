@@ -43,7 +43,8 @@
     "passport-facebook-token": "^3.3.0",
     "passport-google-plus-token": "^2.1.0",
     "path": "^0.12.7",
-    "react": "^16.7.0"
+    "react": "^16.7.0",
+    "redux": "^4.0.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.9",
