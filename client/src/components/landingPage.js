@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import logotest from "../mytinerary_logo.png";
-
 import "../App.css";
 import { NavLink } from "react-router-dom";
 import Header from "./header";
@@ -24,6 +23,7 @@ class LandingPage extends Component {
     };
   }
   render() {
+    console.log("this.props", this.props);
     return (
       <div
         style={{

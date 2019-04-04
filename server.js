@@ -53,14 +53,14 @@ app.use("/uploads", express.static("uploads"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.db_url, {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useCreateIndex: true
 });
 
 let gfs;
 
-var conn = mongoose.createConnection(process.env.db_url);
+var conn = mongoose.createConnection(process.env.MONGODB_URI);
 conn.once("open", () => {
   gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection("uploads");
@@ -69,7 +69,7 @@ conn.once("open", () => {
 });
 
 const storage = new GridFsStorage({
-  url: process.env.db_url,
+  url: process.env.MONGODB_URI,
   file: (req, file) => {
     return new Promise((resolve, reject) => {
       crypto.randomBytes(16, (err, buf) => {
