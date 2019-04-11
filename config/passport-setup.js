@@ -10,9 +10,8 @@ passport.use(
   "googleToken",
   new GooglePlusTokenStrategy(
     {
-      clientID:
-        "71133190926-d8mjt4mslu36qa3md2efuql8md35sjg9.apps.googleusercontent.com",
-      clientSecret: process.env.clientSecret
+      clientID: process.env.CLIENT_ID_GOOGLE,
+      clientSecret: process.env.CLIENT_SECRET_GOOGLE
     },
     async (accessToken, refreshToken, profile, done) => {
       console.log("this is profile from google", profile);
@@ -47,8 +46,8 @@ passport.use(
   "facebookToken",
   new FacebookTokenStrategy(
     {
-      clientID: process.env.clientIDFB,
-      clientSecret: process.env.clientSecretFB
+      clientID: process.env.CLIENT_ID_FACEBOOK,
+      clientSecret: process.env.CLIENT_SECRET_FACEBOOK
     },
     async (accessToken, refreshToken, profile, done) => {
       console.log("this is profile from facebook", profile);

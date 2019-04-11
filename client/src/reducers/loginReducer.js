@@ -1,10 +1,10 @@
 import { AUTH_SIGN_UP } from "../actions/types";
 
 const initialState = {
-  user: "",
   token: "",
   isAuthenticated: false,
-  errorMessage: ""
+  errorMessage: "",
+  user: ""
 };
 
 export default function(state = initialState, action) {

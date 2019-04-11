@@ -3,9 +3,9 @@ const router = express.Router();
 const Account = require("../models/account");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const checkAuth = require("../middleware/check-auth");
 
 router.post("/login", (req, res, next) => {
-  console.log("IN TO LOG IN", req.body.email);
   Account.find({ email: req.body.email })
     .exec()
     .then(account => {
@@ -14,12 +14,11 @@ router.post("/login", (req, res, next) => {
           message: "Auth failed1"
         });
       }
-      console.log(account);
       bcrypt.compare(req.body.password, account[0].password, (err, resp) => {
         console.log(err);
         if (err) {
           return res.status(401).json({
-            message: "Auth failed2"
+            message: "Invalid credentials"
           });
         }
         if (resp) {
@@ -57,6 +56,12 @@ router.post("/login", (req, res, next) => {
         error: err
       });
     });
+});
+
+router.get("/login", checkAuth, (req, res) => {
+  User.findById(req.user.accountId)
+    .select("-password")
+    .then(user => res.json(user));
 });
 
 module.exports = router;

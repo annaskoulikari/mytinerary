@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
   let decoded = jwt.verify(token, process.env.JWT_KEY, (err, authData) => {
     if (err) {
       console.log(err);
-      res.sendStatus(403);
+      res.sendStatus(403).json({ msg: "token is not valid" });
     } else {
       return authData;
     }

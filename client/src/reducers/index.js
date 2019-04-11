@@ -8,6 +8,7 @@ import accountReducer from "./accountReducer";
 import loginReducer from "./loginReducer";
 import profileReducer from "./profileReducer";
 import favouritesReducer from "./favouritesReducer";
+import errorReducer from "./errorReducer";
 
 console.log("this is the combined reducer");
 
@@ -22,5 +23,6 @@ export default combineReducers({
   loggedInUser: loginReducer,
   profile: profileReducer,
   favourites: favouritesReducer,
-  addedFavourite: favouritesReducer
+  addedFavourite: favouritesReducer,
+  error: errorReducer
 });
